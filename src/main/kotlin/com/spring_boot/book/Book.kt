@@ -1,5 +1,6 @@
 package com.spring_boot.book
 
+import com.google.gson.Gson
 import javax.persistence.*
 
 
@@ -10,4 +11,7 @@ class Book(
         var category: Int,
         var score: Double,
         var url: String,
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null)
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null) {
+
+    override fun toString(): String = Gson().toJson(this)
+}

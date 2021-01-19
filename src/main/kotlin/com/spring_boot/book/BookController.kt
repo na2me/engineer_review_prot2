@@ -1,7 +1,5 @@
 package com.spring_boot.book
 
-import com.google.gson.GsonBuilder
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,10 +11,7 @@ class BookController(private val repository: BookRepository) {
 
 
     @PostMapping("")
-    fun store(@ModelAttribute book: Book) {
-        repository.save(book)
-    }
-
+    fun store(@ModelAttribute book: Book) = repository.save(book)
 
 
 }
