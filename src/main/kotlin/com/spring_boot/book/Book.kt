@@ -15,4 +15,3 @@ class Book(
 
     override fun toString(): String = Gson().toJson(this)
 }
-
