@@ -1,4 +1,4 @@
-package com.spring_boot.engineer_review
+package com.spring_boot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
