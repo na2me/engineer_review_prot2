@@ -81,7 +81,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the saved book should be acquired by calling read API
-        mockMvc.perform(get("/api/book/${savedBook.id}").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/book/${savedBook.id()}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(jsonedBook))
@@ -96,7 +96,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be updated with book2 properties by calling update API
-        val response = mockMvc.perform(post("/api/book/${savedBook.id}")
+        val response = mockMvc.perform(post("/api/book/${savedBook.id()}")
                 .param("title", book2.title)
                 .param("category", book2.category.toString())
                 .param("score", book2.score.toString())
@@ -108,7 +108,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book should be updated successfully
-        val updatedBook = repository.findById(savedBook.id!!).get()
+        val updatedBook = repository.findById(savedBook.id()).get()
         assert(response == updatedBook.toString())
     }
 
@@ -120,14 +120,14 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be deleted with by calling delete API
-        mockMvc.perform(delete("/api/book/${savedBook.id}"))
+        mockMvc.perform(delete("/api/book/${savedBook.id()}"))
                 .andExpect(status().isOk)
 
         // --------------------------------------
 
         // the book should be deleted successfully
         assertThrows<NoSuchElementException> {
-            repository.findById(savedBook.id!!).get()
+            repository.findById(savedBook.id()).get()
         }
     }
 }
