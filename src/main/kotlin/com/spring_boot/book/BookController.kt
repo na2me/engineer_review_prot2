@@ -11,7 +11,7 @@ class BookController(private val repository: BookRepository) {
 
 
     @PostMapping("")
-    fun store(@ModelAttribute book: Book) = repository.save(book)
+    fun create(@ModelAttribute book: Book) = repository.save(book)
 
 
 }

@@ -48,7 +48,7 @@ class BookControllerTest {
     }
 
     @Test
-    fun testStore() {
+    fun testCreate() {
         val book = BookTest.entity()
         val jsonedBook = Gson().toJson(book)
 
