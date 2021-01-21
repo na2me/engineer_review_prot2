@@ -1,5 +1,6 @@
 package com.spring_boot.book
 
+import com.spring_boot.book.value_objects.BookTitle
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,10 +14,10 @@ class BookRepositoryTest @Autowired constructor(
 
     @Test
     fun testFindByTitle() {
-        val book = Book("test title", 1, 2.0, "https://test.com")
-        bookRepository.save(book)
+        val book = BookTest.entity()
+        val saved = bookRepository.save(book)
 
-        val foundBook = bookRepository.findByTitle("test title")
-        assertThat(foundBook).isEqualTo(book)
+        val found = bookRepository.findByTitle(BookTitle("test title"))
+        assert(saved == found)
     }
 }

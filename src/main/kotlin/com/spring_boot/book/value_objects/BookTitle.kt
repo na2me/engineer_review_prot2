@@ -8,4 +8,8 @@ import javax.validation.constraints.Size
 class BookTitle(
         @NotNull
         @Size(min = 1, max = 50)
-        val title: String)
+        val value: String) {
+
+        fun equals(other: BookTitle): Boolean =
+                this.value == other.value
+}

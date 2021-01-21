@@ -49,7 +49,7 @@ class BookControllerTest {
 
         // response should be the same entity as "saved"
         val json = JSONArray(response).getJSONObject(0)
-        assert(saved.title == json.get("title"))
+        assert(saved.title.value == json.getValue("title"))
         assert(saved.category == json.get("category"))
         assert(saved.score == json.get("score"))
         assert(saved.url == json.get("url"))
@@ -63,7 +63,7 @@ class BookControllerTest {
 
         // the book created above should be returned as saved one by calling store API
         mockMvc.perform(post("/api/book/")
-                .param("title", book.title)
+                .param("title", book.title.value)
                 .param("category", book.category.toString())
                 .param("score", book.score.toString())
                 .param("url", book.url))
@@ -94,7 +94,7 @@ class BookControllerTest {
 
         // response should be the same entity as "saved"
         val json = JSONObject(response)
-        assert(saved.title == json.get("title"))
+        assert(saved.title.value == json.getValue("title"))
         assert(saved.category == json.get("category"))
         assert(saved.score == json.get("score"))
         assert(saved.url == json.get("url"))
@@ -111,7 +111,7 @@ class BookControllerTest {
 
         // the book created above should be updated with book2 properties by calling update API
         mockMvc.perform(post("/api/book/${saved.id()}")
-                .param("title", book2.title)
+                .param("title", book2.title.value)
                 .param("category", book2.category.toString())
                 .param("score", book2.score.toString())
                 .param("url", book2.url))
@@ -122,7 +122,7 @@ class BookControllerTest {
         // the book should be updated successfully
         val updated = repository.findById(saved.id()).get()
 
-        assert(updated.title == book2.title)
+        assert(updated.title.equals(book2.title))
         assert(updated.category == book2.category)
         assert(updated.score == book2.score)
         assert(updated.url == book2.url)
@@ -147,3 +147,6 @@ class BookControllerTest {
         }
     }
 }
+
+fun JSONObject.getValue(field: String) =
+        JSONObject(this.getString(field)).getString("value")
