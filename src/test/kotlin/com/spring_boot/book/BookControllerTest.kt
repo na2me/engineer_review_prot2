@@ -122,7 +122,7 @@ class BookControllerTest {
         // the book should be updated successfully
         val updated = repository.findById(saved.id()).get()
 
-        assert(updated.title.equals(book2.title))
+        assert(updated.title.isEqual(book2.title))
         assert(updated.category == book2.category)
         assert(updated.score == book2.score)
         assert(updated.url == book2.url)

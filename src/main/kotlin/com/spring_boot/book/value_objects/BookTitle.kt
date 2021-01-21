@@ -10,6 +10,6 @@ class BookTitle(
         @Size(min = 1, max = 50)
         val value: String) {
 
-        fun equals(other: BookTitle): Boolean =
+        fun isEqual(other: BookTitle): Boolean =
                 this.value == other.value
 }
