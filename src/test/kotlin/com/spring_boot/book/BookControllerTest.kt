@@ -1,6 +1,7 @@
 package com.spring_boot.book
 
-import com.google.gson.Gson
+import org.json.JSONArray
+import org.json.JSONObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -35,23 +36,28 @@ class BookControllerTest {
     fun testIndex() {
         val book = BookTest.entity()
         val saved = repository.save(book)
-        // make book as list since index will return data as jsonArray
-        val jsonedBook = listOf(Gson().toJson(saved)).toString()
 
         // --------------------------------------
 
         // the saved book should be acquired by calling index API
-        mockMvc.perform(get("/api/book/").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(get("/api/book/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(jsonedBook))
                 .andReturn().response.contentAsString
+
+        // --------------------------------------
+
+        // response should be the same entity as "saved"
+        val json = JSONArray(response).getJSONObject(0)
+        assert(saved.title == json.get("title"))
+        assert(saved.category == json.get("category"))
+        assert(saved.score == json.get("score"))
+        assert(saved.url == json.get("url"))
     }
 
     @Test
     fun testCreate() {
         val book = BookTest.entity()
-        val jsonedBook = Gson().toJson(book)
 
         // --------------------------------------
 
@@ -63,7 +69,6 @@ class BookControllerTest {
                 .param("url", book.url))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(jsonedBook))
 
         // --------------------------------------
 
@@ -75,41 +80,52 @@ class BookControllerTest {
     @Test
     fun testRead() {
         val book = BookTest.entity()
-        val savedBook = repository.save(book)
-        val jsonedBook = Gson().toJson(savedBook)
+        val saved = repository.save(book)
 
         // --------------------------------------
 
         // the saved book should be acquired by calling read API
-        mockMvc.perform(get("/api/book/${savedBook.id()}").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk)
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(jsonedBook))
-    }
-
-    @Test
-    fun testUpdate() {
-        val book = BookTest.entity()
-        val book2 = BookTest.entity2()
-        val savedBook = repository.save(book)
-
-        // --------------------------------------
-
-        // the book created above should be updated with book2 properties by calling update API
-        val response = mockMvc.perform(post("/api/book/${savedBook.id()}")
-                .param("title", book2.title)
-                .param("category", book2.category.toString())
-                .param("score", book2.score.toString())
-                .param("url", book2.url))
+        val response = mockMvc.perform(get("/api/book/${saved.id()}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
 
         // --------------------------------------
 
+        // response should be the same entity as "saved"
+        val json = JSONObject(response)
+        assert(saved.title == json.get("title"))
+        assert(saved.category == json.get("category"))
+        assert(saved.score == json.get("score"))
+        assert(saved.url == json.get("url"))
+
+    }
+
+    @Test
+    fun testUpdate() {
+        val book = BookTest.entity()
+        val book2 = BookTest.entity2()
+        val saved = repository.save(book)
+
+        // --------------------------------------
+
+        // the book created above should be updated with book2 properties by calling update API
+        mockMvc.perform(post("/api/book/${saved.id()}")
+                .param("title", book2.title)
+                .param("category", book2.category.toString())
+                .param("score", book2.score.toString())
+                .param("url", book2.url))
+                .andExpect(status().isOk)
+
+        // --------------------------------------
+
         // the book should be updated successfully
-        val updatedBook = repository.findById(savedBook.id()).get()
-        assert(response == updatedBook.toString())
+        val updated = repository.findById(saved.id()).get()
+
+        assert(updated.title == book2.title)
+        assert(updated.category == book2.category)
+        assert(updated.score == book2.score)
+        assert(updated.url == book2.url)
     }
 
     @Test

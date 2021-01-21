@@ -1,6 +1,7 @@
 package com.spring_boot.book
 
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/api/book/")
@@ -16,7 +17,16 @@ class BookController(private val repository: BookRepository) {
     fun read(@PathVariable id: Long) = repository.findById(id)
 
     @PostMapping("{id}")
-    fun update(@PathVariable id: Long, @ModelAttribute book: Book) = repository.save(book)
+    fun update(@PathVariable id: Long, @ModelAttribute book: Book) {
+        val targetBook: Optional<Book> = repository.findById(id)
+        targetBook.ifPresent {
+            it.title = book.title
+            it.category = book.category
+            it.score = book.score
+            it.url = book.url
+            repository.save(it)
+        }
+    }
 
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: Long) {

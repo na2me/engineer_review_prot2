@@ -2,7 +2,8 @@ package com.spring_boot.book
 
 import com.google.gson.Gson
 import com.spring_boot.base.AbstractEntity
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Table
 
 
 @Entity
@@ -11,7 +12,7 @@ class Book(
         var title: String,
         var category: Int,
         var score: Double,
-        var url: String): AbstractEntity() {
+        var url: String) : AbstractEntity() {
 
     override fun isSatisfied() {
         TODO("Not yet implemented")
