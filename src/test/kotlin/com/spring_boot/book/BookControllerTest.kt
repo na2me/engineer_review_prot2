@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.testng.Assert.assertEquals
 import java.util.*
 
 
@@ -49,10 +50,10 @@ class BookControllerTest {
 
         // response should be the same entity as "saved"
         val json = JSONArray(response).getJSONObject(0)
-        assert(saved.title.value == json.getValue("title"))
-        assert(saved.category == json.get("category"))
-        assert(saved.score == json.get("score"))
-        assert(saved.url == json.get("url"))
+        assertEquals(json.getValue("title"), saved.title.value)
+        assertEquals(json.get("category"), saved.category)
+        assertEquals(json.get("score"), saved.score)
+        assertEquals(json.get("url"), saved.url)
     }
 
     @Test
@@ -94,11 +95,10 @@ class BookControllerTest {
 
         // response should be the same entity as "saved"
         val json = JSONObject(response)
-        assert(saved.title.value == json.getValue("title"))
-        assert(saved.category == json.get("category"))
-        assert(saved.score == json.get("score"))
-        assert(saved.url == json.get("url"))
-
+        assertEquals(json.getValue("title"), saved.title.value)
+        assertEquals(json.get("category"), saved.category)
+        assertEquals(json.get("score"), saved.score)
+        assertEquals(json.get("url"), saved.url)
     }
 
     @Test
@@ -121,11 +121,10 @@ class BookControllerTest {
 
         // the book should be updated successfully
         val updated = repository.findById(saved.id()).get()
-
-        assert(updated.title.isEqual(book2.title))
-        assert(updated.category == book2.category)
-        assert(updated.score == book2.score)
-        assert(updated.url == book2.url)
+        assertEquals(book2.title, updated.title)
+        assertEquals(updated.category, book2.category)
+        assertEquals(updated.score, book2.score)
+        assertEquals(updated.url, book2.url)
     }
 
     @Test
