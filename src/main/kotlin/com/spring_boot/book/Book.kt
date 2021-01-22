@@ -21,7 +21,7 @@ class Book(
         var url: String) : AbstractEntity() {
 
     override fun isSatisfied() {
-        TODO("Not yet implemented")
+        //// 必須フィールド存在確認
     }
 
     fun id() = this.id
