@@ -8,8 +8,11 @@ class BookCategory(
         @Size(min = 1, max = 8)
         val value: Int) {
 
-    fun isEqual(other: BookCategory): Boolean =
-            this.value == other.value
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is BookCategory) return false
+        return value == other.value
+    }
 
     companion object {
         fun SERVER_SIDE(): BookCategory {
