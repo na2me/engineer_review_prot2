@@ -1,7 +1,10 @@
 package com.spring_boot.base
 
 import java.time.LocalDateTime
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.MappedSuperclass
+import javax.persistence.PrePersist
+import javax.persistence.PreUpdate
 
 @MappedSuperclass
 abstract class AbstractEntity : BaseEntity() {

@@ -14,6 +14,10 @@ class BookCategory(
         return value == other.value
     }
 
+    override fun hashCode(): Int {
+        return value
+    }
+
     companion object {
         fun SERVER_SIDE(): BookCategory {
             return BookCategory(1)

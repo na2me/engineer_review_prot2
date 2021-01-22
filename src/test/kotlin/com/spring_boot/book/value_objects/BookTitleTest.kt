@@ -12,7 +12,7 @@ class BookTitleTest {
     fun test(value: String, isValid: Boolean) {
         when (isValid) {
             true -> assertDoesNotThrow { BookTitle(value) }
-            false -> assertThrows<ConstraintViolationException>  { BookTitle(value) }
+            false -> assertThrows<ConstraintViolationException> { BookTitle(value) }
         }
     }
 
