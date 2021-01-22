@@ -35,6 +35,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("junit:junit:4.13")
+	testImplementation("com.tngtech.java:junit-dataprovider:1.13.1")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 	testImplementation("com.ninja-squad:springmockk:3.0.1")
 	runtimeOnly("com.h2database:h2")
@@ -43,7 +44,6 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.8.5")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.valiktor:valiktor-core:0.12.0")
-	implementation("org.testng:testng:6.14.3")
 }
 
 tasks.withType<KotlinCompile> {

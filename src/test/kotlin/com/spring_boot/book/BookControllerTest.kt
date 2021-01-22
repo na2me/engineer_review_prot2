@@ -2,6 +2,7 @@ package com.spring_boot.book
 
 import org.json.JSONArray
 import org.json.JSONObject
+import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.testng.Assert.assertEquals
 import java.util.*
 
 
@@ -123,7 +123,7 @@ class BookControllerTest {
         val updated = repository.findById(saved.id()).get()
         assertEquals(book2.title, updated.title)
         assertEquals(updated.category, book2.category)
-        assertEquals(updated.score, book2.score)
+        assert(updated.score == book2.score)
         assertEquals(updated.url, book2.url)
     }
 

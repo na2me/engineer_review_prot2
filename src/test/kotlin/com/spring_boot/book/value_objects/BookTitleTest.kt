@@ -2,33 +2,33 @@ package com.spring_boot.book.value_objects
 
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
-import org.testng.annotations.DataProvider
-import org.testng.annotations.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
 
 class BookTitleTest {
+    companion object {
+        @JvmStatic
+        fun dataProvider() = listOf(
+                // normal scenarios
+                Arguments.of("test title", true),
+                Arguments.of("a", true),
+                Arguments.of("a".repeat(50), true),
+                // exceptional scenarios
+                Arguments.of("", false),
+                Arguments.of("a".repeat(51), false)
 
-    @Test(dataProvider = "provider")
-    fun test(value: String, isValid: Boolean) {
+        )
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataProvider")
+    fun testValidation(value: String, isValid: Boolean) {
         when (isValid) {
             true -> assertDoesNotThrow { BookTitle(value) }
             false -> assertThrows<ConstraintViolationException> { BookTitle(value) }
         }
     }
-
-
-    @DataProvider(name = "provider")
-    fun dataProvider(): MutableIterator<Array<*>> {
-        val testData: ArrayList<Array<*>> = arrayListOf()
-
-        // normal scenarios
-        testData.add(arrayOf("test title", true))
-        testData.add(arrayOf("a", true))
-        testData.add(arrayOf("a".repeat(50), true))
-        // exceptional scenarios
-        testData.add(arrayOf("", false))
-        testData.add(arrayOf("a".repeat(51), false))
-
-        return testData.iterator()
-    }
 }
+
