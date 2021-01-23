@@ -65,12 +65,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be returned as saved one by calling store API
-        println(book.category.value.toString())
-        mockMvc.perform(post("/api/book/")
-                .param("title", book.title.value)
-                .param("category", book.category.value)
-                .param("score", book.score.toString())
-                .param("url", book.url))
+        mockMvc.perform(post("/api/book/").flashAttr("book", book))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
@@ -99,7 +94,7 @@ class BookControllerTest {
         // response should be the same entity as "saved"
         val json = JSONObject(response)
         assertEquals(json.getValue("title"), saved.title.value)
-        assertEquals(json.get("category"), saved.category)
+        assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.get("score"), saved.score)
         assertEquals(json.get("url"), saved.url)
     }
@@ -113,11 +108,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be updated with book2 properties by calling update API
-        mockMvc.perform(post("/api/book/${saved.id()}")
-                .param("title", book2.title.value)
-                .param("category", book2.category.toString())
-                .param("score", book2.score.toString())
-                .param("url", book2.url))
+        mockMvc.perform(post("/api/book/${saved.id()}").flashAttr("book", book2))
                 .andExpect(status().isOk)
 
         // --------------------------------------

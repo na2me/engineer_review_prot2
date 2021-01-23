@@ -1,7 +1,6 @@
 package com.spring_boot.model.book.value_objects
 
 import com.google.gson.Gson
-import org.valiktor.functions.hasSize
 import org.valiktor.functions.isBetween
 import org.valiktor.validate
 import javax.persistence.Column
