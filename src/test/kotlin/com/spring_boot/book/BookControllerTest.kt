@@ -54,7 +54,7 @@ class BookControllerTest {
         val json = JSONArray(response).getJSONObject(0)
         assertEquals(json.getValue("title"), saved.title.value)
         assertEquals(json.getValue("category"), saved.category.value.toString())
-        assertEquals(json.get("score"), saved.score)
+        assertEquals(json.getValue("score"), saved.score.value.toString())
         assertEquals(json.get("url"), saved.url)
     }
 
@@ -95,7 +95,7 @@ class BookControllerTest {
         val json = JSONObject(response)
         assertEquals(json.getValue("title"), saved.title.value)
         assertEquals(json.getValue("category"), saved.category.value.toString())
-        assertEquals(json.get("score"), saved.score)
+        assertEquals(json.getValue("score"), saved.score.value.toString())
         assertEquals(json.get("url"), saved.url)
     }
 

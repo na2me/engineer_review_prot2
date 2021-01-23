@@ -3,6 +3,7 @@ package com.spring_boot.model.book
 import com.google.gson.Gson
 import com.spring_boot.base.AbstractEntity
 import com.spring_boot.model.book.value_objects.BookCategory
+import com.spring_boot.model.book.value_objects.BookScore
 import com.spring_boot.model.book.value_objects.BookTitle
 import javax.persistence.Embedded
 import javax.persistence.Entity
@@ -14,7 +15,7 @@ import javax.persistence.Table
 class Book(
         @Embedded var title: BookTitle,
         @Embedded var category: BookCategory,
-        var score: Double,
+        @Embedded var score: BookScore,
         var url: String) : AbstractEntity() {
 
     override fun isSatisfied() {
