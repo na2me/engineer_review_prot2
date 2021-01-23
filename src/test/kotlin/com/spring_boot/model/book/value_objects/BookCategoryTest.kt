@@ -1,4 +1,4 @@
-package com.spring_boot.book.value_objects
+package com.spring_boot.model.book.value_objects
 
 import com.spring_boot.model.book.value_objects.BookCategory
 import org.junit.jupiter.api.assertDoesNotThrow

@@ -1,4 +1,4 @@
-package com.spring_boot.book
+package com.spring_boot.model.book
 
 import com.spring_boot.model.book.Book
 import com.spring_boot.model.book.value_objects.BookCategory
