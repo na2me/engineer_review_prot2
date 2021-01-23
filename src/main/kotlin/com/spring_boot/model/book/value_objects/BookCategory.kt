@@ -4,10 +4,13 @@ import com.google.gson.Gson
 import org.valiktor.functions.hasSize
 import org.valiktor.functions.isBetween
 import org.valiktor.validate
+import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-final class BookCategory(val value: Int) {
+final class BookCategory(
+        @Column(name = "category", nullable = false)
+        val value: Int) {
 
     init {
         validate(this) {

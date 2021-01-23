@@ -53,7 +53,7 @@ class BookControllerTest {
         // response should be the same entity as "saved"
         val json = JSONArray(response).getJSONObject(0)
         assertEquals(json.getValue("title"), saved.title.value)
-        assertEquals(json.get("category"), saved.category)
+        assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.get("score"), saved.score)
         assertEquals(json.get("url"), saved.url)
     }
@@ -65,9 +65,10 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be returned as saved one by calling store API
+        println(book.category.value.toString())
         mockMvc.perform(post("/api/book/")
                 .param("title", book.title.value)
-                .param("category", book.category.toString())
+                .param("category", book.category.value)
                 .param("score", book.score.toString())
                 .param("url", book.url))
                 .andExpect(status().isOk)
