@@ -1,4 +1,4 @@
-package com.spring_boot.book
+package com.spring_boot.model.book
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository

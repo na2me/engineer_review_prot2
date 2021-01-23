@@ -1,6 +1,7 @@
 package com.spring_boot.book
 
-import com.spring_boot.book.value_objects.BookTitle
+import com.spring_boot.model.book.value_objects.BookTitle
+import com.spring_boot.model.book.Book
 
 class BookTest {
     companion object {

@@ -1,5 +1,6 @@
 package com.spring_boot.book.value_objects
 
+import com.spring_boot.model.book.value_objects.BookTitle
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest

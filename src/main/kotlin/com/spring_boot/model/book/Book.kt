@@ -1,8 +1,8 @@
-package com.spring_boot.book
+package com.spring_boot.model.book
 
 import com.google.gson.Gson
 import com.spring_boot.base.AbstractEntity
-import com.spring_boot.book.value_objects.BookTitle
+import com.spring_boot.model.book.value_objects.BookTitle
 import javax.persistence.Embedded
 import javax.persistence.Entity
 import javax.persistence.Table

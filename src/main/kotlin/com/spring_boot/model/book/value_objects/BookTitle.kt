@@ -1,4 +1,4 @@
-package com.spring_boot.book.value_objects
+package com.spring_boot.model.book.value_objects
 
 import com.google.gson.Gson
 import org.valiktor.functions.hasSize
