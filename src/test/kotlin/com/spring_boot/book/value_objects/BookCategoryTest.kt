@@ -7,27 +7,25 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
 
-class BookTitleTest {
+class BookCategoryTest {
     companion object {
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
-                Arguments.of("test title", true),
-                Arguments.of("a", true),
-                Arguments.of("a".repeat(50), true),
+                Arguments.of(1, true),
+                Arguments.of(8, true),
                 // exceptional scenarios
-                Arguments.of("", false),
-                Arguments.of("a".repeat(51), false)
+                Arguments.of(0, false),
+                Arguments.of(9, false),
         )
     }
 
     @ParameterizedTest
     @MethodSource("dataProvider")
-    fun testValidation(value: String, isValid: Boolean) {
+    fun testValidation(value: Int, isValid: Boolean) {
         when (isValid) {
-            true -> assertDoesNotThrow { BookTitle(value) }
-            false -> assertThrows<ConstraintViolationException> { BookTitle(value) }
+            true -> assertDoesNotThrow { BookCategory(value) }
+            false -> assertThrows<ConstraintViolationException> { BookCategory(value) }
         }
     }
 }
-

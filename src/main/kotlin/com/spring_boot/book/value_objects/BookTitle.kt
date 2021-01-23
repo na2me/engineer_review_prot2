@@ -6,7 +6,7 @@ import org.valiktor.validate
 import javax.persistence.Embeddable
 
 @Embeddable
-class BookTitle(val value: String) {
+final class BookTitle(val value: String) {
 
     init {
         validate(this) {
@@ -21,10 +21,8 @@ class BookTitle(val value: String) {
         return value == other.value
     }
 
+    override fun hashCode() = value.hashCode()
+
 
     override fun toString(): String = Gson().toJson(this)
-
-    override fun hashCode(): Int {
-        return value.hashCode()
-    }
 }

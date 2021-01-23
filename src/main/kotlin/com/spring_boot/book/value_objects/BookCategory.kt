@@ -1,12 +1,20 @@
 package com.spring_boot.book.value_objects
 
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Size
+import com.google.gson.Gson
+import org.valiktor.functions.hasSize
+import org.valiktor.functions.isBetween
+import org.valiktor.validate
+import javax.persistence.Embeddable
 
-class BookCategory(
-        @NotNull
-        @Size(min = 1, max = 8)
-        val value: Int) {
+@Embeddable
+final class BookCategory(val value: Int) {
+
+    init {
+        validate(this) {
+            validate(BookCategory::value).isBetween(start = 1, end = 8)
+        }
+    }
+
 
     override fun equals(other: Any?): Boolean {
         if (other === this) return true
@@ -14,9 +22,9 @@ class BookCategory(
         return value == other.value
     }
 
-    override fun hashCode(): Int {
-        return value
-    }
+    override fun hashCode() = value.hashCode()
+
+    override fun toString(): String = Gson().toJson(this)
 
     companion object {
         fun SERVER_SIDE(): BookCategory {
