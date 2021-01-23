@@ -31,7 +31,7 @@ final class BookCategory(val value: Int) {
             return BookCategory(1)
         }
 
-        fun FRONT_SIDE(): BookCategory {
+        fun FRONT_END(): BookCategory {
             return BookCategory(2)
         }
 
