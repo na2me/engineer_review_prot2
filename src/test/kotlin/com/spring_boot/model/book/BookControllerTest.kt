@@ -1,7 +1,5 @@
 package com.spring_boot.model.book
 
-import com.spring_boot.model.book.BookController
-import com.spring_boot.model.book.BookRepository
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
@@ -55,7 +53,7 @@ class BookControllerTest {
         assertEquals(json.getValue("title"), saved.title.value)
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value.toString())
-        assertEquals(json.get("url"), saved.url)
+        assertEquals(json.getValue("url"), saved.url.value)
     }
 
     @Test
@@ -96,7 +94,7 @@ class BookControllerTest {
         assertEquals(json.getValue("title"), saved.title.value)
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value.toString())
-        assertEquals(json.get("url"), saved.url)
+        assertEquals(json.getValue("url"), saved.url.value)
     }
 
     @Test
