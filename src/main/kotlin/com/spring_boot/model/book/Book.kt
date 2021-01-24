@@ -1,7 +1,7 @@
 package com.spring_boot.model.book
 
 import com.google.gson.Gson
-import com.spring_boot.base.AbstractEntity
+import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.model.book.value_objects.BookCategory
 import com.spring_boot.model.book.value_objects.BookScore
 import com.spring_boot.model.book.value_objects.BookTitle

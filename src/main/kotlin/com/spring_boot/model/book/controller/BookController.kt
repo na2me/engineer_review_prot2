@@ -1,5 +1,7 @@
-package com.spring_boot.model.book
+package com.spring_boot.model.book.controller
 
+import com.spring_boot.model.book.Book
+import com.spring_boot.model.book.repository.BookRepository
 import org.springframework.web.bind.annotation.*
 import java.util.*
 

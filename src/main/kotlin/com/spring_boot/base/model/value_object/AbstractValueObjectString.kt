@@ -1,4 +1,4 @@
-package com.spring_boot.base
+package com.spring_boot.base.model.value_object
 
 abstract class AbstractValueObjectString {
 

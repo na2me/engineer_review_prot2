@@ -1,4 +1,4 @@
-package com.spring_boot.base
+package com.spring_boot.base.model.entity
 
 import java.time.LocalDateTime
 import javax.persistence.Column

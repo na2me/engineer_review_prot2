@@ -1,4 +1,4 @@
-package com.spring_boot.base
+package com.spring_boot.base.model.entity
 
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType

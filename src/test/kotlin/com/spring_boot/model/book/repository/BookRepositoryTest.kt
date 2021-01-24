@@ -1,4 +1,4 @@
-package com.spring_boot.model.book
+package com.spring_boot.model.book.repository
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase

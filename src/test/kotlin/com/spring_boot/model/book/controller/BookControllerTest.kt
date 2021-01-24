@@ -1,5 +1,7 @@
-package com.spring_boot.model.book
+package com.spring_boot.model.book.controller
 
+import com.spring_boot.model.book.BookTest
+import com.spring_boot.model.book.repository.BookRepository
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals

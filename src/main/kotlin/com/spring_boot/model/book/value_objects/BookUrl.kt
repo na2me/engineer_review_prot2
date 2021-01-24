@@ -1,6 +1,6 @@
 package com.spring_boot.model.book.value_objects
 
-import com.spring_boot.base.AbstractValueObjectString
+import com.spring_boot.base.model.value_object.AbstractValueObjectString
 import org.valiktor.functions.isNotBlank
 import org.valiktor.functions.isWebsite
 import org.valiktor.validate
