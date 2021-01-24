@@ -19,10 +19,6 @@ class Book(
         @Embedded var score: BookScore,
         @Embedded var url: BookUrl) : AbstractEntity() {
 
-    override fun isSatisfied() {
-        //// 必須フィールド存在確認
-    }
-
     fun id() = this.id
 
     override fun toString(): String = Gson().toJson(this)

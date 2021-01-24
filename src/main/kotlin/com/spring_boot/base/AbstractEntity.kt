@@ -25,6 +25,4 @@ abstract class AbstractEntity : BaseEntity() {
     protected fun preUpdate() {
         this.updatedDate = LocalDateTime.now()
     }
-
-    abstract fun isSatisfied()
 }
