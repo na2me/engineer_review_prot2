@@ -1,6 +1,6 @@
 package com.spring_boot.base.model.value_object
 
-import com.spring_boot.model.book.value_objects.BookTitle
+import com.spring_boot.model.book.BookTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -21,7 +21,7 @@ class AbstractValueObjectStringTest {
 
         assertFalse(valueObject.equals(null))
 
-        val bookTitle = BookTitle("test title")
+        val bookTitle = BookTest.voTitle()
         assertFalse(valueObject.equals(bookTitle))
 
         assertTrue(valueObject.equals(valueObject))
