@@ -20,11 +20,4 @@ enum class Categories {
 @Embeddable
 final class BookCategory(
         @Column(name = "category", nullable = false)
-        override var value: Categories) : AbstractValueObject<Categories>() {
-
-    init {
-        validate(this) {
-
-        }
-    }
-}
+        override var value: Categories) : AbstractValueObject<Categories>()
