@@ -12,17 +12,14 @@ class BookCategoryTest {
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
-                Arguments.of(1, true),
-                Arguments.of(8, true),
-                // exceptional scenarios
-                Arguments.of(0, false),
-                Arguments.of(9, false),
+                Arguments.of(Categories.SERVER_SIDE, true),
+                Arguments.of(Categories.FRONT_END, true),
         )
     }
 
     @ParameterizedTest
     @MethodSource("dataProvider")
-    fun testValidation(value: Int, isValid: Boolean) {
+    fun testValidation(value: Categories, isValid: Boolean) {
         when (isValid) {
             true -> assertDoesNotThrow { BookCategory(value) }
             false -> assertThrows<ConstraintViolationException> { BookCategory(value) }
