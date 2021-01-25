@@ -1,64 +1,30 @@
 package com.spring_boot.model.book.value_objects
 
-import com.google.gson.Gson
-import org.valiktor.functions.isBetween
+import com.spring_boot.base.model.value_object.AbstractValueObject
 import org.valiktor.validate
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
+
+enum class Categories {
+    SERVER_SIDE,
+    FRONT_END,
+    INFRASTRUCTURE,
+    OS,
+    HARDWARE,
+    DESIGN,
+    NETWORK,
+    DATA_SCIENCE
+}
+
 @Embeddable
 final class BookCategory(
         @Column(name = "category", nullable = false)
-        val value: Int) {
+        override var value: Categories) : AbstractValueObject<Categories>() {
 
     init {
         validate(this) {
-            validate(BookCategory::value).isBetween(start = 1, end = 8)
-        }
-    }
 
-
-    override fun equals(other: Any?): Boolean {
-        if (other === this) return true
-        if (other !is BookCategory) return false
-        return value == other.value
-    }
-
-    override fun hashCode() = value.hashCode()
-
-    override fun toString(): String = Gson().toJson(this)
-
-    companion object {
-        fun SERVER_SIDE(): BookCategory {
-            return BookCategory(1)
-        }
-
-        fun FRONT_END(): BookCategory {
-            return BookCategory(2)
-        }
-
-        fun INFRASTORUCTURE(): BookCategory {
-            return BookCategory(3)
-        }
-
-        fun OS(): BookCategory {
-            return BookCategory(4)
-        }
-
-        fun HARDWARE(): BookCategory {
-            return BookCategory(5)
-        }
-
-        fun DESIGN(): BookCategory {
-            return BookCategory(6)
-        }
-
-        fun NETWORK(): BookCategory {
-            return BookCategory(7)
-        }
-
-        fun DATA_SCIENCE(): BookCategory {
-            return BookCategory(8)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.spring_boot.model.book.value_objects
 
-import com.spring_boot.base.model.value_object.AbstractValueObjectDouble
+import com.spring_boot.base.model.value_object.AbstractValueObject
 import org.valiktor.functions.isBetween
 import org.valiktor.validate
 import javax.persistence.Column
@@ -9,7 +9,7 @@ import javax.persistence.Embeddable
 @Embeddable
 final class BookScore(
         @Column(name = "score", nullable = false)
-        override var value: Double) : AbstractValueObjectDouble() {
+        override var value: Double) : AbstractValueObject<Double>() {
 
     init {
         validate(this) {

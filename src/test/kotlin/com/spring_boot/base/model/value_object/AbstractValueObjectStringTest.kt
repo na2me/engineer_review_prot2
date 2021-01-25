@@ -4,20 +4,20 @@ import com.spring_boot.model.book.value_objects.BookTitle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class ValueObjectString(override var value: String) : AbstractValueObjectString() {
+class ValueObject(override var value: String) : AbstractValueObject<String>() {
     companion object {
-        fun testInstance1(): ValueObjectString =
-                ValueObjectString("test instance1")
+        fun testInstance1(): ValueObject =
+                ValueObject("test instance1")
 
-        fun testInstance2(): ValueObjectString =
-                ValueObjectString("test instance2")
+        fun testInstance2(): ValueObject =
+                ValueObject("test instance2")
     }
 }
 
 class AbstractValueObjectStringTest {
     @Test
     fun testEquals() {
-        val valueObject = ValueObjectString.testInstance1()
+        val valueObject = ValueObject.testInstance1()
 
         assertFalse(valueObject.equals(null))
 
@@ -26,14 +26,14 @@ class AbstractValueObjectStringTest {
 
         assertTrue(valueObject.equals(valueObject))
 
-        assertTrue(valueObject.equals(ValueObjectString.testInstance1()))
+        assertTrue(valueObject.equals(ValueObject.testInstance1()))
 
-        assertFalse(valueObject.equals(ValueObjectString.testInstance2()))
+        assertFalse(valueObject.equals(ValueObject.testInstance2()))
     }
 
     @Test
     fun testToString() {
-        val valueObject = ValueObjectString.testInstance1()
+        val valueObject = ValueObject.testInstance1()
 
         val stringedValueObject = valueObject.toString()
 
