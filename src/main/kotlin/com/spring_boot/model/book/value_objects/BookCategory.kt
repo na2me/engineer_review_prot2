@@ -1,7 +1,6 @@
 package com.spring_boot.model.book.value_objects
 
 import com.spring_boot.base.model.value_object.AbstractValueObject
-import org.valiktor.validate
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
