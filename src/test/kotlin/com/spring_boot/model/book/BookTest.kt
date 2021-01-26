@@ -22,9 +22,9 @@ class BookTest {
         fun voPublishedAt2() = BookPublishedAt(LocalDate.EPOCH)
 
         fun entity() =
-              Book(voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
+                Book(voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
 
         fun entity2() =
-              Book(voTitle2(), voCategory2(), voScore2(), voUrl2(), voPublishedAt2())
+                Book(voTitle2(), voCategory2(), voScore2(), voUrl2(), voPublishedAt2())
     }
 }

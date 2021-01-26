@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test
 class ValueObject(override var value: String) : AbstractValueObject<String>() {
     companion object {
         fun testInstance1(): ValueObject =
-              ValueObject("test instance1")
+                ValueObject("test instance1")
 
         fun testInstance2(): ValueObject =
-              ValueObject("test instance2")
+                ValueObject("test instance2")
     }
 }
 

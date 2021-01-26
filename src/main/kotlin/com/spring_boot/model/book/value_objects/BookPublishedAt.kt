@@ -7,10 +7,10 @@ import javax.persistence.Embeddable
 
 @Embeddable
 final class BookPublishedAt(
-      @Column(name = "published_at", nullable = false)
-      override var value: LocalDate) : AbstractValueObject<LocalDate>() {
+        @Column(name = "published_at", nullable = false)
+        override var value: LocalDate) : AbstractValueObject<LocalDate>() {
 
-      fun toJsonFormat(): String {
-            return "[${value.year},${value.monthValue},${value.dayOfMonth}]"
-      }
+    fun toJsonFormat(): String {
+        return "[${value.year},${value.monthValue},${value.dayOfMonth}]"
+    }
 }

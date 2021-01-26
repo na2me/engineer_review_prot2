@@ -2,7 +2,6 @@ package com.spring_boot.model.book.controller
 
 import com.spring_boot.model.book.BookTest
 import com.spring_boot.model.book.repository.BookRepository
-import io.mockk.InternalPlatformDsl.toArray
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
