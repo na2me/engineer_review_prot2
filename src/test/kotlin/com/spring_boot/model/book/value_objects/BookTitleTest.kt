@@ -11,13 +11,13 @@ class BookTitleTest {
     companion object {
         @JvmStatic
         fun dataProvider() = listOf(
-                // normal scenarios
-                Arguments.of("test title", true),
-                Arguments.of("a", true),
-                Arguments.of("a".repeat(50), true),
-                // exceptional scenarios
-                Arguments.of("", false),
-                Arguments.of("a".repeat(51), false)
+              // normal scenarios
+              Arguments.of("test title", true),
+              Arguments.of("a", true),
+              Arguments.of("a".repeat(50), true),
+              // exceptional scenarios
+              Arguments.of("", false),
+              Arguments.of("a".repeat(51), false)
         )
     }
 

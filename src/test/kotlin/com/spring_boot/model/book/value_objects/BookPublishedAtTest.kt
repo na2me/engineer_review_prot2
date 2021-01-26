@@ -6,27 +6,25 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
+import java.time.LocalDate
 
-class BookScoreTest {
+class BookPublishedAtTest {
     companion object {
         @JvmStatic
         fun dataProvider() = listOf(
               // normal scenarios
-              Arguments.of(0.0, true),
-              Arguments.of(5, true),
-              Arguments.of(10.0, true),
-              // exceptional scenarios
-              Arguments.of(-0.1, false),
-              Arguments.of(10.1, false)
+              Arguments.of(LocalDate.now(), true),
+              Arguments.of(LocalDate.of(2020, 1, 1), true),
+              // all LocalDate should be accepted
         )
     }
 
     @ParameterizedTest
     @MethodSource("dataProvider")
-    fun testValidation(value: Double, isValid: Boolean) {
+    fun testValidation(value: LocalDate, isValid: Boolean) {
         when (isValid) {
-            true -> assertDoesNotThrow { BookScore(value) }
-            false -> assertThrows<ConstraintViolationException> { BookScore(value) }
+            true -> assertDoesNotThrow { BookPublishedAt(value) }
+            false -> assertThrows<ConstraintViolationException> { BookPublishedAt(value) }
         }
     }
 }

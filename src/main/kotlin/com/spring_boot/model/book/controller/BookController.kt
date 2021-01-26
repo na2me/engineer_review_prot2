@@ -26,6 +26,7 @@ class BookController(private val repository: BookRepository) {
             it.category = book.category
             it.score = book.score
             it.url = book.url
+            it.publishedAt = book.publishedAt
             repository.save(it)
         }
     }

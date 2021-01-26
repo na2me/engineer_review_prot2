@@ -2,10 +2,7 @@ package com.spring_boot.model.book
 
 import com.google.gson.Gson
 import com.spring_boot.base.model.entity.AbstractEntity
-import com.spring_boot.model.book.value_objects.BookCategory
-import com.spring_boot.model.book.value_objects.BookScore
-import com.spring_boot.model.book.value_objects.BookTitle
-import com.spring_boot.model.book.value_objects.BookUrl
+import com.spring_boot.model.book.value_objects.*
 import javax.persistence.Embedded
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -17,7 +14,8 @@ class Book(
         @Embedded var title: BookTitle,
         @Embedded var category: BookCategory,
         @Embedded var score: BookScore,
-        @Embedded var url: BookUrl) : AbstractEntity() {
+        @Embedded var url: BookUrl,
+        @Embedded var publishedAt: BookPublishedAt) : AbstractEntity() {
 
     fun id() = this.id
 

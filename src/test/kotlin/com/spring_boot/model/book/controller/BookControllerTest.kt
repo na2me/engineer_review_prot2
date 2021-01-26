@@ -2,6 +2,7 @@ package com.spring_boot.model.book.controller
 
 import com.spring_boot.model.book.BookTest
 import com.spring_boot.model.book.repository.BookRepository
+import io.mockk.InternalPlatformDsl.toArray
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -56,6 +58,7 @@ class BookControllerTest {
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value.toString())
         assertEquals(json.getValue("url"), saved.url.value)
+        assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
     }
 
     @Test
@@ -97,6 +100,7 @@ class BookControllerTest {
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value.toString())
         assertEquals(json.getValue("url"), saved.url.value)
+        assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
     }
 
     @Test
@@ -117,8 +121,10 @@ class BookControllerTest {
         val updated = repository.findById(saved.id()).get()
         assertEquals(book2.title, updated.title)
         assertEquals(updated.category, book2.category)
-        assert(updated.score == book2.score)
+        assertEquals(updated.score, book2.score)
         assertEquals(updated.url, book2.url)
+        assertEquals(updated.publishedAt, book2.publishedAt)
+
     }
 
     @Test
