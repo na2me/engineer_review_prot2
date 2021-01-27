@@ -20,4 +20,13 @@ class Book(
     fun id() = this.id
 
     override fun toString(): String = Gson().toJson(this)
+
+//    fun update(newBook: Book): Book {
+//        title = newBook.title
+//        category = newBook.category
+//        score = newBook.score
+//        url = newBook.url
+//        publishedAt = newBook.publishedAt
+//        repository.save(this)
+//    }
 }
