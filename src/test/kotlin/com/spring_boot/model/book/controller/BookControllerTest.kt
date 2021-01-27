@@ -27,9 +27,6 @@ class BookControllerTest {
     @Autowired
     lateinit var controller: BookController
 
-    @Autowired
-    lateinit var repository: BookRepository
-
     @BeforeEach
     fun setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build()
@@ -38,7 +35,7 @@ class BookControllerTest {
     @Test
     fun testIndex() {
         val book = BookTest.entity()
-        val saved = repository.save(book)
+        val saved = BookRepository.save(book)
 
         // --------------------------------------
 
@@ -73,14 +70,14 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book should be saved successfully
-        val books = repository.findAll()
+        val books = BookRepository.findAll()
         books.contains(book)
     }
 
     @Test
     fun testRead() {
         val book = BookTest.entity()
-        val saved = repository.save(book)
+        val saved = BookRepository.save(book)
 
         // --------------------------------------
 
@@ -105,7 +102,7 @@ class BookControllerTest {
     fun testUpdate() {
         val book = BookTest.entity()
         val book2 = BookTest.entity2()
-        val saved = repository.save(book)
+        val saved = BookRepository.save(book)
 
         // --------------------------------------
 
@@ -116,7 +113,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book should be updated successfully
-        val updated = repository.findById(saved.id()).get()
+        val updated = BookRepository.findById(saved.id()).get()
         assertEquals(book2.title, updated.title)
         assertEquals(updated.category, book2.category)
         assertEquals(updated.score, book2.score)
@@ -128,7 +125,7 @@ class BookControllerTest {
     @Test
     fun testDelete() {
         val book = BookTest.entity()
-        val savedBook = repository.save(book)
+        val savedBook = BookRepository.save(book)
 
         // --------------------------------------
 
@@ -140,7 +137,7 @@ class BookControllerTest {
 
         // the book should be deleted successfully
         assertThrows<NoSuchElementException> {
-            repository.findById(savedBook.id()).get()
+            BookRepository.findById(savedBook.id()).get()
         }
     }
 }

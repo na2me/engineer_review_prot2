@@ -2,6 +2,7 @@ package com.spring_boot.model.book
 
 import com.google.gson.Gson
 import com.spring_boot.base.model.entity.AbstractEntity
+import com.spring_boot.model.book.repository.BookRepository
 import com.spring_boot.model.book.value_objects.*
 import javax.persistence.Embedded
 import javax.persistence.Entity
@@ -21,12 +22,12 @@ class Book(
 
     override fun toString(): String = Gson().toJson(this)
 
-//    fun update(newBook: Book): Book {
-//        title = newBook.title
-//        category = newBook.category
-//        score = newBook.score
-//        url = newBook.url
-//        publishedAt = newBook.publishedAt
-//        repository.save(this)
-//    }
+    fun update(newBook: Book): Book {
+        title = newBook.title
+        category = newBook.category
+        score = newBook.score
+        url = newBook.url
+        publishedAt = newBook.publishedAt
+        return BookRepository.save(this)
+    }
 }

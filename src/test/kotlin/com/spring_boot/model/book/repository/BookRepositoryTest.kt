@@ -6,5 +6,4 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class BookRepositoryTest @Autowired constructor(
-      val bookRepository: BookRepository)
+class BookRepositoryTest @Autowired constructor()

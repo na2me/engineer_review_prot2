@@ -11,13 +11,13 @@ class BookScoreTest {
     companion object {
         @JvmStatic
         fun dataProvider() = listOf(
-              // normal scenarios
-              Arguments.of(0.0, true),
-              Arguments.of(5, true),
-              Arguments.of(10.0, true),
-              // exceptional scenarios
-              Arguments.of(-0.1, false),
-              Arguments.of(10.1, false)
+                // normal scenarios
+                Arguments.of(0.0, true),
+                Arguments.of(5, true),
+                Arguments.of(10.0, true),
+                // exceptional scenarios
+                Arguments.of(-0.1, false),
+                Arguments.of(10.1, false)
         )
     }
 

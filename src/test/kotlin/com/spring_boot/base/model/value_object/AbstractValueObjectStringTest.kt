@@ -38,7 +38,7 @@ class AbstractValueObjectStringTest {
         val stringedValueObject = valueObject.toString()
 
         assertEquals(
-              "{class=ValueObject, value=test instance1}",
-              stringedValueObject)
+                "{class=ValueObject, value=test instance1}",
+                stringedValueObject)
     }
 }

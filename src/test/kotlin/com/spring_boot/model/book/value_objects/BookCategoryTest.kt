@@ -11,9 +11,9 @@ class BookCategoryTest {
     companion object {
         @JvmStatic
         fun dataProvider() = listOf(
-              // normal scenarios
-              Arguments.of(Categories.SERVER_SIDE, true),
-              Arguments.of(Categories.FRONT_END, true),
+                // normal scenarios
+                Arguments.of(Categories.SERVER_SIDE, true),
+                Arguments.of(Categories.FRONT_END, true),
         )
     }
 
