@@ -19,9 +19,9 @@ class BookController {
     fun read(@PathVariable id: Long) = BookRepository.findById(id)
 
     @PostMapping("{id}")
-    fun update(@PathVariable id: Long, @ModelAttribute book: Book) {
+    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>) {
         val targetBook: Optional<Book> = BookRepository.findById(id)
-        targetBook.ifPresent { it.update(book) }
+        targetBook.ifPresent { it.update(params) }
     }
 
     @DeleteMapping("{id}")

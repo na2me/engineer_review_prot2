@@ -100,26 +100,29 @@ class BookControllerTest {
 
     @Test
     fun testUpdate() {
-        val book = BookTest.entity()
-        val book2 = BookTest.entity2()
-        val saved = BookRepository.save(book)
+        val saved = BookRepository.save(BookTest.entity())
+        val newBook = BookTest.entity2()
 
         // --------------------------------------
 
         // the book created above should be updated with book2 properties by calling update API
-        mockMvc.perform(post("/api/book/${saved.id()}").flashAttr("book", book2))
+        mockMvc.perform(post("/api/book/${saved.id()}")
+                .param("title", newBook.title.value)
+                .param("category", newBook.category.value.toString())
+                .param("score", newBook.score.value.toString())
+                .param("url", newBook.url.value)
+                .param("publishedAt", newBook.publishedAt.value.toString()))
                 .andExpect(status().isOk)
 
         // --------------------------------------
 
         // the book should be updated successfully
         val updated = BookRepository.findById(saved.id()).get()
-        assertEquals(book2.title, updated.title)
-        assertEquals(updated.category, book2.category)
-        assertEquals(updated.score, book2.score)
-        assertEquals(updated.url, book2.url)
-        assertEquals(updated.publishedAt, book2.publishedAt)
-
+        assertEquals(newBook.title, updated.title)
+        assertEquals(updated.category, newBook.category)
+        assertEquals(updated.score, newBook.score)
+        assertEquals(updated.url, newBook.url)
+        assertEquals(updated.publishedAt, newBook.publishedAt)
     }
 
     @Test
