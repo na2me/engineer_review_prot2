@@ -117,7 +117,7 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book should be updated successfully
-        val updated = BookRepository.findById(saved.id()).get()
+        val updated = BookRepository.findById(saved.id())
         assertEquals(newBook.title, updated.title)
         assertEquals(updated.category, newBook.category)
         assertEquals(updated.score, newBook.score)
@@ -140,7 +140,7 @@ class BookControllerTest {
 
         // the book should be deleted successfully
         assertThrows<NoSuchElementException> {
-            BookRepository.findById(savedBook.id()).get()
+            BookRepository.findById(savedBook.id())
         }
     }
 }
