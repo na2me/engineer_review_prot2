@@ -4,7 +4,6 @@ import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.model.book.Book
 import com.spring_boot.model.book.repository.BookRepository
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
 @RequestMapping("/api/book/")
@@ -14,8 +13,9 @@ class BookController {
     fun index() = BookRepository.findAll()
 
     @PostMapping("")
-    fun create(@ModelAttribute book: Book) {
-        BookRepository.save(book)
+    fun create(@RequestParam params: Map<String, String>): Book {
+        val requestParams = RequestParams(params)
+        return Book.new(requestParams)
     }
 
     @GetMapping("{id}")
@@ -24,7 +24,7 @@ class BookController {
     @PostMapping("{id}")
     fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Book {
         val requestParams = RequestParams(params)
-        return Book.update(id, requestParams)
+        return Book.new(requestParams, false, id)
     }
 
     @DeleteMapping("{id}")

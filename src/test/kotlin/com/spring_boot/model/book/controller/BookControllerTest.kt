@@ -63,7 +63,12 @@ class BookControllerTest {
         // --------------------------------------
 
         // the book created above should be returned as saved one by calling store API
-        mockMvc.perform(post("/api/book/").flashAttr("book", book))
+        mockMvc.perform(post("/api/book/")
+                .param("title", book.title.value)
+                .param("category", book.category.value.toString())
+                .param("score", book.score.value.toString())
+                .param("url", book.url.value)
+                .param("publishedAt", book.publishedAt.value.toString()))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
@@ -101,28 +106,28 @@ class BookControllerTest {
     @Test
     fun testUpdate() {
         val saved = BookRepository.save(BookTest.entity())
-        val newBook = BookTest.entity2()
+        val book = BookTest.entity2()
 
         // --------------------------------------
 
         // the book created above should be updated with book2 properties by calling update API
         mockMvc.perform(post("/api/book/${saved.id()}")
-                .param("title", newBook.title.value)
-                .param("category", newBook.category.value.toString())
-                .param("score", newBook.score.value.toString())
-                .param("url", newBook.url.value)
-                .param("publishedAt", newBook.publishedAt.value.toString()))
+                .param("title", book.title.value)
+                .param("category", book.category.value.toString())
+                .param("score", book.score.value.toString())
+                .param("url", book.url.value)
+                .param("publishedAt", book.publishedAt.value.toString()))
                 .andExpect(status().isOk)
 
         // --------------------------------------
 
         // the book should be updated successfully
         val updated = BookRepository.findById(saved.id())
-        assertEquals(newBook.title, updated.title)
-        assertEquals(updated.category, newBook.category)
-        assertEquals(updated.score, newBook.score)
-        assertEquals(updated.url, newBook.url)
-        assertEquals(updated.publishedAt, newBook.publishedAt)
+        assertEquals(updated.title, book.title)
+        assertEquals(updated.category, book.category)
+        assertEquals(updated.score, book.score)
+        assertEquals(updated.url, book.url)
+        assertEquals(updated.publishedAt, book.publishedAt)
     }
 
     @Test

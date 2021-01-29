@@ -2,7 +2,6 @@ package com.spring_boot.model.book.repository
 
 import com.spring_boot.base.util.resolve
 import com.spring_boot.model.book.Book
-import javassist.NotFoundException
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -23,12 +22,8 @@ class BookRepository {
 
         fun findAll() = repository().findAll()
 
-        fun findById(id: Long): Book = repository().findById(id).orElseThrow(::ClassNotFoundException)
+        fun findById(id: Long): Book = repository().findById(id).orElseThrow(::NoSuchElementException)
 
         fun delete(book: Book) = repository().delete(book)
-
-//        fun findOne(id: Long): Book {
-//            return repository().findOne(id)
-//        }
     }
 }
