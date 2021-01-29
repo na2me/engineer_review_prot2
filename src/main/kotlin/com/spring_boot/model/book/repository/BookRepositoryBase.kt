@@ -20,7 +20,7 @@ class BookRepository {
             return repository().saveAndFlush(book)
         }
 
-        fun findAll() = repository().findAll()
+        fun findAll(): List<Book> = repository().findAll()
 
         fun findById(id: Long): Book = repository().findById(id).orElseThrow(::NoSuchElementException)
 
