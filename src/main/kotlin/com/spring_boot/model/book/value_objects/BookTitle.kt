@@ -11,6 +11,9 @@ final class BookTitle(
         @Column(name = "title", nullable = false)
         override var value: String) : AbstractValueObject<String>() {
 
+    /**
+     * validation rule
+     */
     init {
         validate(this) {
             validate(BookTitle::value).hasSize(min = 1, max = 50)

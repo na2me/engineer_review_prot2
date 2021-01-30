@@ -9,9 +9,15 @@ import java.time.format.DateTimeFormatter
 
 class BookFactory {
     companion object {
+        /**
+         * create or update instance by referring [params]
+         * if [isNew] is false, need [id] to specify the target entity
+         *
+         * @return Book
+         */
         fun new(params: RequestParams, isNew: Boolean, id: Long): Book {
             val title = BookTitle(params.getValue("title"))
-            val category = BookCategory(Categories.valueOf(params.getValue("category")))
+            val category = BookCategory(BookCategory.Categories.valueOf(params.getValue("category")))
             val score = BookScore(params.getValue("score").toDouble())
             val url = BookUrl(params.getValue("url"))
             val publishedAt = BookPublishedAt(LocalDate.parse(params.getValue("publishedAt"), DateTimeFormatter.ISO_DATE))

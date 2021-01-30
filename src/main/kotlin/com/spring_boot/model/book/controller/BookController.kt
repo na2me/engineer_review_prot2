@@ -2,7 +2,6 @@ package com.spring_boot.model.book.controller
 
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.model.book.Book
-import com.spring_boot.model.book.factory.BookFactory.Companion.new
 import com.spring_boot.model.book.repository.BookRepository
 import org.springframework.web.bind.annotation.*
 
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/book/")
 class BookController {
 
+    // todo: swagger format comment
     @GetMapping("")
     fun index() = BookRepository.findAll()
 

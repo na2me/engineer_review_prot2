@@ -11,6 +11,9 @@ final class BookScore(
         @Column(name = "score", nullable = false)
         override var value: Double) : AbstractValueObject<Double>() {
 
+    /**
+     * validation rule
+     */
     init {
         validate(this) {
             validate(BookScore::value).isBetween(start = 0.0, end = 10.0)
