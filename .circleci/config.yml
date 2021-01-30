@@ -38,8 +38,8 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-      - store_test_results:
-          path: reports
-
       # run tests!
       - run: gradle test
+
+      - store_test_results:
+          path: index.html
