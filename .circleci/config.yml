@@ -41,5 +41,13 @@ jobs:
       # run tests!
       - run: gradle test
 
+      - run:
+          name: テスト結果の保存
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
       - store_test_results:
-          path: index.html
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
