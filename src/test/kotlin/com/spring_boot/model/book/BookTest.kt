@@ -19,7 +19,7 @@ class BookTest {
         fun voUrl2() = BookUrl("https://test2.com")
 
         fun voPublishedAt() = BookPublishedAt(LocalDate.now())
-        fun voPublishedAt2() = BookPublishedAt(LocalDate.EPOCH)
+        fun voPublishedAt2() = BookPublishedAt(LocalDate.now().minusYears(1))
 
         fun entity() =
                 Book(voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
