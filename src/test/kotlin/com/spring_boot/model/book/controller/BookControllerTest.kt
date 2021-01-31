@@ -1,5 +1,6 @@
 package com.spring_boot.model.book.controller
 
+import com.spring_boot.base.util.json.getValue
 import com.spring_boot.model.book.BookTest
 import com.spring_boot.model.book.repository.BookRepository
 import org.json.JSONArray
@@ -27,11 +28,17 @@ class BookControllerTest {
     @Autowired
     lateinit var controller: BookController
 
+    /**
+     * setup mockMvc DI for each test methods
+     */
     @BeforeEach
     fun setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build()
     }
 
+    /**
+     * test Index Api
+     */
     @Test
     fun testIndex() {
         val book = BookTest.entity()
@@ -56,6 +63,9 @@ class BookControllerTest {
         assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
     }
 
+    /**
+     * test Create Api
+     */
     @Test
     fun testCreate() {
         val book = BookTest.entity()
@@ -79,6 +89,9 @@ class BookControllerTest {
         books.contains(book)
     }
 
+    /**
+     * test Read Api
+     */
     @Test
     fun testRead() {
         val book = BookTest.entity()
@@ -103,6 +116,9 @@ class BookControllerTest {
         assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
     }
 
+    /**
+     * test Update Api
+     */
     @Test
     fun testUpdate() {
         val saved = BookRepository.save(BookTest.entity())
@@ -130,6 +146,9 @@ class BookControllerTest {
         assertEquals(updated.publishedAt, book.publishedAt)
     }
 
+    /**
+     * test Delete Api
+     */
     @Test
     fun testDelete() {
         val book = BookTest.entity()
@@ -149,6 +168,3 @@ class BookControllerTest {
         }
     }
 }
-
-fun JSONObject.getValue(field: String) =
-        JSONObject(this.getString(field)).getString("value")

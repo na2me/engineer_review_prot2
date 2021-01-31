@@ -9,6 +9,9 @@ import org.valiktor.ConstraintViolationException
 
 class BookCategoryTest {
     companion object {
+        /**
+         * data provider methods for "testValidation"
+         */
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
@@ -17,6 +20,9 @@ class BookCategoryTest {
         )
     }
 
+    /**
+     * validation test checking if provided parameters are valid for the VO
+     */
     @ParameterizedTest
     @MethodSource("dataProvider")
     fun testValidation(value: BookCategory.Categories, isValid: Boolean) {

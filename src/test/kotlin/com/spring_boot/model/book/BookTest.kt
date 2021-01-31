@@ -6,6 +6,9 @@ import java.time.LocalDate
 class BookTest {
     companion object {
 
+        /**
+         * Value Object generation methods
+         */
         fun voTitle() = BookTitle("test title")
         fun voTitle2() = BookTitle("test title2")
 
@@ -21,6 +24,11 @@ class BookTest {
         fun voPublishedAt() = BookPublishedAt(LocalDate.now())
         fun voPublishedAt2() = BookPublishedAt(LocalDate.now().minusYears(1))
 
+        // --------------------------------------
+
+        /**
+         * Entity generation methods
+         */
         fun entity() =
                 Book(voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
 

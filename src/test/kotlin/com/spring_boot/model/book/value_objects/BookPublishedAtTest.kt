@@ -10,6 +10,9 @@ import java.time.LocalDate
 
 class BookPublishedAtTest {
     companion object {
+        /**
+         * data provider methods for "testValidation"
+         */
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
@@ -19,6 +22,9 @@ class BookPublishedAtTest {
         )
     }
 
+    /**
+     * validation test checking if provided parameters are valid for the VO
+     */
     @ParameterizedTest
     @MethodSource("dataProvider")
     fun testValidation(value: LocalDate, isValid: Boolean) {

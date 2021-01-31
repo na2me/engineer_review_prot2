@@ -32,7 +32,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("junit:junit:4.13")
 	testImplementation("com.tngtech.java:junit-dataprovider:1.13.1")
@@ -45,6 +44,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.valiktor:valiktor-core:0.12.0")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("org.json:json:20200518")
 }
 
 tasks.withType<KotlinCompile> {

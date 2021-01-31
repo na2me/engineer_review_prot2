@@ -9,6 +9,9 @@ import org.valiktor.ConstraintViolationException
 
 class BookUrlTest {
     companion object {
+        /**
+         * data provider methods for "testValidation"
+         */
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
@@ -20,6 +23,9 @@ class BookUrlTest {
         )
     }
 
+    /**
+     * validation test checking if provided parameters are valid for the VO
+     */
     @ParameterizedTest
     @MethodSource("dataProvider")
     fun testValidation(value: String, isValid: Boolean) {
