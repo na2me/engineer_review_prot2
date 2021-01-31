@@ -31,8 +31,8 @@ class Swagger2Config {
      * @return [ApiInfoBuilder] which contains description info about API
      */
     fun apiInfo(): ApiInfo = ApiInfoBuilder()
-            .title("EngineerReview API")
-            .description("書籍情報を扱うAPIです")
+            .title("EngineerReview Book API")
+            .description("API operating Book information")
             .version("1.0")
             .build()
 }

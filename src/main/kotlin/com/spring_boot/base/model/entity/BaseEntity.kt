@@ -1,5 +1,6 @@
 package com.spring_boot.base.model.entity
 
+import io.swagger.annotations.ApiModelProperty
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -15,6 +16,7 @@ abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "エンティティID", required = false)
     protected val id: Long = UNSAVED_ID
 
     /**
