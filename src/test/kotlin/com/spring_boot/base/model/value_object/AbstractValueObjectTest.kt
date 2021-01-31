@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test
 
 class ValueObject(override var value: String) : AbstractValueObject<String>() {
     companion object {
+        /**
+         * test abstract instance generation methods
+         */
         fun testInstance1(): ValueObject =
                 ValueObject("test instance1")
 
@@ -14,7 +17,10 @@ class ValueObject(override var value: String) : AbstractValueObject<String>() {
     }
 }
 
-class AbstractValueObjectStringTest {
+class AbstractValueObjectTest {
+    /**
+     * test equals method
+     */
     @Test
     fun testEquals() {
         val valueObject = ValueObject.testInstance1()
@@ -31,6 +37,9 @@ class AbstractValueObjectStringTest {
         assertFalse(valueObject.equals(ValueObject.testInstance2()))
     }
 
+    /**
+     * test toString method
+     */
     @Test
     fun testToString() {
         val valueObject = ValueObject.testInstance1()

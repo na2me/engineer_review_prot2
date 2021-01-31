@@ -6,20 +6,25 @@ import org.springframework.stereotype.Component
 
 private var context: ApplicationContext? = null
 
-/** resolve container */
-fun <T> resolve(clazz: Class<T>): T {
-    val bean = context?.getBean(clazz)
-    if (bean != null) {
-        return bean
-    }
-    throw IllegalStateException("Spring utility class not initialized.")
-}
-
-/** DI container resolver */
+/**
+ * DI container resolver
+ */
 @Component
 class Resolver : ApplicationContextAware {
-
     override fun setApplicationContext(applicationContext: ApplicationContext) {
         context = applicationContext
+    }
+
+    companion object {
+        /**
+         * resolve container passed as [clazz]
+         */
+        fun <T> resolve(clazz: Class<T>): T {
+            val bean = context?.getBean(clazz)
+            if (bean != null) {
+                return bean
+            }
+            throw IllegalStateException("Spring utility class not initialized.")
+        }
     }
 }

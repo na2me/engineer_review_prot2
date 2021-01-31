@@ -9,17 +9,23 @@ import org.valiktor.ConstraintViolationException
 
 class BookCategoryTest {
     companion object {
+        /**
+         * data provider methods for "testValidation"
+         */
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal scenarios
-                Arguments.of(Categories.SERVER_SIDE, true),
-                Arguments.of(Categories.FRONT_END, true),
+                Arguments.of(BookCategory.Categories.SERVER_SIDE, true),
+                Arguments.of(BookCategory.Categories.FRONT_END, true),
         )
     }
 
+    /**
+     * validation test checking if provided parameters are valid for the VO
+     */
     @ParameterizedTest
     @MethodSource("dataProvider")
-    fun testValidation(value: Categories, isValid: Boolean) {
+    fun testValidation(value: BookCategory.Categories, isValid: Boolean) {
         when (isValid) {
             true -> assertDoesNotThrow { BookCategory(value) }
             false -> assertThrows<ConstraintViolationException> { BookCategory(value) }

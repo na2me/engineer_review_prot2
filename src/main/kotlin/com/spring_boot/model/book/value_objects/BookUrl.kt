@@ -12,6 +12,9 @@ final class BookUrl(
         @Column(name = "url", nullable = false)
         override var value: String) : AbstractValueObject<String>() {
 
+    /**
+     * validation rule
+     */
     init {
         validate(this) {
             validate(BookUrl::value).isNotBlank().isWebsite()
