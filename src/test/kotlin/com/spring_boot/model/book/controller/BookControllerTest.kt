@@ -1,6 +1,5 @@
 package com.spring_boot.model.book.controller
 
-import com.spring_boot.base.util.json.getValue
 import com.spring_boot.model.book.BookTest
 import com.spring_boot.model.book.repository.BookRepository
 import org.json.JSONArray
@@ -168,3 +167,6 @@ class BookControllerTest {
         }
     }
 }
+
+fun JSONObject.getValue(field: String) =
+        JSONObject(this.getString(field)).getString("value")
