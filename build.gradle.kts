@@ -44,9 +44,7 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.8.5")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.valiktor:valiktor-core:0.12.0")
-	implementation("io.springfox:springfox-swagger2:2.9.2")
-	implementation("io.springfox:springfox-core:2.9.2")
-	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
