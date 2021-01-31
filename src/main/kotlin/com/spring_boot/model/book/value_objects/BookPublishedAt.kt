@@ -1,6 +1,8 @@
 package com.spring_boot.model.book.value_objects
 
+import com.google.gson.JsonArray
 import com.spring_boot.base.model.value_object.AbstractValueObject
+import org.json.JSONArray
 import org.valiktor.validate
 import java.time.LocalDate
 import javax.persistence.Column
@@ -23,7 +25,7 @@ final class BookPublishedAt(
     /**
      * @return string formatted as LocalDate json
      */
-    fun toJsonFormat(): String {
-        return "[${value.year},${value.monthValue},${value.dayOfMonth}]"
-    }
+    fun toJsonFormat(): JSONArray =
+            JSONArray("[${value.year},${value.monthValue},${value.dayOfMonth}]")
+
 }

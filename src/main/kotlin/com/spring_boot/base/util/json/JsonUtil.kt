@@ -5,5 +5,5 @@ import org.json.JSONObject
 /**
  * @return string value associated with [field]
  */
-fun JSONObject.getValue(field: String): String =
-        JSONObject(this.getString(field)).getString("value")
+fun JSONObject.getValue(field: String) =
+        this.getJSONObject(field).get("value")
