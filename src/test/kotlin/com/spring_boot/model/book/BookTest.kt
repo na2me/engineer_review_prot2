@@ -5,7 +5,6 @@ import java.time.LocalDate
 
 class BookTest {
     companion object {
-
         /**
          * Value Object generation methods
          */
