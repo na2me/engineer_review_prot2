@@ -3,7 +3,7 @@ package com.spring_boot.model.book.factory
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.model.book.Book
 import com.spring_boot.model.book.repository.BookRepository
-import com.spring_boot.model.book.value_objects.*
+import com.spring_boot.model.book.value_object.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

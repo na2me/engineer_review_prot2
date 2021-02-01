@@ -1,4 +1,4 @@
-package com.spring_boot.model.book.value_objects
+package com.spring_boot.model.book.value_object
 
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows

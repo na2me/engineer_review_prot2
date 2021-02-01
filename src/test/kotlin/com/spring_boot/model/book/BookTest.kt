@@ -1,6 +1,6 @@
 package com.spring_boot.model.book
 
-import com.spring_boot.model.book.value_objects.*
+import com.spring_boot.model.book.value_object.*
 import java.time.LocalDate
 
 class BookTest {

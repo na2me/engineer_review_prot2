@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.model.book.factory.BookFactory
-import com.spring_boot.model.book.value_objects.*
+import com.spring_boot.model.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
 import javax.persistence.Entity
