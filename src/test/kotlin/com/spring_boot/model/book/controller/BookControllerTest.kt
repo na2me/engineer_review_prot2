@@ -60,8 +60,7 @@ class BookControllerTest {
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value)
         assertEquals(json.getValue("url"), saved.url.value)
-        // todo: deal with Json format
-//        assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
+        assertEquals(json.getValue("publishedAt").toString(), (saved.publishedAt.toJsonFormat()))
     }
 
     /**
@@ -115,8 +114,7 @@ class BookControllerTest {
         assertEquals(json.getValue("category"), saved.category.value.toString())
         assertEquals(json.getValue("score"), saved.score.value)
         assertEquals(json.getValue("url"), saved.url.value)
-        // todo: deal with Json format
-//        assertEquals(json.getValue("publishedAt"), saved.publishedAt.toJsonFormat())
+        assertEquals(json.getValue("publishedAt").toString(), (saved.publishedAt.toJsonFormat()))
     }
 
     /**

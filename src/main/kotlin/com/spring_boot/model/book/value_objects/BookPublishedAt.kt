@@ -25,7 +25,6 @@ final class BookPublishedAt(
     /**
      * @return string formatted as LocalDate json
      */
-    fun toJsonFormat(): JSONArray =
-            JSONArray("[${value.year},${value.monthValue},${value.dayOfMonth}]")
+    fun toJsonFormat() = "[${value.year},${value.monthValue},${value.dayOfMonth}]"
 
 }
