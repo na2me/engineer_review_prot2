@@ -28,7 +28,7 @@ class Account(
         /**
          * call `new` method process provided by Factory
          *
-         * @return Book
+         * @return Account
          */
         fun new(params: RequestParams, isNew: Boolean = true, id: Long = -1) =
                 AccountFactory.new(params, isNew, id)
