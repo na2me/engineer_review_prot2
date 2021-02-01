@@ -14,11 +14,11 @@ class BookTitleTest {
          */
         @JvmStatic
         fun dataProvider() = listOf(
-                // normal scenarios
+                // normal cases
                 Arguments.of("test title", true),
                 Arguments.of("a", true),
                 Arguments.of("a".repeat(50), true),
-                // exceptional scenarios
+                // exceptional cases
                 Arguments.of("", false),
                 Arguments.of("a".repeat(51), false)
         )

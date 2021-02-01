@@ -15,7 +15,7 @@ class BookPublishedAtTest {
          */
         @JvmStatic
         fun dataProvider() = listOf(
-                // normal scenarios
+                // normal cases
                 Arguments.of(LocalDate.now(), true),
                 Arguments.of(LocalDate.of(2020, 1, 1), true),
                 // all LocalDate should be accepted

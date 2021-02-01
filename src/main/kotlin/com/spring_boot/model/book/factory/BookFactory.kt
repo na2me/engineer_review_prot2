@@ -24,6 +24,7 @@ class BookFactory {
 
             val book: Book
             when (isNew) {
+                // when the entity is newly created, prepare new entity
                 true -> {
                     book = Book(
                             title,
@@ -33,6 +34,7 @@ class BookFactory {
                             publishedAt
                     )
                 }
+                // when the existed entity is updated, set each fields as new ones
                 false -> {
                     book = BookRepository.findById(id)
                     book.title = title

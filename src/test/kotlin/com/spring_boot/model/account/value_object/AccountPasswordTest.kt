@@ -1,4 +1,4 @@
-package com.spring_boot.model.book.value_object
+package com.spring_boot.model.account.value_object
 
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
 
-class BookCategoryTest {
+class AccountPasswordTest {
     companion object {
         /**
          * data provider methods for "testValidation"
@@ -15,8 +15,13 @@ class BookCategoryTest {
         @JvmStatic
         fun dataProvider() = listOf(
                 // normal cases
-                Arguments.of(BookCategory.Categories.SERVER_SIDE, true),
-                Arguments.of(BookCategory.Categories.FRONT_END, true),
+                Arguments.of("ThisIsSamplePassWord", true),
+                Arguments.of("a".repeat(12), true),
+                Arguments.of("a".repeat(30), true),
+                // exceptional cases
+                Arguments.of("", false),
+                Arguments.of("This>IsSamplePassWord", false),
+                Arguments.of("This IsSamplePassWord", false),
         )
     }
 
@@ -25,10 +30,10 @@ class BookCategoryTest {
      */
     @ParameterizedTest
     @MethodSource("dataProvider")
-    fun testValidation(value: BookCategory.Categories, isValid: Boolean) {
+    fun testValidation(value: String, isValid: Boolean) {
         when (isValid) {
-            true -> assertDoesNotThrow { BookCategory(value) }
-            false -> assertThrows<ConstraintViolationException> { BookCategory(value) }
+            true -> assertDoesNotThrow { AccountPassword(value) }
+            false -> assertThrows<ConstraintViolationException> { AccountPassword(value) }
         }
     }
 }
