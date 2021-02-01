@@ -16,12 +16,10 @@ class AccountPasswordTest {
         fun dataProvider() = listOf(
                 // normal cases
                 Arguments.of("ThisIsSamplePassWord", true),
-                Arguments.of("a".repeat(12), true),
-                Arguments.of("a".repeat(30), true),
+                Arguments.of("a".repeat(100), true),
                 // exceptional cases
                 Arguments.of("", false),
-                Arguments.of("This>IsSamplePassWord", false),
-                Arguments.of("This IsSamplePassWord", false),
+                Arguments.of("a".repeat(101), false),
         )
     }
 
