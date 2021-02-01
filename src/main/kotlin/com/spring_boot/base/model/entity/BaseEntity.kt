@@ -16,7 +16,7 @@ abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(value = "エンティティID", required = false)
+    @ApiModelProperty(value = "entity ID", required = false)
     protected val id: Long = UNSAVED_ID
 
     /**
