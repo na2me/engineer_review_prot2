@@ -1,6 +1,6 @@
 package com.spring_boot.base.model.value_object
 
-import com.spring_boot.model.book.BookTest
+import com.spring_boot.domain.book.BookTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
