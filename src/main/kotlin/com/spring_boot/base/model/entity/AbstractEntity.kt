@@ -1,6 +1,5 @@
 package com.spring_boot.base.model.entity
 
-import com.google.gson.Gson
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 import javax.persistence.Column
@@ -43,9 +42,4 @@ abstract class AbstractEntity : BaseEntity() {
     protected fun preUpdate() {
         this.updatedDate = LocalDateTime.now()
     }
-
-    /**
-     * @return json format
-     */
-    override fun toString(): String = Gson().toJson(this)
 }

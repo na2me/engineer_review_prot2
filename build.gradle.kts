@@ -45,6 +45,8 @@ dependencies {
 	implementation("org.valiktor:valiktor-core:0.12.0")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
 	implementation("org.json:json:20200518")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,6 +1,7 @@
 package com.spring_boot.domain.account.factory
 
 import com.spring_boot.base.util.http.RequestParams
+import com.spring_boot.base.util.security.passwordEncoder
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.account.value_object.AccountEmail
@@ -18,7 +19,9 @@ class AccountFactory {
         fun new(params: RequestParams, isNew: Boolean, id: Long): Account {
             val name = AccountName(params.getValue("name"))
             val email = AccountEmail(params.getValue("email"))
-            val password = AccountPassword(params.getValue("password"))
+            // encode raw password to record
+            val encodedPassword = passwordEncoder().encode(params.getValue("password"))
+            val password = AccountPassword(encodedPassword)
 
             val account: Account
             when (isNew) {
