@@ -33,5 +33,4 @@ class Account(
         fun new(params: RequestParams, isNew: Boolean = true, id: Long = -1) =
                 AccountFactory.new(params, isNew, id)
     }
-
 }

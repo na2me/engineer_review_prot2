@@ -19,11 +19,11 @@ abstract class AbstractEntity : BaseEntity() {
      */
     fun id() = this.id
 
-    @ApiModelProperty(value = "作成日時", required = false)
+    @ApiModelProperty(value = "when it was created", required = false)
     @Column(name = "created_date", nullable = false)
     var createdDate: LocalDateTime? = null
 
-    @ApiModelProperty(value = "更新日時", required = false)
+    @ApiModelProperty(value = "when it was updated", required = false)
     @Column(name = "updated_date", nullable = false)
     var updatedDate: LocalDateTime? = null
 
