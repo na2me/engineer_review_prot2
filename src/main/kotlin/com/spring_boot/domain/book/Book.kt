@@ -1,13 +1,14 @@
 package com.spring_boot.domain.book
 
 import com.spring_boot.base.model.entity.AbstractEntity
-import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import com.spring_boot.base.util.http.RequestParams
+import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.factory.BookFactory
 import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
 import javax.persistence.Entity
+import javax.persistence.IdClass
 import javax.persistence.Table
 
 
@@ -30,13 +31,20 @@ class Book(
         @Embedded
         var publishedAt: BookPublishedAt) : AbstractEntity<BookId>() {
 
+    /**
+     * @return Value Object ID
+     */
+    fun id(): BookId {
+        return BookId(this.id)
+    }
+
     companion object {
         /**
          * call `new` method process provided by Factory
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: BookId = BookId.getUnsaved()) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: BookId = BookId.getUnsavedId()) =
                 BookFactory.new(params, isNew, id)
     }
 }

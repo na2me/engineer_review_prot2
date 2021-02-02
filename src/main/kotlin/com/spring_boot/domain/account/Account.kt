@@ -10,6 +10,7 @@ import com.spring_boot.domain.account.value_object.AccountPassword
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
 import javax.persistence.Entity
+import javax.persistence.IdClass
 import javax.persistence.Table
 
 @Entity
@@ -25,13 +26,20 @@ class Account(
         @Embedded
         var password: AccountPassword) : AbstractEntity<AccountId>() {
 
+    /**
+     * @return Value Object ID
+     */
+    fun id(): AccountId {
+        return AccountId(this.id)
+    }
+
     companion object {
         /**
          * call `new` method process provided by Factory
          *
          * @return Account
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: AccountId = AccountId.getUnsaved()) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: AccountId = AccountId.getUnsavedId()) =
                 AccountFactory.new(params, isNew, id)
     }
 }

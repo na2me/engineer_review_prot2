@@ -1,10 +1,11 @@
 package com.spring_boot.base.model.entity
 
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
-import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 import javax.persistence.*
+
+const val UNSAVED_VALUE = -1L
 
 /**
  * abstract class implementing necessary information for Value Object
@@ -12,21 +13,16 @@ import javax.persistence.*
 @MappedSuperclass
 abstract class AbstractEntity<T : AbstractValueObjectId> {
 
-    @EmbeddedId
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "entity ID", required = false)
-    lateinit var id: T
-
-    /**
-     * @return [id] value of the entity
-     */
-    fun id(): T = this.id
+    var id: Long = UNSAVED_VALUE
 
     /**
      * @return true if the entity is saved, false if not
      */
     fun isSaved(): Boolean {
-        return id.value != UNSAVED_VALUE
+        return id != UNSAVED_VALUE
     }
 
     // --------------------------------------
@@ -74,7 +70,7 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
      * @return true if [other] has the same id as this entity
      */
     protected fun sameIdentityAs(other: AbstractEntity<*>): Boolean {
-        if (id.value == UNSAVED_VALUE || other.id.value == UNSAVED_VALUE) {
+        if (id == UNSAVED_VALUE || other.id == UNSAVED_VALUE) {
             return false
         }
         return this.id == other.id
@@ -84,6 +80,6 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
      * @return hashed code of [id]
      */
     override fun hashCode(): Int {
-        return if (id.value != UNSAVED_VALUE) id.hashCode() else 0
+        return if (id != UNSAVED_VALUE) id.hashCode() else 0
     }
 }
