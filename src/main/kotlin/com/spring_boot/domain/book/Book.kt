@@ -27,9 +27,8 @@ class Book(
         var url: BookUrl,
         @ApiModelProperty(value = "PublishedAt", required = true)
         @Embedded
-        var publishedAt: BookPublishedAt) : AbstractEntity() {
+        var publishedAt: BookPublishedAt) : AbstractEntity<BookId>() {
 
-    // NEXT::IMPLEMENTING BOOKID BY REFERRING REVIEW ID
     companion object {
         /**
          * call `new` method process provided by Factory

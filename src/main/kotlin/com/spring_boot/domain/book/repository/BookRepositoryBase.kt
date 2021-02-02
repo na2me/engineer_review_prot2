@@ -2,6 +2,7 @@ package com.spring_boot.domain.book.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.book.Book
+import com.spring_boot.domain.book.value_object.BookId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -33,7 +34,7 @@ class BookRepository {
         /**
          * find entity by [id]
          */
-        fun findById(id: Long): Book = repository().findById(id).orElseThrow(::NoSuchElementException)
+        fun findById(id: BookId): Book = repository().findById(id.value).orElseThrow(::NoSuchElementException)
 
         /**
          * delete [entity]
