@@ -34,7 +34,10 @@ class AccountRepository {
         /**
          * find book entity by [id]
          */
-        fun findById(id: AccountId): Account = repository().findById(id.value).orElseThrow(::NoSuchElementException)
+        fun findById(id: AccountId?): Account {
+            id ?: throw KotlinNullPointerException("ID is not set for searching")
+            return repository().findById(id.value).orElseThrow(::NoSuchElementException)
+        }
 
         /**
          * delete [account] entity

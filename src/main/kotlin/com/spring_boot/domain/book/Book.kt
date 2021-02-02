@@ -35,7 +35,7 @@ class Book(
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: Long = -1) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: BookId? = null) =
                 BookFactory.new(params, isNew, id)
     }
 }

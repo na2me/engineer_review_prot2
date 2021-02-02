@@ -31,7 +31,7 @@ class Account(
          *
          * @return Account
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: Long = -1) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: AccountId? = null) =
                 AccountFactory.new(params, isNew, id)
     }
 }

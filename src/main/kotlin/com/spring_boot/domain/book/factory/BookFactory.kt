@@ -15,7 +15,7 @@ class BookFactory {
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean, id: Long): Book {
+        fun new(params: RequestParams, isNew: Boolean, id: BookId?): Book {
             val title = BookTitle(params.getValue("title"))
             val category = BookCategory(BookCategory.Categories.valueOf(params.getValue("category")))
             val score = BookScore(params.getValue("score").toDouble())
@@ -36,6 +36,7 @@ class BookFactory {
                 }
                 // when the existed entity is updated, set each fields as new ones
                 false -> {
+                    id ?: throw KotlinNullPointerException("This should never happen")
                     book = BookRepository.findById(id)
                     book.title = title
                     book.category = category

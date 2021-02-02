@@ -5,6 +5,7 @@ import com.spring_boot.base.util.security.passwordEncoder
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.account.value_object.AccountEmail
+import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.account.value_object.AccountName
 import com.spring_boot.domain.account.value_object.AccountPassword
 
@@ -16,7 +17,7 @@ class AccountFactory {
          *
          * @return Account
          */
-        fun new(params: RequestParams, isNew: Boolean, id: Long): Account {
+        fun new(params: RequestParams, isNew: Boolean, id: AccountId?): Account {
             val name = AccountName(params.getValue("name"))
             val email = AccountEmail(params.getValue("email"))
             // encode raw password to record
@@ -35,6 +36,7 @@ class AccountFactory {
                 }
                 // when the existed entity is updated, set each fields as new ones
                 false -> {
+                    id ?: throw KotlinNullPointerException("This should never happen")
                     account = AccountRepository.findById(id)
                     account.name = name
                     account.email = email
