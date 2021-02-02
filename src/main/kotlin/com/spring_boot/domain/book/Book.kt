@@ -29,6 +29,7 @@ class Book(
         @Embedded
         var publishedAt: BookPublishedAt) : AbstractEntity() {
 
+    // NEXT::IMPLEMENTING BOOKID BY REFERRING REVIEW ID
     companion object {
         /**
          * call `new` method process provided by Factory

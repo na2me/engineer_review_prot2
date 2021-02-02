@@ -2,6 +2,7 @@ package com.spring_boot.domain.review.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.review.Review
+import com.spring_boot.domain.review.value_object.ReviewId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -30,7 +31,7 @@ class ReviewRepository {
         /**
          * find entity by [id]
          */
-        fun findById(id: Long): Review = repository().findById(id).orElseThrow(::NoSuchElementException)
+        fun findById(id: ReviewId): Review = repository().findById(id.value).orElseThrow(::NoSuchElementException)
 
         /**
          * delete [entity]

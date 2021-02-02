@@ -1,10 +1,9 @@
 package com.spring_boot.domain.review
 
 import com.spring_boot.base.model.entity.AbstractEntity
-import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.book.Book
-import com.spring_boot.domain.book.factory.BookFactory
+import com.spring_boot.domain.review.value_object.ReviewId
 import com.spring_boot.domain.review.value_object.ReviewScore
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
@@ -20,7 +19,7 @@ class Review(
         var book: Book,
         @ApiModelProperty(value = "Score", required = true)
         @Embedded
-        var score: ReviewScore) : AbstractEntity() {
+        var score: ReviewScore) : AbstractEntity<ReviewId>() {
 
     companion object {
         /**
