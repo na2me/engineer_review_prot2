@@ -1,4 +1,4 @@
-package com.spring_boot.domain.book.value_object
+package com.spring_boot.domain.review.value_object
 
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
 
-class BookScoreTest {
+class ReviewScoreTest {
     companion object {
         /**
          * data provider methods for "testValidation"
@@ -31,8 +31,8 @@ class BookScoreTest {
     @MethodSource("dataProvider")
     fun testValidation(value: Double, isValid: Boolean) {
         when (isValid) {
-            true -> assertDoesNotThrow { BookScore(value) }
-            false -> assertThrows<ConstraintViolationException> { BookScore(value) }
+            true -> assertDoesNotThrow { ReviewScore(value) }
+            false -> assertThrows<ConstraintViolationException> { ReviewScore(value) }
         }
     }
 }
