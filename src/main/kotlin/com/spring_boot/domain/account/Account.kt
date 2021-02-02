@@ -4,6 +4,7 @@ import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.account.factory.AccountFactory
 import com.spring_boot.domain.account.value_object.AccountEmail
+import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.account.value_object.AccountName
 import com.spring_boot.domain.account.value_object.AccountPassword
 import io.swagger.annotations.ApiModelProperty
@@ -22,7 +23,7 @@ class Account(
         var email: AccountEmail,
         @ApiModelProperty(value = "Password", required = true)
         @Embedded
-        var password: AccountPassword) : AbstractEntity() {
+        var password: AccountPassword) : AbstractEntity<AccountId>() {
 
     companion object {
         /**

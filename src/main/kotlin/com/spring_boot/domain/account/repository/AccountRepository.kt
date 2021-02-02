@@ -2,6 +2,7 @@ package com.spring_boot.domain.account.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.account.Account
+import com.spring_boot.domain.account.value_object.AccountId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -33,7 +34,7 @@ class AccountRepository {
         /**
          * find book entity by [id]
          */
-        fun findById(id: Long): Account = repository().findById(id).orElseThrow(::NoSuchElementException)
+        fun findById(id: AccountId): Account = repository().findById(id.value).orElseThrow(::NoSuchElementException)
 
         /**
          * delete [account] entity
