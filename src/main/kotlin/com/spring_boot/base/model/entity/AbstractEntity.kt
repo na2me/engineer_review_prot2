@@ -1,6 +1,7 @@
 package com.spring_boot.base.model.entity
 
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
+import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -14,18 +15,18 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "entity ID", required = false)
-    protected var id: T? = null
+    lateinit var id: T
 
     /**
      * @return [id] value of the entity
      */
-    fun id(): T? = this.id
+    fun id(): T = this.id
 
     /**
      * @return true if the entity is saved, false if not
      */
     fun isSaved(): Boolean {
-        return id != null
+        return id.value != UNSAVED_VALUE
     }
 
     // --------------------------------------
@@ -73,7 +74,7 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
      * @return true if [other] has the same id as this entity
      */
     protected fun sameIdentityAs(other: AbstractEntity<*>): Boolean {
-        if (id == null || other.id == null) {
+        if (id.value == UNSAVED_VALUE || other.id.value == UNSAVED_VALUE) {
             return false
         }
         return this.id == other.id
@@ -83,6 +84,6 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
      * @return hashed code of [id]
      */
     override fun hashCode(): Int {
-        return if (id != null) id.hashCode() else 0
+        return if (id.value != UNSAVED_VALUE) id.hashCode() else 0
     }
 }

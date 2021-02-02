@@ -1,6 +1,7 @@
 package com.spring_boot.domain.book
 
 import com.spring_boot.base.model.entity.AbstractEntity
+import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.book.factory.BookFactory
 import com.spring_boot.domain.book.value_object.*
@@ -35,7 +36,7 @@ class Book(
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: BookId? = null) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: BookId = BookId.getUnsaved()) =
                 BookFactory.new(params, isNew, id)
     }
 }

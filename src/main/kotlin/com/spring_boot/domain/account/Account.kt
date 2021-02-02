@@ -31,7 +31,7 @@ class Account(
          *
          * @return Account
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: AccountId? = null) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: AccountId = AccountId.getUnsaved()) =
                 AccountFactory.new(params, isNew, id)
     }
 }
