@@ -12,7 +12,7 @@ import javax.persistence.*
 @MappedSuperclass
 abstract class AbstractEntity<T : AbstractValueObjectId> {
 
-    @Id
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "entity ID", required = false)
     lateinit var id: T

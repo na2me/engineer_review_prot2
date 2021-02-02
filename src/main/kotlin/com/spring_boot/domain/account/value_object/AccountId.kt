@@ -4,8 +4,11 @@ import com.spring_boot.base.model.value_object.AbstractValueObjectId
 import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.account.repository.AccountRepository
+import java.io.Serializable
+import javax.persistence.Embeddable
 
-class AccountId(override var value: Long) : AbstractValueObjectId() {
+@Embeddable
+class AccountId(override var value: Long) : AbstractValueObjectId(), Serializable {
     /**
      * @return entity which has the same ID as this ReviewId instance
      */

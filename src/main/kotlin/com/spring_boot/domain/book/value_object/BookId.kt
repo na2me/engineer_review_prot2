@@ -5,8 +5,11 @@ import com.spring_boot.base.model.value_object.UNSAVED_VALUE
 import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.Book
 import com.spring_boot.domain.book.repository.BookRepository
+import java.io.Serializable
+import javax.persistence.Embeddable
 
-class BookId(override var value: Long) : AbstractValueObjectId() {
+@Embeddable
+class BookId(override var value: Long) : AbstractValueObjectId(), Serializable {
     /**
      * @return entity which has the same ID as this ReviewId instance
      */
