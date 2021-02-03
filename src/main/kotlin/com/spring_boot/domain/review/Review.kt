@@ -40,12 +40,11 @@ class Review(
      * @return saved entity
      */
     override fun save(): Review {
-        ReviewRepository.save(this)
+        val saved = ReviewRepository.save(this)
         // need to recalculate the associated book's score
         // to reflect newly added review for that book
-        reCalculateBookScore()
-
-        return this
+        reCalculateBookScore(saved)
+        return saved
     }
 
     companion object {
@@ -63,8 +62,8 @@ class Review(
     /**
      * recalculate BookScore associated with this Review
      */
-    fun reCalculateBookScore() {
-        val associatedBook = this.book
+    fun reCalculateBookScore(review: Review) {
+        val associatedBook = review.book
         val reviews = ReviewRepository.findAllByBookId(associatedBook.id())
 
         //TODO: make list as Entity Collection
