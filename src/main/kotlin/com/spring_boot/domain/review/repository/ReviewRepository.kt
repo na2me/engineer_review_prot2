@@ -1,13 +1,16 @@
 package com.spring_boot.domain.review.repository
 
 import com.spring_boot.base.util.Resolver
+import com.spring_boot.domain.book.value_object.BookId
 import com.spring_boot.domain.review.Review
 import com.spring_boot.domain.review.value_object.ReviewId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-private interface ReviewRepositoryBase : JpaRepository<Review, Long>
+private interface ReviewRepositoryBase : JpaRepository<Review, Long> {
+    fun findAllByBookId(bookId: Long): MutableList<Review>
+}
 
 class ReviewRepository {
     companion object {
@@ -31,7 +34,14 @@ class ReviewRepository {
         /**
          * find entity by [id]
          */
-        fun findById(id: ReviewId): Review = repository().findById(id.value).orElseThrow(::NoSuchElementException)
+        fun findById(id: ReviewId): Review =
+                repository().findById(id.value).orElseThrow(::NoSuchElementException)
+
+        /**
+         * find entity by [id]
+         */
+        fun findAllByBookId(id: BookId): MutableList<Review> =
+                repository().findAllByBookId(id.value)
 
         /**
          * delete [entity]

@@ -7,11 +7,13 @@ import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.Book
 import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.book.value_object.BookId
+import com.spring_boot.domain.book.value_object.BookScore
 import com.spring_boot.domain.review.factory.ReviewFactory
 import com.spring_boot.domain.review.repository.ReviewRepository
 import com.spring_boot.domain.review.value_object.ReviewId
 import com.spring_boot.domain.review.value_object.ReviewScore
 import io.swagger.annotations.ApiModelProperty
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -19,11 +21,11 @@ import javax.persistence.*
 class Review(
         @ApiModelProperty(value = "AccountId", required = true)
         @ManyToOne
-        @JoinColumn
+        @JoinColumn(name = "account_id")
         var account: Account,
         @ApiModelProperty(value = "BookId", required = true)
         @ManyToOne
-        @JoinColumn
+        @JoinColumn(name = "book_id")
         var book: Book,
         @ApiModelProperty(value = "Score", required = true)
         @Embedded
@@ -47,5 +49,23 @@ class Review(
          */
         fun new(params: RequestParams, isNew: Boolean = true, id: ReviewId = ReviewId.getUnsavedId()) =
                 ReviewFactory.new(params, isNew, id)
+    }
+
+    // --------------------------------------
+
+    /**
+     * recalculate BookScore associated with this Review
+     */
+    @PostPersist
+    fun postPersist() {
+        val associatedBook = this.book
+        val reviews = ReviewRepository.findAllByBookId(associatedBook.id())
+
+        //TODO: make list as Entity Collection
+        val scoreAverage = reviews.map { it.score.value }.average()
+
+        // 該当 Book のBookScoreとして割り当て、保存
+        associatedBook.score = BookScore(scoreAverage)
+        associatedBook.save()
     }
 }

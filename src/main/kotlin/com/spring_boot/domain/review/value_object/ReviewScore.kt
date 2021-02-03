@@ -4,7 +4,9 @@ import com.spring_boot.base.model.value_object.AbstractValueObject
 import org.valiktor.functions.isBetween
 import org.valiktor.validate
 import javax.persistence.Column
+import javax.persistence.Embeddable
 
+@Embeddable
 final class ReviewScore(
         @Column(name = "score", nullable = false)
         override var value: Double)  : AbstractValueObject<Double>() {
