@@ -1,7 +1,6 @@
 package com.spring_boot.base.model.entity
 
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
-import com.spring_boot.domain.account.value_object.AccountId
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 import javax.persistence.*

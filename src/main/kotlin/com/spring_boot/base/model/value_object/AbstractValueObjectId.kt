@@ -11,5 +11,5 @@ abstract class AbstractValueObjectId : AbstractValueObject<Long>() {
     /**
      * @return entity which has the same ID as this AbstractValueObjectId instance
      */
-    abstract fun toEntity() : AbstractEntity<*>
+    abstract fun toEntity(): AbstractEntity<*>
 }

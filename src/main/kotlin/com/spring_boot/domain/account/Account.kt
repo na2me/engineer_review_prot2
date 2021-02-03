@@ -11,7 +11,6 @@ import com.spring_boot.domain.account.value_object.AccountPassword
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
 import javax.persistence.Entity
-import javax.persistence.IdClass
 import javax.persistence.Table
 
 @Entity

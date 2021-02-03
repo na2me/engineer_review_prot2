@@ -9,7 +9,7 @@ import javax.persistence.Embeddable
 @Embeddable
 final class ReviewScore(
         @Column(name = "score", nullable = false)
-        override var value: Double)  : AbstractValueObject<Double>() {
+        override var value: Double) : AbstractValueObject<Double>() {
 
     /**
      * validation rule

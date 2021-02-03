@@ -22,7 +22,7 @@ class ReviewTest {
         review2.save()
 
         // Book's score should be average of two reviews above
-        val averageScore = (review1.score.value + review2.score.value)/2
+        val averageScore = (review1.score.value + review2.score.value) / 2
         val fetchedBook = BookRepository.findById(review1.book.id())
         assertEquals(averageScore, fetchedBook.score.value)
     }

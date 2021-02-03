@@ -3,17 +3,13 @@ package com.spring_boot.domain.review
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.account.Account
-import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.Book
-import com.spring_boot.domain.book.repository.BookRepository
-import com.spring_boot.domain.book.value_object.BookId
 import com.spring_boot.domain.book.value_object.BookScore
 import com.spring_boot.domain.review.factory.ReviewFactory
 import com.spring_boot.domain.review.repository.ReviewRepository
 import com.spring_boot.domain.review.value_object.ReviewId
 import com.spring_boot.domain.review.value_object.ReviewScore
 import io.swagger.annotations.ApiModelProperty
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -42,7 +38,7 @@ class Review(
     override fun save(): Review {
         ReviewRepository.save(this)
         // need to recalculate the associated book's score
-        // to reflect newly added review for that book
+        // to reflect newly added review [this] for that book
         reCalculateBookScore()
 
         return this
