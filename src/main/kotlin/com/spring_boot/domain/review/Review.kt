@@ -39,7 +39,14 @@ class Review(
     /**
      * @return saved entity
      */
-    override fun save() = ReviewRepository.save(this)
+    override fun save(): Review {
+        ReviewRepository.save(this)
+        // need to recalculate the associated book's score
+        // to reflect newly added review for that book
+        reCalculateBookScore()
+
+        return this
+    }
 
     companion object {
         /**
@@ -56,16 +63,14 @@ class Review(
     /**
      * recalculate BookScore associated with this Review
      */
-    @PostPersist
-    fun postPersist() {
+    fun reCalculateBookScore() {
         val associatedBook = this.book
         val reviews = ReviewRepository.findAllByBookId(associatedBook.id())
 
         //TODO: make list as Entity Collection
-        val scoreAverage = reviews.map { it.score.value }.average()
+        val averageScore = reviews.map { it.score.value }.average()
 
-        // 該当 Book のBookScoreとして割り当て、保存
-        associatedBook.score = BookScore(scoreAverage)
+        associatedBook.score = BookScore(averageScore)
         associatedBook.save()
     }
 }
