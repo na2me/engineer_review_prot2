@@ -1,14 +1,13 @@
-package com.spring_boot.domain.account.controller
+package com.spring_boot.domain.review.controller
 
 import com.spring_boot.base.AbstractControllerTest
-import com.spring_boot.base.util.json.getValue
-import com.spring_boot.base.util.security.passwordEncoder
-import com.spring_boot.domain.account.AccountTest
-import com.spring_boot.domain.account.repository.AccountRepository
+import com.spring_boot.base.util.json.getForeignKeyOf
+import com.spring_boot.base.util.json.getId
+import com.spring_boot.domain.review.ReviewTest
+import com.spring_boot.domain.review.repository.ReviewRepository
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.MediaType
@@ -16,16 +15,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.util.*
 
-class AccountControllerTest : AbstractControllerTest<AccountController>() {
+class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
-    override var BASE_API = "/api/account/"
+    override var BASE_API = "/api/review/"
 
     /**
      * test Index Api
      */
     @Test
     fun testIndex() {
-        AccountTest.entity().save()
+        ReviewTest.entity().save()
 
         // --------------------------------------
 
@@ -46,29 +45,23 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testCreate() {
-        val entity = AccountTest.entity()
+        val entity = ReviewTest.entity()
 
         // --------------------------------------
 
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_API)
-                .param("name", entity.name.value)
-                .param("email", entity.email.value)
-                .param("password", entity.password.value))
+                .param("accountId", entity.account.id().value.toString())
+                .param("bookId", entity.book.id().value.toString())
+                .param("score", entity.score.value.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 
         // --------------------------------------
 
         // the entity should be saved successfully
-        val entities = AccountRepository.findAll()
+        val entities = ReviewRepository.findAll()
         entities.contains(entity)
-
-        // --------------------------------------
-
-        // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
-                entity.password.value, entities.first().password.value))
     }
 
     /**
@@ -76,8 +69,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testRead() {
-        val entity = AccountTest.entity()
-        val saved = entity.save()
+        val saved = ReviewTest.entity().save()
 
         // --------------------------------------
 
@@ -91,9 +83,9 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // response should be the same entity as "saved"
         val json = JSONObject(response)
-        assertEquals(json.getValue("name"), saved.name.value)
-        assertEquals(json.getValue("email"), saved.email.value)
-        assertEquals(json.getValue("password"), saved.password.value)
+        assertEquals(json.getForeignKeyOf("account"), saved.account.id().value)
+        assertEquals(json.getForeignKeyOf("book"), saved.book.id().value)
+        assertEquals(json.getId(), saved.id().value)
     }
 
     /**
@@ -101,27 +93,25 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testUpdate() {
-        val saved = AccountTest.entity().save()
-        val entity = AccountTest.entity2()
+        val saved = ReviewTest.entity().save()
+        val entity = ReviewTest.entity2()
 
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
         mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("name", entity.name.value)
-                .param("email", entity.email.value)
-                .param("password", entity.password.value))
+                .param("accountId", entity.account.id().value.toString())
+                .param("bookId", entity.book.id().value.toString())
+                .param("score", entity.score.value.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
-        val updated = AccountRepository.findById(saved.id())
-        assertEquals(updated.name, entity.name)
-        assertEquals(updated.email, entity.email)
-        // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
-                entity.password.value, updated.password.value))
+        val updated = ReviewRepository.findById(saved.id())
+        assertEquals(updated.account.id(), entity.account.id())
+        assertEquals(updated.book.id(), entity.book.id())
+        assertEquals(updated.score, entity.score)
     }
 
     /**
@@ -129,7 +119,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testDelete() {
-        val saved = AccountTest.entity().save()
+        val saved = ReviewTest.entity().save()
 
         // --------------------------------------
 
@@ -141,7 +131,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // the entity should be deleted successfully
         assertThrows<NoSuchElementException> {
-            AccountRepository.findById(saved.id())
+            ReviewRepository.findById(saved.id())
         }
     }
 }

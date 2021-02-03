@@ -7,6 +7,7 @@ import com.spring_boot.domain.book.repository.BookRepository
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.MediaType
@@ -25,8 +26,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testIndex() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        BookTest.entity().save()
 
         // --------------------------------------
 
@@ -38,13 +38,8 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
 
         // --------------------------------------
 
-        // response should be the same entity as "saved"
-        val json = JSONArray(response).getJSONObject(0)
-        assertEquals(json.getValue("title"), saved.title.value)
-        assertEquals(json.getValue("category"), saved.category.value.toString())
-        assertEquals(json.getValue("score"), saved.score.value)
-        assertEquals(json.getValue("url"), saved.url.value)
-        assertEquals(json.getValue("publishedAt").toString(), (saved.publishedAt.toJsonFormat()))
+        // acquired entity should be 1 as it's saved first
+        Assertions.assertEquals(1, JSONArray(response).count())
     }
 
     /**
@@ -78,13 +73,12 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testRead() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        val saved = BookTest.entity().save()
 
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(get("$BASE_API${saved.id()}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -105,13 +99,13 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testUpdate() {
-        val saved = BookRepository.save(BookTest.entity())
+        val saved = BookTest.entity().save()
         val entity = BookTest.entity2()
 
         // --------------------------------------
 
         // the saved created above should be updated with entity properties by calling update API
-        mockMvc.perform(post("$BASE_API${saved.id()}")
+        mockMvc.perform(post("$BASE_API${saved.id().value}")
                 .param("title", entity.title.value)
                 .param("category", entity.category.value.toString())
                 .param("score", entity.score.value.toString())
@@ -135,13 +129,12 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testDelete() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        val saved = BookTest.entity().save()
 
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(delete("$BASE_API${saved.id()}"))
+        mockMvc.perform(delete("$BASE_API${saved.id().value}"))
                 .andExpect(status().isOk)
 
         // --------------------------------------

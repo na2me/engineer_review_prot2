@@ -2,6 +2,7 @@ package com.spring_boot.domain.book.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.book.Book
+import com.spring_boot.domain.book.value_object.BookId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -19,25 +20,27 @@ class BookRepository {
         private fun repository(): BookRepositoryBase = Resolver.resolve(BookRepositoryBase::class.java)
 
         /**
-         * save [book] entity
+         * save [entity]
          */
-        fun save(book: Book): Book {
-            return repository().saveAndFlush(book)
+        fun save(entity: Book): Book {
+            return repository().saveAndFlush(entity)
         }
 
         /**
-         * find all book entities
+         * find all entities
          */
         fun findAll(): List<Book> = repository().findAll()
 
         /**
-         * find book entity by [id]
+         * find entity by [id]
          */
-        fun findById(id: Long): Book = repository().findById(id).orElseThrow(::NoSuchElementException)
+        fun findById(id: BookId): Book =
+                repository().findById(id.value).orElseThrow(::NoSuchElementException)
+
 
         /**
-         * delete [book] entity
+         * delete [entity]
          */
-        fun delete(book: Book) = repository().delete(book)
+        fun delete(entity: Book) = repository().delete(entity)
     }
 }

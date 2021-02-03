@@ -15,7 +15,7 @@ class BookFactory {
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean, id: Long): Book {
+        fun new(params: RequestParams, isNew: Boolean, id: BookId): Book {
             val title = BookTitle(params.getValue("title"))
             val category = BookCategory(BookCategory.Categories.valueOf(params.getValue("category")))
             val score = BookScore(params.getValue("score").toDouble())
@@ -44,7 +44,7 @@ class BookFactory {
                     book.publishedAt = publishedAt
                 }
             }
-            return BookRepository.save(book)
+            return book.save()
         }
     }
 }

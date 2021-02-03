@@ -5,6 +5,7 @@ import com.spring_boot.base.util.security.passwordEncoder
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.account.value_object.AccountEmail
+import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.account.value_object.AccountName
 import com.spring_boot.domain.account.value_object.AccountPassword
 
@@ -16,7 +17,7 @@ class AccountFactory {
          *
          * @return Account
          */
-        fun new(params: RequestParams, isNew: Boolean, id: Long): Account {
+        fun new(params: RequestParams, isNew: Boolean, id: AccountId): Account {
             val name = AccountName(params.getValue("name"))
             val email = AccountEmail(params.getValue("email"))
             // encode raw password to record
@@ -41,7 +42,7 @@ class AccountFactory {
                     account.password = password
                 }
             }
-            return AccountRepository.save(account)
+            return account.save()
         }
     }
 }

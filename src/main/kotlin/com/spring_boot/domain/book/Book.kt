@@ -3,6 +3,7 @@ package com.spring_boot.domain.book
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.book.factory.BookFactory
+import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
@@ -27,7 +28,17 @@ class Book(
         var url: BookUrl,
         @ApiModelProperty(value = "PublishedAt", required = true)
         @Embedded
-        var publishedAt: BookPublishedAt) : AbstractEntity() {
+        var publishedAt: BookPublishedAt) : AbstractEntity<BookId>() {
+
+    /**
+     * @return Value Object ID
+     */
+    override fun id() = BookId(this.id)
+
+    /**
+     * @return saved entity
+     */
+    override fun save() = BookRepository.save(this)
 
     companion object {
         /**
@@ -35,7 +46,7 @@ class Book(
          *
          * @return Book
          */
-        fun new(params: RequestParams, isNew: Boolean = true, id: Long = -1) =
+        fun new(params: RequestParams, isNew: Boolean = true, id: BookId = BookId.getUnsavedId()) =
                 BookFactory.new(params, isNew, id)
     }
 }
