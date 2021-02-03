@@ -4,7 +4,6 @@ import com.spring_boot.base.model.entity.UNSAVED_VALUE
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
 import com.spring_boot.domain.book.Book
 import com.spring_boot.domain.book.repository.BookRepository
-import java.io.Serializable
 import javax.persistence.Embeddable
 
 @Embeddable
