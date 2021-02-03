@@ -1,5 +1,6 @@
 package com.spring_boot.domain.review.controller
 
+import com.google.gson.JsonArray
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getValue
 import com.spring_boot.base.util.security.passwordEncoder
@@ -8,6 +9,7 @@ import com.spring_boot.domain.account.controller.AccountController
 import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.review.ReviewTest
 import com.spring_boot.domain.review.repository.ReviewRepository
+import io.mockk.InternalPlatformDsl.toArray
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions
@@ -21,7 +23,6 @@ import java.util.NoSuchElementException
 
 class ReviewControllerTest  : AbstractControllerTest<ReviewController>() {
 
-
     override var BASE_API = "/api/review/"
 
     /**
@@ -29,7 +30,7 @@ class ReviewControllerTest  : AbstractControllerTest<ReviewController>() {
      */
     @Test
     fun testIndex() {
-        val saved = ReviewTest.entity().save()
+        ReviewTest.entity().save()
 
         // --------------------------------------
 
@@ -41,10 +42,8 @@ class ReviewControllerTest  : AbstractControllerTest<ReviewController>() {
 
         // --------------------------------------
 
-        // response should be the same entity as "saved"
-        val json = JSONArray(response).getJSONObject(0)
-        println(json)
-        assertEquals(json.getJSONObject("account"), saved.account.id().value)
+        // acquired entity should be 1 as it's saved first
+        assertEquals(1, JSONArray(response).count())
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.spring_boot.base.model.entity
 
+import com.google.gson.Gson
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime

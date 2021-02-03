@@ -7,6 +7,7 @@ import com.spring_boot.domain.book.repository.BookRepository
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.MediaType
@@ -25,7 +26,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testIndex() {
-        val saved = BookTest.entity().save()
+        BookTest.entity().save()
 
         // --------------------------------------
 
@@ -37,13 +38,8 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
 
         // --------------------------------------
 
-        // response should be the same entity as "saved"
-        val json = JSONArray(response).getJSONObject(0)
-        assertEquals(json.getValue("title"), saved.title.value)
-        assertEquals(json.getValue("category"), saved.category.value.toString())
-        assertEquals(json.getValue("score"), saved.score.value)
-        assertEquals(json.getValue("url"), saved.url.value)
-        assertEquals(json.getValue("publishedAt").toString(), (saved.publishedAt.toJsonFormat()))
+        // acquired entity should be 1 as it's saved first
+        Assertions.assertEquals(1, JSONArray(response).count())
     }
 
     /**

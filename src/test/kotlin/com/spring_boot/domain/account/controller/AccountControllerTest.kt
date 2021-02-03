@@ -25,7 +25,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testIndex() {
-        val saved = AccountTest.entity().save()
+        AccountTest.entity().save()
 
         // --------------------------------------
 
@@ -37,11 +37,8 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // --------------------------------------
 
-        // response should be the same entity as "saved"
-        val json = JSONArray(response).getJSONObject(0)
-        assertEquals(json.getValue("name"), saved.name.value)
-        assertEquals(json.getValue("email"), saved.email.value)
-        assertEquals(json.getValue("password"), saved.password.value)
+        // acquired entity should be 1 as it's saved first
+        assertEquals(1, JSONArray(response).count())
     }
 
     /**
