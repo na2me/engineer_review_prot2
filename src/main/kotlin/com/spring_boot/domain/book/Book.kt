@@ -2,8 +2,10 @@ package com.spring_boot.domain.book
 
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
+import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.factory.BookFactory
+import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Embedded
@@ -34,9 +36,12 @@ class Book(
     /**
      * @return Value Object ID
      */
-    fun id(): BookId {
-        return BookId(this.id)
-    }
+    override fun id() = BookId(this.id)
+
+    /**
+     * @return saved entity
+     */
+    override fun save() = BookRepository.save(this)
 
     companion object {
         /**

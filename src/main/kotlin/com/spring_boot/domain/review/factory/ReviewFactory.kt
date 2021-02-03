@@ -39,7 +39,7 @@ class ReviewFactory {
                     entity.score = score
                 }
             }
-            return ReviewRepository.save(entity)
+            return entity.save()
         }
     }
 }

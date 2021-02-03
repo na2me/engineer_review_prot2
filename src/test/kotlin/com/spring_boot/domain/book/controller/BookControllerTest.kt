@@ -25,8 +25,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testIndex() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        val saved = BookTest.entity().save()
 
         // --------------------------------------
 
@@ -78,8 +77,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testRead() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        val saved = BookTest.entity().save()
 
         // --------------------------------------
 
@@ -105,7 +103,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testUpdate() {
-        val saved = BookRepository.save(BookTest.entity())
+        val saved = BookTest.entity().save()
         val entity = BookTest.entity2()
 
         // --------------------------------------
@@ -135,8 +133,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
      */
     @Test
     fun testDelete() {
-        val entity = BookTest.entity()
-        val saved = BookRepository.save(entity)
+        val saved = BookTest.entity().save()
 
         // --------------------------------------
 

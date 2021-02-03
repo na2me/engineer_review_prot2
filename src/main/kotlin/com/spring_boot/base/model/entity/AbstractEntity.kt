@@ -16,7 +16,17 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "entity ID", required = false)
-    var id: Long = UNSAVED_VALUE
+    protected var id: Long = UNSAVED_VALUE
+
+    /**
+     * @return Value Object ID
+     */
+    abstract fun id(): T
+
+    /**
+     * @return saved entity
+     */
+    abstract fun save(): AbstractEntity<T>
 
     /**
      * @return true if the entity is saved, false if not

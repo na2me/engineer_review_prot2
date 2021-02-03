@@ -5,8 +5,10 @@ import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.account.Account
 import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.book.Book
+import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.book.value_object.BookId
 import com.spring_boot.domain.review.factory.ReviewFactory
+import com.spring_boot.domain.review.repository.ReviewRepository
 import com.spring_boot.domain.review.value_object.ReviewId
 import com.spring_boot.domain.review.value_object.ReviewScore
 import io.swagger.annotations.ApiModelProperty
@@ -17,11 +19,9 @@ import javax.persistence.*
 class Review(
         @ApiModelProperty(value = "AccountId", required = true)
         @ManyToOne
-        @JoinColumn(name = "account_id")
         var account: Account,
         @ApiModelProperty(value = "BookId", required = true)
         @ManyToOne
-        @JoinColumn(name = "book_id")
         var book: Book,
         @ApiModelProperty(value = "Score", required = true)
         @Embedded
@@ -30,9 +30,12 @@ class Review(
     /**
      * @return Value Object ID
      */
-    fun id(): ReviewId {
-        return ReviewId(this.id)
-    }
+    override fun id() = ReviewId(this.id)
+
+    /**
+     * @return saved entity
+     */
+    override fun save() = ReviewRepository.save(this)
 
     companion object {
         /**

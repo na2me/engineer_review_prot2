@@ -42,7 +42,7 @@ class AccountFactory {
                     account.password = password
                 }
             }
-            return AccountRepository.save(account)
+            return account.save()
         }
     }
 }

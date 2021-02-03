@@ -17,8 +17,12 @@ class ReviewTest {
         /**
          * Entity generation methods
          */
-        fun entity() =
-                Review(AccountTest.entity(), BookTest.entity(), voScore())
+        fun entity(): Review {
+            val account = AccountTest.entity().save()
+            val book = BookTest.entity().save()
+            return Review(account, book, voScore())
+        }
+
 
         fun entity2() =
                 Review(AccountTest.entity2(), BookTest.entity2(), voScore2())

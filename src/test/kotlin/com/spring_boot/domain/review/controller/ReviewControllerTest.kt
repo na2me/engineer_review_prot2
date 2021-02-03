@@ -1,31 +1,35 @@
-package com.spring_boot.domain.account.controller
+package com.spring_boot.domain.review.controller
 
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getValue
 import com.spring_boot.base.util.security.passwordEncoder
 import com.spring_boot.domain.account.AccountTest
+import com.spring_boot.domain.account.controller.AccountController
 import com.spring_boot.domain.account.repository.AccountRepository
+import com.spring_boot.domain.review.ReviewTest
+import com.spring_boot.domain.review.repository.ReviewRepository
 import org.json.JSONArray
 import org.json.JSONObject
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import java.util.*
+import java.util.NoSuchElementException
 
-class AccountControllerTest : AbstractControllerTest<AccountController>() {
+class ReviewControllerTest  : AbstractControllerTest<ReviewController>() {
 
-    override var BASE_API = "/api/account/"
+
+    override var BASE_API = "/api/review/"
 
     /**
      * test Index Api
      */
     @Test
     fun testIndex() {
-        val saved = AccountTest.entity().save()
+        val saved = ReviewTest.entity().save()
 
         // --------------------------------------
 
@@ -39,9 +43,8 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // response should be the same entity as "saved"
         val json = JSONArray(response).getJSONObject(0)
-        assertEquals(json.getValue("name"), saved.name.value)
-        assertEquals(json.getValue("email"), saved.email.value)
-        assertEquals(json.getValue("password"), saved.password.value)
+        println(json)
+        assertEquals(json.getJSONObject("account"), saved.account.id().value)
     }
 
     /**
@@ -70,7 +73,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // --------------------------------------
 
         // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
+        Assertions.assertTrue(passwordEncoder().matches(
                 entity.password.value, entities.first().password.value))
     }
 
@@ -79,8 +82,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testRead() {
-        val entity = AccountTest.entity()
-        val saved = entity.save()
+        val saved = AccountTest.entity().save()
 
         // --------------------------------------
 
@@ -120,10 +122,10 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // the entity should be updated successfully
         val updated = AccountRepository.findById(saved.id())
-        assertEquals(updated.name, entity.name)
-        assertEquals(updated.email, entity.email)
+        Assertions.assertEquals(updated.name, entity.name)
+        Assertions.assertEquals(updated.email, entity.email)
         // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
+        Assertions.assertTrue(passwordEncoder().matches(
                 entity.password.value, updated.password.value))
     }
 

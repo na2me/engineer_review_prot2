@@ -44,7 +44,7 @@ class BookFactory {
                     book.publishedAt = publishedAt
                 }
             }
-            return BookRepository.save(book)
+            return book.save()
         }
     }
 }

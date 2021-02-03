@@ -3,6 +3,7 @@ package com.spring_boot.domain.account
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
 import com.spring_boot.domain.account.factory.AccountFactory
+import com.spring_boot.domain.account.repository.AccountRepository
 import com.spring_boot.domain.account.value_object.AccountEmail
 import com.spring_boot.domain.account.value_object.AccountId
 import com.spring_boot.domain.account.value_object.AccountName
@@ -29,9 +30,12 @@ class Account(
     /**
      * @return Value Object ID
      */
-    fun id(): AccountId {
-        return AccountId(this.id)
-    }
+    override fun id() = AccountId(this.id)
+
+    /**
+     * @return saved entity
+     */
+    override fun save() = AccountRepository.save(this)
 
     companion object {
         /**
