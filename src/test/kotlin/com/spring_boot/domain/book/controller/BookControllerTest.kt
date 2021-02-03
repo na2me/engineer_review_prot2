@@ -84,7 +84,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(get("$BASE_API${saved.id()}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -111,7 +111,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // the saved created above should be updated with entity properties by calling update API
-        mockMvc.perform(post("$BASE_API${saved.id()}")
+        mockMvc.perform(post("$BASE_API${saved.id().value}")
                 .param("title", entity.title.value)
                 .param("category", entity.category.value.toString())
                 .param("score", entity.score.value.toString())
@@ -141,7 +141,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(delete("$BASE_API${saved.id()}"))
+        mockMvc.perform(delete("$BASE_API${saved.id().value}"))
                 .andExpect(status().isOk)
 
         // --------------------------------------

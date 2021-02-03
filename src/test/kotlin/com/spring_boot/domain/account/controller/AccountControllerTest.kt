@@ -85,7 +85,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API${saved.id()}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -110,7 +110,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
-        mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id()}")
+        mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
                 .param("name", entity.name.value)
                 .param("email", entity.email.value)
                 .param("password", entity.password.value))
@@ -138,7 +138,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API${saved.id()}"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API${saved.id().value}"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------

@@ -26,19 +26,19 @@ class BookController {
 
     @ApiOperation(value = "Get a Specific Book", notes = "get a specific Book by ID", response = Book::class)
     @GetMapping("{id}")
-    fun read(@PathVariable id: BookId) = BookRepository.findById(id)
+    fun read(@PathVariable id: Long) = BookRepository.findById(BookId(id))
 
     @ApiOperation(value = "Update a Specific Book", notes = "update a specific Book by request params", response = Book::class)
     @PostMapping("{id}")
-    fun update(@PathVariable id: BookId, @RequestParam params: Map<String, String>): Book {
+    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Book {
         val requestParams = RequestParams(params)
-        return Book.new(requestParams, false, id)
+        return Book.new(requestParams, false, BookId(id))
     }
 
     @ApiOperation(value = "Delete a Specific Book", notes = "delete a specific Book passed", response = Book::class)
     @DeleteMapping("{id}")
-    fun delete(@PathVariable id: BookId) {
-        val targetBook = BookRepository.findById(id)
+    fun delete(@PathVariable id: Long) {
+        val targetBook = BookRepository.findById(BookId(id))
         return BookRepository.delete(targetBook)
     }
 }
