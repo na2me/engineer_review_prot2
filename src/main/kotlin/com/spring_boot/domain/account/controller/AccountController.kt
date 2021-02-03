@@ -38,7 +38,7 @@ class AccountController {
     @ApiOperation(value = "Delete a Specific Account", notes = "delete a specific Account passed", response = Account::class)
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: Long) {
-        val targetAccount = AccountRepository.findById(AccountId(id))
-        return AccountRepository.delete(targetAccount)
+        val targetEntity = AccountRepository.findById(AccountId(id))
+        return AccountRepository.delete(targetEntity)
     }
 }
