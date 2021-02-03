@@ -19,9 +19,11 @@ import javax.persistence.*
 class Review(
         @ApiModelProperty(value = "AccountId", required = true)
         @ManyToOne
+        @JoinColumn
         var account: Account,
         @ApiModelProperty(value = "BookId", required = true)
         @ManyToOne
+        @JoinColumn
         var book: Book,
         @ApiModelProperty(value = "Score", required = true)
         @Embedded

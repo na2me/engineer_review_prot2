@@ -18,13 +18,19 @@ class ReviewTest {
          * Entity generation methods
          */
         fun entity(): Review {
+            // need to save associated entities as foreign key
             val account = AccountTest.entity().save()
             val book = BookTest.entity().save()
             return Review(account, book, voScore())
         }
 
 
-        fun entity2() =
-                Review(AccountTest.entity2(), BookTest.entity2(), voScore2())
+        fun entity2(): Review {
+            // need to save associated entities as foreign key
+            val account = AccountTest.entity2().save()
+            val book = BookTest.entity2().save()
+            return Review(account, book, voScore2())
+        }
+
     }
 }

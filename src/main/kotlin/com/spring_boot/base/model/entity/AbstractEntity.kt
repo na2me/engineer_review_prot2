@@ -1,7 +1,7 @@
 package com.spring_boot.base.model.entity
 
-import com.google.gson.Gson
 import com.spring_boot.base.model.value_object.AbstractValueObjectId
+import com.spring_boot.domain.account.value_object.AccountId
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -17,7 +17,8 @@ abstract class AbstractEntity<T : AbstractValueObjectId> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "entity ID", required = false)
-    protected var id: Long = UNSAVED_VALUE
+    // TODO: make the field protected and output as json element at the same time
+    var id: Long = UNSAVED_VALUE
 
     /**
      * @return Value Object ID
