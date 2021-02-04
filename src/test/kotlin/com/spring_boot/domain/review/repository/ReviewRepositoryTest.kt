@@ -1,14 +1,11 @@
 package com.spring_boot.domain.review.repository
 
+import com.spring_boot.base.AbstractRepositoryTest
 import com.spring_boot.domain.review.ReviewTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.DirtiesContext
 
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ReviewRepositoryTest {
+class ReviewRepositoryTest : AbstractRepositoryTest() {
 
     @Test
     fun testFindAllByBookId() {

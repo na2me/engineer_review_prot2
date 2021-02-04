@@ -1,10 +1,11 @@
 package com.spring_boot.domain.account
 
+import com.spring_boot.base.AbstractEntityTest
 import com.spring_boot.domain.account.value_object.AccountEmail
 import com.spring_boot.domain.account.value_object.AccountName
 import com.spring_boot.domain.account.value_object.AccountPassword
 
-class AccountTest {
+class AccountTest : AbstractEntityTest() {
     companion object {
         /**
          * Value Object generation methods
