@@ -1,17 +1,14 @@
 package com.spring_boot.domain.review
 
+import com.spring_boot.base.AbstractEntityTest
 import com.spring_boot.domain.account.AccountTest
 import com.spring_boot.domain.book.BookTest
 import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.review.value_object.ReviewScore
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.DirtiesContext
 
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class ReviewTest {
+class ReviewTest : AbstractEntityTest() {
 
     @Test
     fun testReCalculateBookScore() {

@@ -1,9 +1,10 @@
 package com.spring_boot.domain.book
 
+import com.spring_boot.base.AbstractEntityTest
 import com.spring_boot.domain.book.value_object.*
 import java.time.LocalDate
 
-class BookTest {
+class BookTest : AbstractEntityTest() {
     companion object {
         /**
          * Value Object generation methods

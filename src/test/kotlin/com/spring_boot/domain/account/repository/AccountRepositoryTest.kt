@@ -1,8 +1,5 @@
 package com.spring_boot.domain.account.repository
 
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import com.spring_boot.base.AbstractRepositoryTest
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AccountRepositoryTest
+class AccountRepositoryTest : AbstractRepositoryTest()
