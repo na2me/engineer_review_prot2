@@ -15,7 +15,7 @@ class AccountFactory {
          * create or update instance by referring [params]
          * if [isNew] is false, need [id] to specify the target entity
          *
-         * @return Account
+         * @return [Account]
          */
         fun new(params: RequestParams, isNew: Boolean, id: AccountId): Account {
             val name = AccountName(params.getValue("name"))
@@ -24,11 +24,11 @@ class AccountFactory {
             val encodedPassword = passwordEncoder().encode(params.getValue("password"))
             val password = AccountPassword(encodedPassword)
 
-            val account: Account
+            val entity: Account
             when (isNew) {
                 // when the entity is newly created, prepare new entity
                 true -> {
-                    account = Account(
+                    entity = Account(
                             name,
                             email,
                             password
@@ -36,13 +36,13 @@ class AccountFactory {
                 }
                 // when the existed entity is updated, set each fields as new ones
                 false -> {
-                    account = AccountRepository.findById(id)
-                    account.name = name
-                    account.email = email
-                    account.password = password
+                    entity = AccountRepository.findById(id)
+                    entity.name = name
+                    entity.email = email
+                    entity.password = password
                 }
             }
-            return account.save()
+            return entity.save()
         }
     }
 }

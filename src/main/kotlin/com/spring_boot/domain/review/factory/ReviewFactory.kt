@@ -14,7 +14,7 @@ class ReviewFactory {
          * create or update instance by referring [params]
          * if [isNew] is false, need [id] to specify the target entity
          *
-         * @return Review
+         * @return [Review]
          */
         fun new(params: RequestParams, isNew: Boolean, id: ReviewId): Review {
             val account = AccountId(params.getValue("accountId").toLong()).toEntity()

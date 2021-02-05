@@ -77,8 +77,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testRead() {
-        val entity = AccountTest.entity()
-        val saved = entity.save()
+        val saved = AccountTest.entity().save()
 
         // --------------------------------------
 
@@ -103,26 +102,26 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
     @Test
     fun testUpdate() {
         val saved = AccountTest.entity().save()
-        val entity = AccountTest.entity2()
+        val entity2 = AccountTest.entity2()
 
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
         mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("name", entity.name.value)
-                .param("email", entity.email.value)
-                .param("password", entity.password.value))
+                .param("name", entity2.name.value)
+                .param("email", entity2.email.value)
+                .param("password", entity2.password.value))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
         val updated = AccountRepository.findById(saved.id())
-        assertEquals(updated.name, entity.name)
-        assertEquals(updated.email, entity.email)
+        assertEquals(updated.name, entity2.name)
+        assertEquals(updated.email, entity2.email)
         // the password should be encrypted
         assertTrue(passwordEncoder().matches(
-                entity.password.value, updated.password.value))
+                entity2.password.value, updated.password.value))
     }
 
     /**

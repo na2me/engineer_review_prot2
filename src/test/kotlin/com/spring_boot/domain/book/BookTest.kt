@@ -1,6 +1,7 @@
 package com.spring_boot.domain.book
 
 import com.spring_boot.base.AbstractEntityTest
+import com.spring_boot.domain.author.AuthorTest
 import com.spring_boot.domain.book.value_object.*
 import java.time.LocalDate
 
@@ -29,10 +30,14 @@ class BookTest : AbstractEntityTest() {
         /**
          * Entity generation methods
          */
-        fun entity() =
-                Book(voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
+        fun entity(): Book {
+            val author = AuthorTest.entity().save()
+            return Book(author, voTitle(), voCategory(), voScore(), voUrl(), voPublishedAt())
+        }
 
-        fun entity2() =
-                Book(voTitle2(), voCategory2(), voScore2(), voUrl2(), voPublishedAt2())
+        fun entity2(): Book {
+            val author2 = AuthorTest.entity2().save()
+            return Book(author2, voTitle2(), voCategory2(), voScore2(), voUrl2(), voPublishedAt2())
+        }
     }
 }

@@ -54,6 +54,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
 
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(post(BASE_API)
+                .param("authorId", entity.author.id().value.toString())
                 .param("title", entity.title.value)
                 .param("category", entity.category.value.toString())
                 .param("score", entity.score.value.toString())
@@ -101,28 +102,30 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
     @Test
     fun testUpdate() {
         val saved = BookTest.entity().save()
-        val entity = BookTest.entity2()
+        val entity2 = BookTest.entity2()
 
         // --------------------------------------
 
         // the saved created above should be updated with entity properties by calling update API
         mockMvc.perform(post("$BASE_API${saved.id().value}")
-                .param("title", entity.title.value)
-                .param("category", entity.category.value.toString())
-                .param("score", entity.score.value.toString())
-                .param("url", entity.url.value)
-                .param("publishedAt", entity.publishedAt.value.toString()))
+                .param("authorId", entity2.author.id().value.toString())
+                .param("title", entity2.title.value)
+                .param("category", entity2.category.value.toString())
+                .param("score", entity2.score.value.toString())
+                .param("url", entity2.url.value)
+                .param("publishedAt", entity2.publishedAt.value.toString()))
                 .andExpect(status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
         val updated = BookRepository.findById(saved.id())
-        assertEquals(updated.title, entity.title)
-        assertEquals(updated.category, entity.category)
-        assertEquals(updated.score, entity.score)
-        assertEquals(updated.url, entity.url)
-        assertEquals(updated.publishedAt, entity.publishedAt)
+        assertEquals(updated.author.id(), entity2.author.id())
+        assertEquals(updated.title, entity2.title)
+        assertEquals(updated.category, entity2.category)
+        assertEquals(updated.score, entity2.score)
+        assertEquals(updated.url, entity2.url)
+        assertEquals(updated.publishedAt, entity2.publishedAt)
     }
 
     /**

@@ -2,18 +2,21 @@ package com.spring_boot.domain.book
 
 import com.spring_boot.base.model.entity.AbstractEntity
 import com.spring_boot.base.util.http.RequestParams
+import com.spring_boot.domain.author.Author
 import com.spring_boot.domain.book.factory.BookFactory
 import com.spring_boot.domain.book.repository.BookRepository
 import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 
 @Entity
 @Table(name = "book")
 class Book(
+        @ApiModelProperty(value = "AuthorId", required = true)
+        @ManyToOne
+        @JoinColumn(name = "author_id")
+        var author: Author,
         @ApiModelProperty(value = "Title", required = true)
         @Embedded
         var title: BookTitle,

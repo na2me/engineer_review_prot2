@@ -1,11 +1,10 @@
-package com.spring_boot.domain.review.controller
+package com.spring_boot.domain.author.controller
 
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getCollectionElements
-import com.spring_boot.base.util.json.getForeignKeyOf
-import com.spring_boot.base.util.json.getId
-import com.spring_boot.domain.review.ReviewTest
-import com.spring_boot.domain.review.repository.ReviewRepository
+import com.spring_boot.base.util.json.getValue
+import com.spring_boot.domain.author.AuthorTest
+import com.spring_boot.domain.author.repository.AuthorRepository
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -15,16 +14,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.util.*
 
-class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
+class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
 
-    override var BASE_API = "/api/review/"
+    override var BASE_API = "/api/author/"
 
     /**
      * test Index Api
      */
     @Test
     fun testIndex() {
-        ReviewTest.entity().save()
+        AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -46,22 +45,21 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
      */
     @Test
     fun testCreate() {
-        val entity = ReviewTest.entity()
+        val entity = AuthorTest.entity()
 
         // --------------------------------------
 
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_API)
-                .param("accountId", entity.account.id().value.toString())
-                .param("bookId", entity.book.id().value.toString())
-                .param("score", entity.score.value.toString()))
+                .param("name", entity.name.value)
+                .param("biography", entity.biography.value))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 
         // --------------------------------------
 
         // the entity should be saved successfully
-        val entities = ReviewRepository.findAll()
+        val entities = AuthorRepository.findAll()
         entities.contains(entity)
     }
 
@@ -70,7 +68,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
      */
     @Test
     fun testRead() {
-        val saved = ReviewTest.entity().save()
+        val saved = AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -84,9 +82,8 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
         // response should be the same entity as "saved"
         val json = JSONObject(response)
-        assertEquals(json.getForeignKeyOf("account"), saved.account.id().value)
-        assertEquals(json.getForeignKeyOf("book"), saved.book.id().value)
-        assertEquals(json.getId(), saved.id().value)
+        assertEquals(json.getValue("name"), saved.name.value)
+        assertEquals(json.getValue("biography"), saved.biography.value)
     }
 
     /**
@@ -94,25 +91,23 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
      */
     @Test
     fun testUpdate() {
-        val saved = ReviewTest.entity().save()
-        val entity2 = ReviewTest.entity2()
+        val saved = AuthorTest.entity().save()
+        val entity2 = AuthorTest.entity2()
 
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
         mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("accountId", entity2.account.id().value.toString())
-                .param("bookId", entity2.book.id().value.toString())
-                .param("score", entity2.score.value.toString()))
+                .param("name", entity2.name.value)
+                .param("biography", entity2.biography.value))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
-        val updated = ReviewRepository.findById(saved.id())
-        assertEquals(updated.account.id(), entity2.account.id())
-        assertEquals(updated.book.id(), entity2.book.id())
-        assertEquals(updated.score, entity2.score)
+        val updated = AuthorRepository.findById(saved.id())
+        assertEquals(updated.name, entity2.name)
+        assertEquals(updated.biography, entity2.biography)
     }
 
     /**
@@ -120,7 +115,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
      */
     @Test
     fun testDelete() {
-        val saved = ReviewTest.entity().save()
+        val saved = AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -132,7 +127,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
         // the entity should be deleted successfully
         assertThrows<NoSuchElementException> {
-            ReviewRepository.findById(saved.id())
+            AuthorRepository.findById(saved.id())
         }
     }
 }
