@@ -1,14 +1,13 @@
 package com.spring_boot.base.collection
 
 import com.spring_boot.base.model.entity.AbstractEntity
-import com.spring_boot.base.model.value_object.AbstractValueObjectId
 import java.lang.reflect.ParameterizedType
 
 /**
- * abstract class implementing common methods of Collection
+ * abstract class implementing common methods of Entity Collection
  */
-abstract class AbstractCollection
-<out S : AbstractCollection<S, T>, out T : AbstractEntity<AbstractValueObjectId>>(private val list: List<T>) : Iterable<T> {
+abstract class AbstractEntityCollection
+<S : AbstractEntityCollection<S, T>, T : AbstractEntity<*>>(private val list: List<T>) : Iterable<T> {
 
     /**
      * @return true if this collection is empty, false if not
