@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType
  * abstract class implementing common methods of Entity Collection
  */
 abstract class AbstractEntityCollection
-<S : AbstractEntityCollection<S, T>, T : AbstractEntity<*>>(private val list: List<T>) : Iterable<T> {
+<out S : AbstractEntityCollection<S, T>, out T : AbstractEntity<*>>(private val list: List<T>) : Iterable<T> {
 
     /**
      * @return true if this collection is empty, false if not
