@@ -1,11 +1,11 @@
 package com.spring_boot.domain.review.controller
 
 import com.spring_boot.base.AbstractControllerTest
+import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getForeignKeyOf
 import com.spring_boot.base.util.json.getId
 import com.spring_boot.domain.review.ReviewTest
 import com.spring_boot.domain.review.repository.ReviewRepository
-import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -37,7 +37,8 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
         // --------------------------------------
 
         // acquired entity should be 1 as it's saved first
-        assertEquals(1, JSONArray(response).count())
+        val json = JSONObject(response)
+        assertEquals(1, json.getCollectionElements().count())
     }
 
     /**

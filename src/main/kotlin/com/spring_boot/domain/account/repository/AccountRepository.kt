@@ -2,6 +2,8 @@ package com.spring_boot.domain.account.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.account.Account
+import com.spring_boot.domain.account.collection.AccountCollection
+import com.spring_boot.domain.account.collection.toCollection
 import com.spring_boot.domain.account.value_object.AccountId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
@@ -29,7 +31,7 @@ class AccountRepository {
         /**
          * find all book entities
          */
-        fun findAll(): List<Account> = repository().findAll()
+        fun findAll(): AccountCollection = repository().findAll().toCollection()
 
         /**
          * find book entity by [id]

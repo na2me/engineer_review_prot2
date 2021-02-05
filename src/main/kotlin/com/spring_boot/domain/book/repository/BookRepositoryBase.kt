@@ -2,6 +2,8 @@ package com.spring_boot.domain.book.repository
 
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.book.Book
+import com.spring_boot.domain.book.collection.BookCollection
+import com.spring_boot.domain.book.collection.toCollection
 import com.spring_boot.domain.book.value_object.BookId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
@@ -29,7 +31,7 @@ class BookRepository {
         /**
          * find all entities
          */
-        fun findAll(): List<Book> = repository().findAll()
+        fun findAll(): BookCollection = repository().findAll().toCollection()
 
         /**
          * find entity by [id]

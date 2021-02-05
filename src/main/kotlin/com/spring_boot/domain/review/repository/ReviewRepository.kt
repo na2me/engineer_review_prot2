@@ -3,6 +3,8 @@ package com.spring_boot.domain.review.repository
 import com.spring_boot.base.util.Resolver
 import com.spring_boot.domain.book.value_object.BookId
 import com.spring_boot.domain.review.Review
+import com.spring_boot.domain.review.collection.ReviewCollection
+import com.spring_boot.domain.review.collection.toCollection
 import com.spring_boot.domain.review.value_object.ReviewId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
@@ -29,7 +31,7 @@ class ReviewRepository {
         /**
          * find all entities
          */
-        fun findAll(): List<Review> = repository().findAll()
+        fun findAll(): ReviewCollection = repository().findAll().toCollection()
 
         /**
          * find entity by [id]
@@ -40,8 +42,8 @@ class ReviewRepository {
         /**
          * find entity by [id]
          */
-        fun findAllByBookId(id: BookId): MutableList<Review> =
-                repository().findAllByBookId(id.value)
+        fun findAllByBookId(id: BookId): ReviewCollection =
+                repository().findAllByBookId(id.value).toCollection()
 
         /**
          * delete [entity]
