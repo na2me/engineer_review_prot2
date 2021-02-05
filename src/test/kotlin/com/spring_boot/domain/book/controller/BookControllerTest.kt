@@ -1,10 +1,10 @@
 package com.spring_boot.domain.book.controller
 
 import com.spring_boot.base.AbstractControllerTest
+import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getValue
 import com.spring_boot.domain.book.BookTest
 import com.spring_boot.domain.book.repository.BookRepository
-import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Assertions
@@ -39,7 +39,8 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // acquired entity should be 1 as it's saved first
-        Assertions.assertEquals(1, JSONArray(response).count())
+        val json = JSONObject(response)
+        Assertions.assertEquals(1, json.getCollectionElements().count())
     }
 
     /**

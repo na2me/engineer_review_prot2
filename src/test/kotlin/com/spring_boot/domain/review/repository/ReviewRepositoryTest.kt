@@ -22,6 +22,7 @@ class ReviewRepositoryTest : AbstractRepositoryTest() {
         // --------------------------------------
 
         // should contains the entity which has the BookId passed
-        assertTrue(entities.containsAll(listOf(entity, saved)))
+        assertTrue(entities.contains(entity))
+        assertTrue(entities.contains(saved))
     }
 }

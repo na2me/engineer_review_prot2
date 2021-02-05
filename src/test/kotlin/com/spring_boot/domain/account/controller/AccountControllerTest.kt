@@ -1,11 +1,11 @@
 package com.spring_boot.domain.account.controller
 
 import com.spring_boot.base.AbstractControllerTest
+import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getValue
 import com.spring_boot.base.util.security.passwordEncoder
 import com.spring_boot.domain.account.AccountTest
 import com.spring_boot.domain.account.repository.AccountRepository
-import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -38,7 +38,8 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // --------------------------------------
 
         // acquired entity should be 1 as it's saved first
-        assertEquals(1, JSONArray(response).count())
+        val json = JSONObject(response)
+        assertEquals(1, json.getCollectionElements().count())
     }
 
     /**

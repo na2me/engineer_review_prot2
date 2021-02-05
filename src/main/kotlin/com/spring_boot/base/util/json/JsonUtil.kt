@@ -19,3 +19,8 @@ fun JSONObject.getId() = this.get("id").toString().toLong()
 fun JSONObject.getForeignKeyOf(entity: String) =
         this.getJSONObject(entity).getId()
 
+/**
+ * @return JSONArray containing elements
+ */
+fun JSONObject.getCollectionElements() =
+        this.getJSONArray("list")
