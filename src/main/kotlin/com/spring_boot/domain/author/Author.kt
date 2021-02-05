@@ -8,17 +8,13 @@ import com.spring_boot.domain.author.value_object.AuthorBiography
 import com.spring_boot.domain.author.value_object.AuthorId
 import com.spring_boot.domain.author.value_object.AuthorName
 import com.spring_boot.domain.book.Book
+import com.spring_boot.domain.book.collection.BookCollection
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 
-// one to many Book
 @Entity
 @Table(name = "author")
 class Author(
-        @ApiModelProperty(value = "BookId", required = true)
-        @OneToMany
-        @JoinColumn(name = "book_id")
-        var book: Book,
         @ApiModelProperty(value = "Name", required = true)
         @Embedded
         var name: AuthorName,
