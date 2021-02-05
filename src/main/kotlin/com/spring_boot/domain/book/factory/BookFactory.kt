@@ -13,7 +13,7 @@ class BookFactory {
          * create or update instance by referring [params]
          * if [isNew] is false, need [id] to specify the target entity
          *
-         * @return Book
+         * @return [Book]
          */
         fun new(params: RequestParams, isNew: Boolean, id: BookId): Book {
             val title = BookTitle(params.getValue("title"))
@@ -22,11 +22,11 @@ class BookFactory {
             val url = BookUrl(params.getValue("url"))
             val publishedAt = BookPublishedAt(LocalDate.parse(params.getValue("publishedAt"), DateTimeFormatter.ISO_DATE))
 
-            val book: Book
+            val entity: Book
             when (isNew) {
                 // when the entity is newly created, prepare new entity
                 true -> {
-                    book = Book(
+                    entity = Book(
                             title,
                             category,
                             score,
@@ -36,15 +36,15 @@ class BookFactory {
                 }
                 // when the existed entity is updated, set each fields as new ones
                 false -> {
-                    book = BookRepository.findById(id)
-                    book.title = title
-                    book.category = category
-                    book.score = score
-                    book.url = url
-                    book.publishedAt = publishedAt
+                    entity = BookRepository.findById(id)
+                    entity.title = title
+                    entity.category = category
+                    entity.score = score
+                    entity.url = url
+                    entity.publishedAt = publishedAt
                 }
             }
-            return book.save()
+            return entity.save()
         }
     }
 }
