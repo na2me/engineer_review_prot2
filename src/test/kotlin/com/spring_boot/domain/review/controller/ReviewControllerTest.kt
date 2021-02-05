@@ -95,24 +95,24 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
     @Test
     fun testUpdate() {
         val saved = ReviewTest.entity().save()
-        val entity = ReviewTest.entity2()
+        val entity2 = ReviewTest.entity2()
 
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
         mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("accountId", entity.account.id().value.toString())
-                .param("bookId", entity.book.id().value.toString())
-                .param("score", entity.score.value.toString()))
+                .param("accountId", entity2.account.id().value.toString())
+                .param("bookId", entity2.book.id().value.toString())
+                .param("score", entity2.score.value.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
         val updated = ReviewRepository.findById(saved.id())
-        assertEquals(updated.account.id(), entity.account.id())
-        assertEquals(updated.book.id(), entity.book.id())
-        assertEquals(updated.score, entity.score)
+        assertEquals(updated.account.id(), entity2.account.id())
+        assertEquals(updated.book.id(), entity2.book.id())
+        assertEquals(updated.score, entity2.score)
     }
 
     /**
