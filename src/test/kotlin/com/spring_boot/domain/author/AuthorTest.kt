@@ -4,7 +4,7 @@ import com.spring_boot.base.AbstractEntityTest
 import com.spring_boot.domain.author.value_object.AuthorBiography
 import com.spring_boot.domain.author.value_object.AuthorName
 
-class AuthorTest : AbstractEntityTest()  {
+class AuthorTest : AbstractEntityTest() {
     companion object {
         /**
          * Value Object generation methods

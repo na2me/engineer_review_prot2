@@ -1,14 +1,12 @@
-package com.spring_boot.domain.account.controller
+package com.spring_boot.domain.author.controller
 
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getValue
-import com.spring_boot.base.util.security.passwordEncoder
-import com.spring_boot.domain.account.AccountTest
-import com.spring_boot.domain.account.repository.AccountRepository
+import com.spring_boot.domain.author.AuthorTest
+import com.spring_boot.domain.author.repository.AuthorRepository
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.MediaType
@@ -16,16 +14,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.util.*
 
-class AccountControllerTest : AbstractControllerTest<AccountController>() {
+class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
 
-    override var BASE_API = "/api/account/"
+    override var BASE_API = "/api/author/"
 
     /**
      * test Index Api
      */
     @Test
     fun testIndex() {
-        AccountTest.entity().save()
+        AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -47,29 +45,22 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testCreate() {
-        val entity = AccountTest.entity()
+        val entity = AuthorTest.entity()
 
         // --------------------------------------
 
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_API)
                 .param("name", entity.name.value)
-                .param("email", entity.email.value)
-                .param("password", entity.password.value))
+                .param("biography", entity.biography.value))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 
         // --------------------------------------
 
         // the entity should be saved successfully
-        val entities = AccountRepository.findAll()
+        val entities = AuthorRepository.findAll()
         entities.contains(entity)
-
-        // --------------------------------------
-
-        // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
-                entity.password.value, entities.first().password.value))
     }
 
     /**
@@ -77,7 +68,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testRead() {
-        val saved = AccountTest.entity().save()
+        val saved = AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -92,8 +83,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
         // response should be the same entity as "saved"
         val json = JSONObject(response)
         assertEquals(json.getValue("name"), saved.name.value)
-        assertEquals(json.getValue("email"), saved.email.value)
-        assertEquals(json.getValue("password"), saved.password.value)
+        assertEquals(json.getValue("biography"), saved.biography.value)
     }
 
     /**
@@ -101,27 +91,23 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testUpdate() {
-        val saved = AccountTest.entity().save()
-        val entity2 = AccountTest.entity2()
+        val saved = AuthorTest.entity().save()
+        val entity2 = AuthorTest.entity2()
 
         // --------------------------------------
 
         // the "saved" created above should be updated with "entity" properties by calling update API
         mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
                 .param("name", entity2.name.value)
-                .param("email", entity2.email.value)
-                .param("password", entity2.password.value))
+                .param("biography", entity2.biography.value))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
 
         // the entity should be updated successfully
-        val updated = AccountRepository.findById(saved.id())
+        val updated = AuthorRepository.findById(saved.id())
         assertEquals(updated.name, entity2.name)
-        assertEquals(updated.email, entity2.email)
-        // the password should be encrypted
-        assertTrue(passwordEncoder().matches(
-                entity2.password.value, updated.password.value))
+        assertEquals(updated.biography, entity2.biography)
     }
 
     /**
@@ -129,7 +115,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
      */
     @Test
     fun testDelete() {
-        val saved = AccountTest.entity().save()
+        val saved = AuthorTest.entity().save()
 
         // --------------------------------------
 
@@ -141,7 +127,7 @@ class AccountControllerTest : AbstractControllerTest<AccountController>() {
 
         // the entity should be deleted successfully
         assertThrows<NoSuchElementException> {
-            AccountRepository.findById(saved.id())
+            AuthorRepository.findById(saved.id())
         }
     }
 }

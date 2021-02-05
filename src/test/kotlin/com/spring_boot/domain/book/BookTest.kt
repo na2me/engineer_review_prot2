@@ -1,7 +1,6 @@
 package com.spring_boot.domain.book
 
 import com.spring_boot.base.AbstractEntityTest
-import com.spring_boot.domain.account.AccountTest
 import com.spring_boot.domain.author.AuthorTest
 import com.spring_boot.domain.book.value_object.*
 import java.time.LocalDate

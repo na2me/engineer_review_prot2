@@ -7,10 +7,10 @@ import com.spring_boot.domain.author.repository.AuthorRepository
 import com.spring_boot.domain.author.value_object.AuthorBiography
 import com.spring_boot.domain.author.value_object.AuthorId
 import com.spring_boot.domain.author.value_object.AuthorName
-import com.spring_boot.domain.book.Book
-import com.spring_boot.domain.book.collection.BookCollection
 import io.swagger.annotations.ApiModelProperty
-import javax.persistence.*
+import javax.persistence.Embedded
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "author")
