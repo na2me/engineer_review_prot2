@@ -59,6 +59,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
                 .param("category", entity.category.value.toString())
                 .param("score", entity.score.value.toString())
                 .param("url", entity.url.value)
+                .param("description", entity.description.value)
                 .param("publishedAt", entity.publishedAt.value.toString()))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -113,6 +114,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
                 .param("category", entity2.category.value.toString())
                 .param("score", entity2.score.value.toString())
                 .param("url", entity2.url.value)
+                .param("description", entity2.description.value)
                 .param("publishedAt", entity2.publishedAt.value.toString()))
                 .andExpect(status().isOk)
 
