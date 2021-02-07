@@ -7,7 +7,7 @@ import org.valiktor.functions.isNotBlank
 import org.valiktor.validate
 import javax.persistence.Column
 
-final class AccountEmail(
+data class AccountEmail(
         @Column(name = "email", nullable = false, unique = true)
         override var value: String) : AbstractValueObject<String>() {
 

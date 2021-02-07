@@ -31,7 +31,7 @@ class ReviewFactory {
                             score
                     )
                 }
-                // when the existed entity is updated, set each fields as new ones
+                // when the existed entity is updated, set each fields with new ones
                 false -> {
                     entity = ReviewRepository.findById(id)
                     entity.account = account

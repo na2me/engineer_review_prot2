@@ -7,7 +7,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-final class ReviewScore(
+data class ReviewScore(
         @Column(name = "score", nullable = false)
         override var value: Double) : AbstractValueObject<Double>() {
 

@@ -28,7 +28,7 @@ class AuthorFactory {
                             biography,
                     )
                 }
-                // when the existed entity is updated, set each fields as new ones
+                // when the existed entity is updated, set each fields with new ones
                 false -> {
                     entity = AuthorRepository.findById(id)
                     entity.name = name

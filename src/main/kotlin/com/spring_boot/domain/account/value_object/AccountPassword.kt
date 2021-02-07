@@ -6,7 +6,7 @@ import org.valiktor.functions.isNotBlank
 import org.valiktor.validate
 import javax.persistence.Column
 
-final class AccountPassword(
+data class AccountPassword(
         @Column(name = "password", nullable = false)
         override var value: String) : AbstractValueObject<String>() {
 

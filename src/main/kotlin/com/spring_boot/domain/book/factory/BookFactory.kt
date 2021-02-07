@@ -39,7 +39,7 @@ class BookFactory {
                             publishedAt
                     )
                 }
-                // when the existed entity is updated, set each fields as new ones
+                // when the existed entity is updated, set each fields with new ones
                 false -> {
                     entity = BookRepository.findById(id)
                     entity.author = author

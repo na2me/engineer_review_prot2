@@ -6,7 +6,7 @@ import javax.persistence.Embeddable
 
 
 @Embeddable
-final class BookCategory(
+data class BookCategory(
         @Column(name = "category", nullable = false)
         override var value: Categories) : AbstractValueObject<BookCategory.Categories>() {
 

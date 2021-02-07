@@ -7,7 +7,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-final class BookDescription(
+data class BookDescription(
         @Column(name = "description", nullable = false)
         override var value: String) : AbstractValueObject<String>() {
 

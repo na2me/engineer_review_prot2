@@ -34,7 +34,7 @@ class AccountFactory {
                             password
                     )
                 }
-                // when the existed entity is updated, set each fields as new ones
+                // when the existed entity is updated, set each fields with new ones
                 false -> {
                     entity = AccountRepository.findById(id)
                     entity.name = name
