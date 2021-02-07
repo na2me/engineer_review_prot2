@@ -29,6 +29,9 @@ class Book(
         @ApiModelProperty(value = "URL", required = true)
         @Embedded
         var url: BookUrl,
+        @ApiModelProperty(value = "Description", required = true)
+        @Embedded
+        var description: BookDescription,
         @ApiModelProperty(value = "PublishedAt", required = true)
         @Embedded
         var publishedAt: BookPublishedAt) : AbstractEntity<BookId>() {
