@@ -7,7 +7,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-final class BookPublishedAt(
+data class BookPublishedAt(
         @Column(name = "published_at", nullable = false)
         override var value: LocalDate) : AbstractValueObject<LocalDate>() {
 

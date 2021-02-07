@@ -8,7 +8,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-final class AccountName(
+data class AccountName(
         @Column(name = "name", nullable = false, unique = true)
         override var value: String) : AbstractValueObject<String>() {
 

@@ -22,6 +22,7 @@ class BookFactory {
             val category = BookCategory(BookCategory.Categories.valueOf(params.getValue("category")))
             val score = BookScore(params.getValue("score").toDouble())
             val url = BookUrl(params.getValue("url"))
+            val description = BookDescription(params.getValue("description"))
             val publishedAt = BookPublishedAt(LocalDate.parse(params.getValue("publishedAt"), DateTimeFormatter.ISO_DATE))
 
             val entity: Book
@@ -34,10 +35,11 @@ class BookFactory {
                             category,
                             score,
                             url,
+                            description,
                             publishedAt
                     )
                 }
-                // when the existed entity is updated, set each fields as new ones
+                // when the existed entity is updated, set each fields with new ones
                 false -> {
                     entity = BookRepository.findById(id)
                     entity.author = author
@@ -45,6 +47,7 @@ class BookFactory {
                     entity.category = category
                     entity.score = score
                     entity.url = url
+                    entity.description = description
                     entity.publishedAt = publishedAt
                 }
             }

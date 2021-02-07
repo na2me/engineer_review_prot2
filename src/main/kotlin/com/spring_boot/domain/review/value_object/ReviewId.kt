@@ -7,7 +7,7 @@ import com.spring_boot.domain.review.repository.ReviewRepository
 import javax.persistence.Embeddable
 
 @Embeddable
-final class ReviewId(override var value: Long) : AbstractValueObjectId() {
+data class ReviewId(override var value: Long) : AbstractValueObjectId() {
     /**
      * @return entity which has the same ID as this ReviewId instance
      */
