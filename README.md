@@ -1,7 +1,7 @@
 English coming soon....
 
 ## EngineerReview：エンジニアのための書籍レビューサービス
-[![CircleCI](https://circleci.com/gh/Takuyaaa/engineer_review.svg?style=svg)](https://app.circleci.com/pipelines/github/Takuyaaaa/engineer_review)
+[![CircleCI](https://circleci.com/gh/Takuyaaaa/engineer_review.svg?style=svg)](https://app.circleci.com/pipelines/github/Takuyaaaa/engineer_review)
 
 <details open="open">
   <summary>目次</summary>
