@@ -1,6 +1,7 @@
 English coming soon....
 
 ## EngineerReview：エンジニアのための書籍レビューサービス
+[![CircleCI](https://circleci.com/gh/Takuyaaa/engineer_review.svg?style=svg)](https://app.circleci.com/pipelines/github/Takuyaaaa/engineer_review)
 
 <details open="open">
   <summary>目次</summary>
@@ -25,7 +26,9 @@ English coming soon....
                     <li><a href="#Collection">Collection</a></li>
                 </ul>
         </li>
-        <li><a href="#Controller">Controller</a></li>
+        <li><a href="#API">API</a></li>
+        <li><a href="#基底クラス">基底クラス</a></li>
+        <li><a href="#テストケース">テストケース</a></li>
       </ul>
     </li>
     <li><a href="#コンタクト">コンタクト</a></li>
@@ -36,18 +39,18 @@ English coming soon....
 
 ## プロジェクトについて
 
-個人プロジェクトとして取り組んでいるエンジニア向けの書籍レビューサービスで、軽量DDDで設計をしています。今年中のリリースを目指して取り組んでいます。
+個人プロジェクトとして取り組んでいるエンジニア向けの書籍レビューサービスで、軽量DDD（ドメイン駆動開発）で設計・実装を行っています。今年中のリリースを目指して取り組んでいます。
 
 * 個人の趣味として
-  * エンジニアリングは純粋に楽しいので。
+  * エンジニアリングは純粋に楽しい。
 * 人々に利用してもらえるサービスを目指して
-  * 自身もエンジニアとして日々勉強に励む中、技術書などの書籍情報が集約されていない・それらが技術書として良いものなのかを判断する術が確立されていないという課題を感じ続けている。同じ様な悩みを持つエンジニアの一助になれる様なサービスを目指す。
+  * 自身もエンジニアとして日々勉強に励む中、技術書などの書籍情報が集約されていない・それらが技術書として良いものなのかを判断する信頼性の高い情報が見つからないという課題を感じ続けている。同じ様な悩みを持つエンジニアの一助になれる様なサービスを目指す。
 * 技術研鑽として
-  * モダンな技術や興味のある技術を実際に利用し自分のスキルとすることを目指す。
+  * モダンな技術や興味のある技術を実際に利用し、自分のスキルとして身につけることを目指す。
 * ポートフォリオとして
-  * エンジニアとして経験の浅い中、自身の技術力・モチベーションを示す転職材料として活かす。
+  * エンジニアとして経験が浅い中、自身の技術力・モチベーションを示す転職材料として活用する。
   
-*現在の進捗：サーバサイドをDDD（ドメイン駆動開発）にて開発中*
+*現在の進捗：サーバサイドをDDDにて開発中*
 
 
 ### 利用技術
@@ -69,6 +72,7 @@ English coming soon....
 
 * 4つのEntityとそれに属するValueObjectで構成
 * 関連するEntityについてはManyToOneの関係で外部参照を付与
+* 現状ではBookにAuthorを持たせているが、AuthorにBookを持たせる設計も検討している
 
 ### DDDによる設計
 
@@ -133,7 +137,7 @@ class Book(
   
 #### ValueObject
 
-Entityのドメインモデルを構成する各要素
+ドメインモデルを構成する各要素
 
 ```kotlin
 @Embeddable
@@ -207,12 +211,12 @@ class BookRepository {
 
 * Repositoryのメソッドにstaticな状態でアクセスできる様にcompanion objectとして実装する
 * JpaRepositoryを基底とし、ラッパとしてドメインモデルに属するRepositoryクラスを作成
-* resolveユーティリティを用いることで、基底となるJpaRepositoryのインスタンスをDIコンテナから取得する
+  * resolveユーティリティを用いることで、基底となるJpaRepositoryのインスタンスをDIコンテナから取得する
 
 
 #### Factory
 
-Entityの生成処理に関する処理はFactoryの責務として実装する
+Entityの作成・更新に関する処理はFactoryの責務として実装する
 
 ```kotlin
 class BookFactory {
@@ -264,7 +268,7 @@ class BookFactory {
 }
 ```
 
-* フロントエンドから送信される（と想定される）パラメータを対応するValueObjectとして設定する
+* フロントエンドから送信される各パラメータを対応するValueObjectとして設定する
 * フラグを`isNew`として引き渡すことで、新規時・更新時の処理をDRYに記述する
 * Entityから`new`メソッドの処理を委譲する際にstaticに呼び出しを行える様、companion objectとして実装する
 
@@ -281,7 +285,7 @@ fun List<Book>.toCollection(): BookCollection {
 }
 
 class BookCollection(list: List<Book>) : AbstractEntityCollection<BookCollection, Book>(list) {
-
+    // no method implemented yet
 }
 ```
 
@@ -295,10 +299,93 @@ class BookCollection(list: List<Book>) : AbstractEntityCollection<BookCollection
 
 各ドメインモデルのCURD処理を行うAPIをControllerとして実装する
 
+```kotlin
+@RestController
+@RequestMapping("/api/book/")
+@Api(description = "Book Controller")
+class BookController {
 
+    @ApiOperation(value = "Get All Books", notes = "get all Books from db", response = Book::class)
+    @GetMapping("")
+    fun index() = BookRepository.findAll()
+
+    @ApiOperation(value = "Create New Book", notes = "create new Book entity", response = Book::class)
+    @PostMapping("")
+    fun create(@RequestParam params: Map<String, String>): Book {
+        val requestParams = RequestParams(params)
+        return Book.new(requestParams)
+    }
+
+    @ApiOperation(value = "Get a Specific Book", notes = "get a specific Book by ID", response = Book::class)
+    @GetMapping("{id}")
+    fun read(@PathVariable id: Long) = BookRepository.findById(BookId(id))
+
+    @ApiOperation(value = "Update a Specific Book", notes = "update a specific Book by request params", response = Book::class)
+    @PostMapping("{id}")
+    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Book {
+        val requestParams = RequestParams(params)
+        return Book.new(requestParams, false, BookId(id))
+    }
+
+    @ApiOperation(value = "Delete a Specific Book", notes = "delete a specific Book passed", response = Book::class)
+    @DeleteMapping("{id}")
+    fun delete(@PathVariable id: Long) {
+        val targetEntity = BookRepository.findById(BookId(id))
+        return BookRepository.delete(targetEntity)
+    }
+}
+```
+
+* APIの仕様は`@API`・`@ApiOperation`などのアノテーションを付与してSwaggerで管理する
+* Repository・Factoryメソッドを呼び出すことでドメインモデルのCRUD操作を行うAPIを実装する
+* フロントエンドはReactによるSPAとして実装することを想定しているため、RESTなAPIとしてjsonを返却する
+* リクエストとして送信される各パラメータを格納するクラスとして`RequestParams`を作成する
+```kotlin
+/**
+ * Request Parameters passed through API call
+ */
+class RequestParams(private val params: Map<String, String>) {
+    /**
+     * @return string value associated with [key]
+     */
+    fun getValue(key: String) =
+            params[key] ?: throw IllegalArgumentException("no value associated with the key:$key")
+}
+```
+
+### 基底クラス
+
+必要に応じて各クラスの基底となるクラスを実装する
+
+* 共通処理を規定メソッドとして実装することでDRYに記述できる様にする
+* 平易に新規のDDD関連クラスを追加できる様、隠蔽できる要素は規定クラス上に実装を行う
+* 実際の実装については [base](https://github.com/Takuyaaaa/engineer_review/tree/main/src/main/kotlin/com/spring_boot/base) のmodel・collectionを参照
+* 後述するテストケース関連クラスについても、シンプルに記述できる様になる場合には基底クラスを実装する
+
+
+### テストケース
+
+実装されたビジネスロジックについては必ず単体テストを用意する  
+push時に自動でテストが行われる様、circleciを利用したCI環境を整備する
+
+* Entity
+  * テスト用Entity・ValueObjectの生成メソッド
+  * 振る舞いを持つ場合には該当メソッドの単体テスト
+* ValueObject
+  * 生成時のバリデーションテスト
+  * 振る舞いを持つ場合には該当メソッドの単体テスト
+* Repository
+  * JpaRepositoryに委譲している処理については動作が担保されていると考え、テストケースの実装は行わない
+    * 自身でJpaRepositoryの記法に基づき自動生成したメソッドについては、念のため単体テストを行うものとする
+* Controller
+  * MockMvcを利用した各APIの単体テスト
+  * FactoryメソッドはAPI利用時に呼び出されることを想定しているため、`testCreate`・`testUpdate`を以ってカバーされていると考える
+  
+  
 ## コンタクト
 
-Natsume Takuya
+**夏目　拓哉**  
+フルリモートで働くエンジニア。長野移住予定です。
 * [Twitter：@Takuy_aaaa](https://twitter.com/Takuy_aaaa)
 * [Qiita：@Takuyaaaa](https://qiita.com/Takuyaaaa)
 * メールアドレス：xxtyzs@gmail.com
@@ -309,3 +396,5 @@ Natsume Takuya
 ## 謝辞
 
 * [Valiktor](https://github.com/valiktor/valiktor)
+* [Swagger](https://swagger.io/)
+* [circleci](https://circleci.com/ja/)
