@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/author/")
+@RequestMapping("/api/author")
 @Api(description = "Author Controller")
 class AuthorController {
 
@@ -19,7 +19,7 @@ class AuthorController {
 
     @ApiOperation(value = "Create New Author", notes = "create new Author entity", response = Author::class)
     @PostMapping("")
-    fun create(@RequestParam params: Map<String, String>): Author {
+    fun create(@RequestBody params: Map<String, String>): Author {
         val requestParams = RequestParams(params)
         return Author.new(requestParams)
     }
@@ -30,7 +30,7 @@ class AuthorController {
 
     @ApiOperation(value = "Update a Specific Author", notes = "update a specific Author by request params", response = Author::class)
     @PutMapping("{id}")
-    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Author {
+    fun update(@PathVariable id: Long, @RequestBody params: Map<String, String>): Author {
         val requestParams = RequestParams(params)
         return Author.new(requestParams, false, AuthorId(id))
     }

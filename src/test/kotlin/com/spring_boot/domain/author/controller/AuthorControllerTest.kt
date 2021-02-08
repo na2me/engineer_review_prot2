@@ -1,5 +1,6 @@
 package com.spring_boot.domain.author.controller
 
+import com.google.gson.Gson
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getValue
@@ -16,7 +17,7 @@ import java.util.*
 
 class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
 
-    override var BASE_API = "/api/author/"
+    override var BASE_API = "/api/author"
 
     /**
      * test Index Api
@@ -49,10 +50,18 @@ class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "name" to entity.name.value,
+                        "biography" to entity.biography.value)
+        )
+
+        // --------------------------------------
+
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_API)
-                .param("name", entity.name.value)
-                .param("biography", entity.biography.value))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 
@@ -73,7 +82,7 @@ class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API/${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -96,10 +105,18 @@ class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "name" to entity2.name.value,
+                        "biography" to entity2.biography.value)
+        )
+
+        // --------------------------------------
+
         // the "saved" created above should be updated with "entity" properties by calling update API
-        mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("name", entity2.name.value)
-                .param("biography", entity2.biography.value))
+        mockMvc.perform(MockMvcRequestBuilders.put("$BASE_API/${saved.id().value}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
@@ -120,7 +137,7 @@ class AuthorControllerTest : AbstractControllerTest<AuthorController>() {
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API${saved.id().value}"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API/${saved.id().value}"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------

@@ -1,5 +1,6 @@
 package com.spring_boot.domain.review.controller
 
+import com.google.gson.Gson
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getForeignKeyOf
@@ -17,7 +18,7 @@ import java.util.*
 
 class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
-    override var BASE_API = "/api/review/"
+    override var BASE_API = "/api/review"
 
     /**
      * test Index Api
@@ -50,11 +51,20 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "accountId" to entity.account.id().value.toString(),
+                        "bookId" to entity.book.id().value.toString(),
+                        "score" to entity.score.value.toString(),
+                )
+        )
+
+        // --------------------------------------
+
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_API)
-                .param("accountId", entity.account.id().value.toString())
-                .param("bookId", entity.book.id().value.toString())
-                .param("score", entity.score.value.toString()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 
@@ -75,7 +85,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(MockMvcRequestBuilders.get("$BASE_API/${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -99,11 +109,20 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "accountId" to entity2.account.id().value.toString(),
+                        "bookId" to entity2.book.id().value.toString(),
+                        "score" to entity2.score.value.toString(),
+                )
+        )
+
+        // --------------------------------------
+
         // the "saved" created above should be updated with "entity" properties by calling update API
-        mockMvc.perform(MockMvcRequestBuilders.post("$BASE_API${saved.id().value}")
-                .param("accountId", entity2.account.id().value.toString())
-                .param("bookId", entity2.book.id().value.toString())
-                .param("score", entity2.score.value.toString()))
+        mockMvc.perform(MockMvcRequestBuilders.put("$BASE_API/${saved.id().value}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------
@@ -125,7 +144,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API${saved.id().value}"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("$BASE_API/${saved.id().value}"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
         // --------------------------------------

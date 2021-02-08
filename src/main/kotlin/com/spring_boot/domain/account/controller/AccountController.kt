@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/account/")
+@RequestMapping("/api/account")
 @Api(description = "Account Controller")
 class AccountController {
 
@@ -19,7 +19,8 @@ class AccountController {
 
     @ApiOperation(value = "Create New Account", notes = "create new Account entity", response = Account::class)
     @PostMapping("")
-    fun create(@RequestParam params: Map<String, String>): Account {
+    fun create(@RequestBody params: Map<String, String>): Account {
+        println(params)
         val requestParams = RequestParams(params)
         return Account.new(requestParams)
     }
@@ -30,7 +31,7 @@ class AccountController {
 
     @ApiOperation(value = "Update a Specific Account", notes = "update a specific Account by request params", response = Account::class)
     @PutMapping("{id}")
-    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Account {
+    fun update(@PathVariable id: Long, @RequestBody params: Map<String, String>): Account {
         val requestParams = RequestParams(params)
         return Account.new(requestParams, false, AccountId(id))
     }

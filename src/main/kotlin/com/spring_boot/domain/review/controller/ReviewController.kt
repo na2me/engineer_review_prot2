@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/review/")
+@RequestMapping("/api/review")
 @Api(description = "Review Controller")
 class ReviewController {
 
@@ -19,7 +19,7 @@ class ReviewController {
 
     @ApiOperation(value = "Create New Review", notes = "create new Review entity", response = Review::class)
     @PostMapping("")
-    fun create(@RequestParam params: Map<String, String>): Review {
+    fun create(@RequestBody params: Map<String, String>): Review {
         val requestParams = RequestParams(params)
         return Review.new(requestParams)
     }
@@ -30,7 +30,7 @@ class ReviewController {
 
     @ApiOperation(value = "Update a Specific Review", notes = "update a specific Review by request params", response = Review::class)
     @PutMapping("{id}")
-    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Review {
+    fun update(@PathVariable id: Long, @RequestBody params: Map<String, String>): Review {
         val requestParams = RequestParams(params)
         return Review.new(requestParams, false, ReviewId(id))
     }
