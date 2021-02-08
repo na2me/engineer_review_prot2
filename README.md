@@ -321,7 +321,7 @@ class BookController {
     fun read(@PathVariable id: Long) = BookRepository.findById(BookId(id))
 
     @ApiOperation(value = "Update a Specific Book", notes = "update a specific Book by request params", response = Book::class)
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Book {
         val requestParams = RequestParams(params)
         return Book.new(requestParams, false, BookId(id))
