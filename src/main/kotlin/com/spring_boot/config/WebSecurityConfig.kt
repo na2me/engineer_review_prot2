@@ -19,11 +19,15 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
      * configure HttpSecurity settings
      */
     override fun configure(http: HttpSecurity) {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
+                .mvcMatchers("api/account")
+                    .hasRole("ADMIN")
+                .anyRequest()
+                    .permitAll()
 
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository())
                 .and()
-                .cors().configurationSource(getCorsConfigurationSource())
+            .cors().configurationSource(getCorsConfigurationSource())
     }
 
     /**
