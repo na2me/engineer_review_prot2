@@ -1,5 +1,6 @@
 package com.spring_boot.domain.book.controller
 
+import com.google.gson.Gson
 import com.spring_boot.base.AbstractControllerTest
 import com.spring_boot.base.util.json.getCollectionElements
 import com.spring_boot.base.util.json.getValue
@@ -19,7 +20,7 @@ import java.util.*
 
 class BookControllerTest : AbstractControllerTest<BookController>() {
 
-    override var BASE_API = "/api/book/"
+    override var BASE_API = "/api/book"
 
     /**
      * test Index Api
@@ -52,15 +53,24 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "authorId" to entity.author.id().value.toString(),
+                        "title" to entity.title.value,
+                        "category" to entity.category.value.toString(),
+                        "score" to entity.score.value.toString(),
+                        "url" to entity.url.value,
+                        "description" to entity.description.value,
+                        "publishedAt" to entity.publishedAt.value.toString()
+                )
+        )
+
+        // --------------------------------------
+
         // the entity created above should be returned as saved one by calling store API
         mockMvc.perform(post(BASE_API)
-                .param("authorId", entity.author.id().value.toString())
-                .param("title", entity.title.value)
-                .param("category", entity.category.value.toString())
-                .param("score", entity.score.value.toString())
-                .param("url", entity.url.value)
-                .param("description", entity.description.value)
-                .param("publishedAt", entity.publishedAt.value.toString()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
@@ -81,7 +91,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // the saved entity should be acquired by calling read API
-        val response = mockMvc.perform(get("$BASE_API${saved.id().value}").accept(MediaType.APPLICATION_JSON))
+        val response = mockMvc.perform(get("$BASE_API/${saved.id().value}").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn().response.contentAsString
@@ -107,15 +117,24 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
 
         // --------------------------------------
 
+        val json = Gson().toJson(
+                mapOf(
+                        "authorId" to entity2.author.id().value.toString(),
+                        "title" to entity2.title.value,
+                        "category" to entity2.category.value.toString(),
+                        "score" to entity2.score.value.toString(),
+                        "url" to entity2.url.value,
+                        "description" to entity2.description.value,
+                        "publishedAt" to entity2.publishedAt.value.toString()
+                )
+        )
+
+        // --------------------------------------
+
         // the saved created above should be updated with entity properties by calling update API
-        mockMvc.perform(post("$BASE_API${saved.id().value}")
-                .param("authorId", entity2.author.id().value.toString())
-                .param("title", entity2.title.value)
-                .param("category", entity2.category.value.toString())
-                .param("score", entity2.score.value.toString())
-                .param("url", entity2.url.value)
-                .param("description", entity2.description.value)
-                .param("publishedAt", entity2.publishedAt.value.toString()))
+        mockMvc.perform(put("$BASE_API/${saved.id().value}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
                 .andExpect(status().isOk)
 
         // --------------------------------------
@@ -140,7 +159,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         // --------------------------------------
 
         // the entity created above should be deleted with by calling delete API
-        mockMvc.perform(delete("$BASE_API${saved.id().value}"))
+        mockMvc.perform(delete("$BASE_API/${saved.id().value}"))
                 .andExpect(status().isOk)
 
         // --------------------------------------

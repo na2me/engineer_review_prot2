@@ -19,7 +19,7 @@ class BookController {
 
     @ApiOperation(value = "Create New Book", notes = "create new Book entity", response = Book::class)
     @PostMapping("")
-    fun create(@RequestParam params: Map<String, String>): Book {
+    fun create(@RequestBody params: Map<String, String>): Book {
         val requestParams = RequestParams(params)
         return Book.new(requestParams)
     }
@@ -30,7 +30,7 @@ class BookController {
 
     @ApiOperation(value = "Update a Specific Book", notes = "update a specific Book by request params", response = Book::class)
     @PutMapping("{id}")
-    fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Book {
+    fun update(@PathVariable id: Long, @RequestBody params: Map<String, String>): Book {
         val requestParams = RequestParams(params)
         return Book.new(requestParams, false, BookId(id))
     }
