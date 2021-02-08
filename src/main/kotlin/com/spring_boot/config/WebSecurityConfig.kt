@@ -42,7 +42,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         return InMemoryUserDetailsManager(user)
     }
 
-
     /**
      * @return [CorsConfigurationSource] which defines CORS settings
      */
