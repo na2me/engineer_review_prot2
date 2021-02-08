@@ -20,7 +20,6 @@ class AccountController {
     @ApiOperation(value = "Create New Account", notes = "create new Account entity", response = Account::class)
     @PostMapping("")
     fun create(@RequestBody params: Map<String, String>): Account {
-        println(params)
         val requestParams = RequestParams(params)
         return Account.new(requestParams)
     }
