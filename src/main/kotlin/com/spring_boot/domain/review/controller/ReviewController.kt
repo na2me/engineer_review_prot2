@@ -29,7 +29,7 @@ class ReviewController {
     fun read(@PathVariable id: Long) = ReviewRepository.findById(ReviewId(id))
 
     @ApiOperation(value = "Update a Specific Review", notes = "update a specific Review by request params", response = Review::class)
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Review {
         val requestParams = RequestParams(params)
         return Review.new(requestParams, false, ReviewId(id))

@@ -29,7 +29,7 @@ class AccountController {
     fun read(@PathVariable id: Long) = AccountRepository.findById(AccountId(id))
 
     @ApiOperation(value = "Update a Specific Account", notes = "update a specific Account by request params", response = Account::class)
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Account {
         val requestParams = RequestParams(params)
         return Account.new(requestParams, false, AccountId(id))

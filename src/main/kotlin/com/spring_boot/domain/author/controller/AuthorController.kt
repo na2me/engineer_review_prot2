@@ -29,7 +29,7 @@ class AuthorController {
     fun read(@PathVariable id: Long) = AuthorRepository.findById(AuthorId(id))
 
     @ApiOperation(value = "Update a Specific Author", notes = "update a specific Author by request params", response = Author::class)
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     fun update(@PathVariable id: Long, @RequestParam params: Map<String, String>): Author {
         val requestParams = RequestParams(params)
         return Author.new(requestParams, false, AuthorId(id))
