@@ -1,10 +1,21 @@
 version: "3.3"
 services:
-  spring:
+  app:
     build: .
     ports:
       - "8080:8080"
     depends_on:
-      - mariadb
-  mariadb:
+      - db
+    environment:
+      spring.datasource.driverClassName: "com.mariadb.jdbc.Driver"
+      spring.datasource.url: "jdbc:mariadb://db/engineer_review"
+      spring.datasource.username: "root"
+      spring.datasource.password: "password"
+  db:
     image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=engineer_review
