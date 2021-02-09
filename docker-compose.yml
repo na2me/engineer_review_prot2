@@ -3,7 +3,7 @@ services:
   app:
     build: docker/.
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - .:/app
     depends_on:
@@ -16,7 +16,7 @@ services:
   db:
     image: mariadb
     ports:
-      - "3306:3306"
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=engineer_review
       - MYSQL_USER=user

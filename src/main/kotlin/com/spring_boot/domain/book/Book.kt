@@ -9,7 +9,6 @@ import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 
-
 @Entity
 @Table(name = "books")
 class Book(
