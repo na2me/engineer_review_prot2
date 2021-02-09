@@ -1,21 +1,24 @@
 version: "3.3"
 services:
   app:
-    build: .
+    build: docker/.
     ports:
       - "8080:8080"
+    volumes:
+      - .:/app
     depends_on:
       - db
     environment:
-      spring.datasource.driverClassName: "com.mariadb.jdbc.Driver"
+      spring.datasource.driverClassName: "org.mariadb.jdbc.Driver"
       spring.datasource.url: "jdbc:mariadb://db/engineer_review"
-      spring.datasource.username: "root"
+      spring.datasource.username: "user"
       spring.datasource.password: "password"
   db:
     image: mariadb
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=engineer_review
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=rootpassword,

@@ -11,7 +11,7 @@ import javax.persistence.*
 
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 class Book(
         @ApiModelProperty(value = "AuthorId", required = true)
         @ManyToOne

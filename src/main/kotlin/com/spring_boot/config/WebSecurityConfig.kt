@@ -31,18 +31,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     }
 
     /**
-     * set in memory user details
-     */
-    override fun userDetailsService(): UserDetailsService {
-        val user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build()
-        return InMemoryUserDetailsManager(user)
-    }
-
-    /**
      * @return [CorsConfigurationSource] which defines CORS settings
      */
     private fun getCorsConfigurationSource(): CorsConfigurationSource {

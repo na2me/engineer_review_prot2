@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 
 @Entity
-@Table(name = "review")
+@Table(name = "reviews")
 class Review(
         @ApiModelProperty(value = "AccountId", required = true)
         @ManyToOne
