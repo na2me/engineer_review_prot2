@@ -14,7 +14,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "accounts")
+@Table(name = "account")
 class Account(
         @ApiModelProperty(value = "Name", required = true)
         @Embedded

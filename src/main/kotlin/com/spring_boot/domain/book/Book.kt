@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 class Book(
         @ApiModelProperty(value = "AuthorId", required = true)
         @ManyToOne
