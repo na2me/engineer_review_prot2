@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  app:
+    build: docker/.
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    environment:
+
+      spring.datasource.url: "jdbc:mariadb://db:3306/engineer_review"
+      spring.datasource.username: "user"
+      spring.datasource.password: "password"
+      server.port: 8080
+      server.address: 0.0.0.0
+
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=engineer_review
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=rootpassword,

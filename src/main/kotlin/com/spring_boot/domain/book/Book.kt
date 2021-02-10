@@ -9,9 +9,8 @@ import com.spring_boot.domain.book.value_object.*
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 
-
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 class Book(
         @ApiModelProperty(value = "AuthorId", required = true)
         @ManyToOne

@@ -13,7 +13,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "author")
+@Table(name = "authors")
 class Author(
         @ApiModelProperty(value = "Name", required = true)
         @Embedded
