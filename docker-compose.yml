@@ -10,16 +10,20 @@ services:
       - db
     environment:
 
-      spring.datasource.url: "jdbc:mariadb://db:3306/engineer_review"
+      spring.datasource.url: "jdbc:mariadb://db/engineer_review"
       spring.datasource.username: "user"
       spring.datasource.password: "password"
       server.port: 8080
       server.address: 0.0.0.0
+      spring.jpa.database-platform: "org.hibernate.dialect.MariaDB53Dialect"
+      spring.jpa.hibernate.ddl-auto: "update"
 
   db:
     image: mariadb
+    expose:
+      - "3305"
     ports:
-      - "3306:3306"
+      - "3305:3305"
     environment:
       - MYSQL_DATABASE=engineer_review
       - MYSQL_USER=user
