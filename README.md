@@ -62,8 +62,15 @@ English coming soon....
   * React
     * TypeScript
 * インフラストラクチャ（予定）
+  * mariadb
   * AWS
+* Docker環境
+  * Docker Composeによるアプリケーション環境のコンテナ化
   
+### Dockerについて
+* Dockerfileでspring bootアプリケーションのビルドコマンドを記述する
+* Docker Composeで上記Spring bootアプリケーション及びmariadbを起動することでコンテナ上にアプリケーションの動作環境を用意
+* フロントエンドをReactで実装する際にも同様にDocker Composeによる管理を想定する
 
 ## アプリケーション概要
 
