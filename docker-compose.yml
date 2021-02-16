@@ -1,9 +1,9 @@
 version: "3.3"
 services:
-  spring:
-    build: spring/.
+  back_end:
+    build: back_end/.
     volumes:
-      - ..:/spring
+      - .:/back_end
     ports:
       - "8080:8080"
     depends_on:
@@ -17,12 +17,13 @@ services:
       spring.jpa.database-platform: "org.hibernate.dialect.MariaDB53Dialect"
       spring.jpa.hibernate.ddl-auto: "update"
 
-  react:
-    build: react/.
+  front_end:
+    build: front_end/.
     volumes:
-      - ../:/usr/src/app
+      - .:/front_end
     ports:
       - "3000:3000"
+    stdin_open: true
 
   db:
     image: mariadb
