@@ -1,15 +1,14 @@
 version: "3.3"
 services:
-  app:
-    build: docker/.
+  back_end:
+    build: back_end/.
+    volumes:
+      - ./back_end:/back_end
     ports:
       - "8080:8080"
-    volumes:
-      - .:/app
     depends_on:
       - db
     environment:
-
       spring.datasource.url: "jdbc:mariadb://db/engineer_review"
       spring.datasource.username: "user"
       spring.datasource.password: "password"
@@ -17,6 +16,15 @@ services:
       server.address: 0.0.0.0
       spring.jpa.database-platform: "org.hibernate.dialect.MariaDB53Dialect"
       spring.jpa.hibernate.ddl-auto: "update"
+
+  front_end:
+    build: front_end/.
+    volumes:
+      - ./front_end:/front_end
+    command: yarn start
+    ports:
+      - "3000:3000"
+    stdin_open: true
 
   db:
     image: mariadb
