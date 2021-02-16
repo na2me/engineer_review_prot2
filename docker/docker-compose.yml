@@ -1,15 +1,14 @@
 version: "3.3"
 services:
-  app:
-    build: docker/.
+  spring:
+    build: spring/.
+    volumes:
+      - ..:/spring
     ports:
       - "8080:8080"
-    volumes:
-      - .:/app
     depends_on:
       - db
     environment:
-
       spring.datasource.url: "jdbc:mariadb://db/engineer_review"
       spring.datasource.username: "user"
       spring.datasource.password: "password"
@@ -17,6 +16,13 @@ services:
       server.address: 0.0.0.0
       spring.jpa.database-platform: "org.hibernate.dialect.MariaDB53Dialect"
       spring.jpa.hibernate.ddl-auto: "update"
+
+  react:
+    build: react/.
+    volumes:
+      - ../:/usr/src/app
+    ports:
+      - "3000:3000"
 
   db:
     image: mariadb
