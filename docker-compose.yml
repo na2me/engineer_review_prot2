@@ -3,7 +3,7 @@ services:
   back_end:
     build: back_end/.
     volumes:
-      - .:/back_end
+      - ./back_end:/back_end
     ports:
       - "8080:8080"
     depends_on:
@@ -20,7 +20,8 @@ services:
   front_end:
     build: front_end/.
     volumes:
-      - .:/front_end
+      - ./front_end:/front_end
+    command: yarn start
     ports:
       - "3000:3000"
     stdin_open: true
