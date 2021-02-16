@@ -35,7 +35,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
      */
     private fun getCorsConfigurationSource(): CorsConfigurationSource {
         val corsConfiguration = CorsConfiguration()
-        corsConfiguration.addAllowedOrigin("https://engineer_review.com")
+        corsConfiguration.addAllowedOrigin("http://localhost:3000")
         corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
         corsConfiguration.addAllowedMethod(CorsConfiguration.ALL)
         corsConfiguration.allowCredentials = true
