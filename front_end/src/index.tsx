@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+const books = fetch('http://localhost:8080/api/book')
+    .then((response) => response.json())
+    .then((response) => response.list)
+    .catch(console.error)
+
+export const BookContext = createContext(books);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <BookContext.Provider value={books}>
     <App />
-  </React.StrictMode>,
+  </BookContext.Provider>,
   document.getElementById('root')
 );
 
