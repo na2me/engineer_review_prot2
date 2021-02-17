@@ -1,22 +1,15 @@
-import React, {createContext} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom";
 
-
-const books = fetch('http://localhost:8080/api/book')
-    .then((response) => response.json())
-    .then((response) => response.list)
-    .catch(console.error)
-
-export const BookContext = createContext(books);
 
 ReactDOM.render(
-  <BookContext.Provider value={books}>
-    <App />
-  </BookContext.Provider>,
-  document.getElementById('root')
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
