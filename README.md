@@ -69,9 +69,9 @@ English coming soon....
   * Docker Composeによるアプリケーション環境のコンテナ化
   
 ### Dockerについて
-* Dockerfileでspring bootアプリケーションのビルドコマンドを記述する
-* Docker Composeで上記Spring bootアプリケーション及びmariadbを起動することでコンテナ上にアプリケーションの動作環境を用意
-* フロントエンドをReactで実装する際にも同様にDocker Composeによる管理を想定する
+* Dockerfileでフロンエンド(react)・サーバサイド(spring boot)のアプリケーションビルドを定義する
+* Docker Composeで上記アプリケーション及びmariadbを起動することでコンテナ上にアプリケーションの動作環境を用意
+* デプロイについてもdockerコンテナ単位で行う想定
 
 ## アプリケーション概要
 
