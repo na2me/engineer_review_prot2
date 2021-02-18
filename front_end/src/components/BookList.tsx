@@ -1,25 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {IBook} from "../types/IBook";
 
-export type IBook = {
-    id: number
-    author: IAuthor;
-    category: { value: string };
-    description: { value: string };
-    publishedAt: { value: string };
-    score: { value: number };
-    title: { value: string };
-    url: { value: string };
-    createdDate: string;
-    updatedDate: string;
-}
-
-export type IAuthor = {
-    id: number;
-    name: { value: string };
-    biography: { value: string };
-    createdDate: string;
-    updatedDate: string;
-}
 
 export default function BookList() {
     const [books, setBooks] = useState([] as IBook[])
@@ -33,20 +14,14 @@ export default function BookList() {
     }, [])
 
     return (
-        <div>
-            <p>
-                comone
-                {books.length}
-            </p>
+        <ul>
             {
                 books.map((book) => {
                     return (
-                        <ul>
-                            <li>{book.title.value}</li>
-                        </ul>
+                        <li key={book.id}>{book.title.value}</li>
                     );
                 })
             }
-        </div>
+        </ul>
     );
 }

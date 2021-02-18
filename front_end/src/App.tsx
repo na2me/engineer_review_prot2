@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
-import BookList from "./components/BookList";
+import React from "react";
+import "./App.css";
+import Router from "./components/router/Router";
 
 function App() {
     return (
         <div className="App">
-            <BookList/>
+            <Router/>
         </div>
     );
 }
