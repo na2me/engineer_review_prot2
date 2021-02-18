@@ -58,7 +58,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
                         "authorId" to entity.author.id().value.toString(),
                         "title" to entity.title.value,
                         "category" to entity.category.value.toString(),
-                        "score" to entity.score.value.toString(),
+                        "rating" to entity.rating.value.toString(),
                         "url" to entity.url.value,
                         "description" to entity.description.value,
                         "publishedAt" to entity.publishedAt.value.toString()
@@ -102,7 +102,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         val json = JSONObject(response)
         assertEquals(json.getValue("title"), saved.title.value)
         assertEquals(json.getValue("category"), saved.category.value.toString())
-        assertEquals(json.getValue("score"), saved.score.value)
+        assertEquals(json.getValue("rating"), saved.rating.value)
         assertEquals(json.getValue("url"), saved.url.value)
         assertEquals(json.getValue("publishedAt").toString(), (saved.publishedAt.toJsonFormat()))
     }
@@ -122,7 +122,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
                         "authorId" to entity2.author.id().value.toString(),
                         "title" to entity2.title.value,
                         "category" to entity2.category.value.toString(),
-                        "score" to entity2.score.value.toString(),
+                        "rating" to entity2.rating.value.toString(),
                         "url" to entity2.url.value,
                         "description" to entity2.description.value,
                         "publishedAt" to entity2.publishedAt.value.toString()
@@ -144,7 +144,7 @@ class BookControllerTest : AbstractControllerTest<BookController>() {
         assertEquals(updated.author.id(), entity2.author.id())
         assertEquals(updated.title, entity2.title)
         assertEquals(updated.category, entity2.category)
-        assertEquals(updated.score, entity2.score)
+        assertEquals(updated.rating, entity2.rating)
         assertEquals(updated.url, entity2.url)
         assertEquals(updated.publishedAt, entity2.publishedAt)
     }

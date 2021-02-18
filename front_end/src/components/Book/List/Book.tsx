@@ -13,7 +13,7 @@ export default function Book({ book }) {
                     <strong>{1000}</strong>
                 </p>
                 <div className="product__rating">
-                    {book.score.value}
+                    {book.rating.value}
                 </div>
             </div>
 
