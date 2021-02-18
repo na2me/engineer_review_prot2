@@ -7,8 +7,8 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-data class ReviewScore(
-        @Column(name = "score", nullable = false)
+data class ReviewRating(
+        @Column(name = "rating", nullable = false)
         override var value: Double) : AbstractValueObject<Double>() {
 
     /**
@@ -16,7 +16,7 @@ data class ReviewScore(
      */
     init {
         validate(this) {
-            validate(ReviewScore::value).isBetween(start = 0.0, end = 10.0)
+            validate(ReviewRating::value).isBetween(start = 0.0, end = 10.0)
         }
     }
 }

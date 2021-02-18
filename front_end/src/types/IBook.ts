@@ -6,7 +6,7 @@ export type IBook = {
     category: { value: string };
     description: { value: string };
     publishedAt: { value: string };
-    score: { value: number };
+    rating: { value: number };
     title: { value: string };
     url: { value: string };
     createdDate: string;

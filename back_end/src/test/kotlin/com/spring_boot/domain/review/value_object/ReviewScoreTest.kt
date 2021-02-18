@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.valiktor.ConstraintViolationException
 
-class ReviewScoreTest {
+class ReviewRatingTest {
     companion object {
         /**
          * data provider methods for "testValidation"
@@ -31,8 +31,8 @@ class ReviewScoreTest {
     @MethodSource("dataProvider")
     fun testValidation(value: Double, isValid: Boolean) {
         when (isValid) {
-            true -> assertDoesNotThrow { ReviewScore(value) }
-            false -> assertThrows<ConstraintViolationException> { ReviewScore(value) }
+            true -> assertDoesNotThrow { ReviewRating(value) }
+            false -> assertThrows<ConstraintViolationException> { ReviewRating(value) }
         }
     }
 }

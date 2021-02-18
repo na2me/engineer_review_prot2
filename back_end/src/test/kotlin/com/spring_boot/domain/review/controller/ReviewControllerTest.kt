@@ -55,7 +55,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
                 mapOf(
                         "accountId" to entity.account.id().value.toString(),
                         "bookId" to entity.book.id().value.toString(),
-                        "score" to entity.score.value.toString(),
+                        "rating" to entity.rating.value.toString(),
                 )
         )
 
@@ -113,7 +113,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
                 mapOf(
                         "accountId" to entity2.account.id().value.toString(),
                         "bookId" to entity2.book.id().value.toString(),
-                        "score" to entity2.score.value.toString(),
+                        "rating" to entity2.rating.value.toString(),
                 )
         )
 
@@ -131,7 +131,7 @@ class ReviewControllerTest : AbstractControllerTest<ReviewController>() {
         val updated = ReviewRepository.findById(saved.id())
         assertEquals(updated.account.id(), entity2.account.id())
         assertEquals(updated.book.id(), entity2.book.id())
-        assertEquals(updated.score, entity2.score)
+        assertEquals(updated.rating, entity2.rating)
     }
 
     /**
