@@ -6,7 +6,7 @@ import com.spring_boot.domain.book.value_object.BookId
 import com.spring_boot.domain.review.Review
 import com.spring_boot.domain.review.repository.ReviewRepository
 import com.spring_boot.domain.review.value_object.ReviewId
-import com.spring_boot.domain.review.value_object.ReviewScore
+import com.spring_boot.domain.review.value_object.ReviewRating
 
 class ReviewFactory {
     companion object {
@@ -19,7 +19,7 @@ class ReviewFactory {
         fun new(params: RequestParams, isNew: Boolean, id: ReviewId): Review {
             val account = AccountId(params.getValue("accountId").toLong()).toEntity()
             val book = BookId(params.getValue("bookId").toLong()).toEntity()
-            val score = ReviewScore(params.getValue("score").toDouble())
+            val rating = ReviewRating(params.getValue("rating").toDouble())
 
             val entity: Review
             when (isNew) {
@@ -28,7 +28,7 @@ class ReviewFactory {
                     entity = Review(
                             account,
                             book,
-                            score
+                            rating
                     )
                 }
                 // when the existed entity is updated, set each fields with new ones
@@ -36,7 +36,7 @@ class ReviewFactory {
                     entity = ReviewRepository.findById(id)
                     entity.account = account
                     entity.book = book
-                    entity.score = score
+                    entity.rating = rating
                 }
             }
             return entity.save()

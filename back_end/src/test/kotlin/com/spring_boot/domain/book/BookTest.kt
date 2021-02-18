@@ -16,8 +16,8 @@ class BookTest : AbstractEntityTest() {
         fun voCategory() = BookCategory(BookCategory.Categories.SERVER_SIDE)
         fun voCategory2() = BookCategory(BookCategory.Categories.FRONT_END)
 
-        fun voScore() = BookScore(2.5)
-        fun voScore2() = BookScore(6.8)
+        fun voRating() = BookRating(2.5)
+        fun voRating2() = BookRating(6.8)
 
         fun voUrl() = BookUrl("https://test.com")
         fun voUrl2() = BookUrl("https://test2.com")
@@ -35,12 +35,12 @@ class BookTest : AbstractEntityTest() {
          */
         fun entity(): Book {
             val author = AuthorTest.entity().save()
-            return Book(author, voTitle(), voCategory(), voScore(), voUrl(), voDescription(), voPublishedAt())
+            return Book(author, voTitle(), voCategory(), voRating(), voUrl(), voDescription(), voPublishedAt())
         }
 
         fun entity2(): Book {
             val author2 = AuthorTest.entity2().save()
-            return Book(author2, voTitle2(), voCategory2(), voScore2(), voUrl2(), voDescription(), voPublishedAt2())
+            return Book(author2, voTitle2(), voCategory2(), voRating2(), voUrl2(), voDescription2(), voPublishedAt2())
         }
     }
 }

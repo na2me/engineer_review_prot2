@@ -102,9 +102,9 @@ class Book(
         @ApiModelProperty(value = "Category", required = true)
         @Embedded
         var category: BookCategory,
-        @ApiModelProperty(value = "Score", required = true)
+        @ApiModelProperty(value = "Rating", required = true)
         @Embedded
-        var score: BookScore,
+        var rating: BookRating,
         @ApiModelProperty(value = "URL", required = true)
         @Embedded
         var url: BookUrl,
@@ -239,7 +239,7 @@ class BookFactory {
             val author = AuthorId(params.getValue("authorId").toLong()).toEntity()
             val title = BookTitle(params.getValue("title"))
             val category = BookCategory(BookCategory.Categories.valueOf(params.getValue("category")))
-            val score = BookScore(params.getValue("score").toDouble())
+            val rating = BookRating(params.getValue("rating").toDouble())
             val url = BookUrl(params.getValue("url"))
             val description = BookDescription(params.getValue("description"))
             val publishedAt = BookPublishedAt(LocalDate.parse(params.getValue("publishedAt"), DateTimeFormatter.ISO_DATE))
@@ -252,7 +252,7 @@ class BookFactory {
                             author,
                             title,
                             category,
-                            score,
+                            rating,
                             url,
                             description,
                             publishedAt
@@ -264,7 +264,7 @@ class BookFactory {
                     entity.author = author
                     entity.title = title
                     entity.category = category
-                    entity.score = score
+                    entity.rating = rating
                     entity.url = url
                     entity.description = description
                     entity.publishedAt = publishedAt

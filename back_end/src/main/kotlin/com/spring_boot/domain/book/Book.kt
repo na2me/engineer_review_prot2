@@ -12,26 +12,26 @@ import javax.persistence.*
 @Entity
 @Table(name = "books")
 class Book(
-        @ApiModelProperty(value = "AuthorId", required = true)
+    @ApiModelProperty(value = "AuthorId", required = true)
         @ManyToOne
         @JoinColumn(name = "author_id")
         var author: Author,
-        @ApiModelProperty(value = "Title", required = true)
+    @ApiModelProperty(value = "Title", required = true)
         @Embedded
         var title: BookTitle,
-        @ApiModelProperty(value = "Category", required = true)
+    @ApiModelProperty(value = "Category", required = true)
         @Embedded
         var category: BookCategory,
-        @ApiModelProperty(value = "Score", required = true)
+    @ApiModelProperty(value = "Rating", required = true)
         @Embedded
-        var score: BookScore,
-        @ApiModelProperty(value = "URL", required = true)
+        var rating: BookRating,
+    @ApiModelProperty(value = "URL", required = true)
         @Embedded
         var url: BookUrl,
-        @ApiModelProperty(value = "Description", required = true)
+    @ApiModelProperty(value = "Description", required = true)
         @Embedded
         var description: BookDescription,
-        @ApiModelProperty(value = "PublishedAt", required = true)
+    @ApiModelProperty(value = "PublishedAt", required = true)
         @Embedded
         var publishedAt: BookPublishedAt) : AbstractEntity<BookId>() {
 
