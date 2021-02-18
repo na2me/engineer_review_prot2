@@ -40,7 +40,7 @@ class BookTest : AbstractEntityTest() {
 
         fun entity2(): Book {
             val author2 = AuthorTest.entity2().save()
-            return Book(author2, voTitle2(), voCategory2(), voRating2(), voUrl2(), voDescription(), voPublishedAt2())
+            return Book(author2, voTitle2(), voCategory2(), voRating2(), voUrl2(), voDescription2(), voPublishedAt2())
         }
     }
 }
