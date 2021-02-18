@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {IBook} from "../types/IBook";
+import {BrowserRouter, Link, Route, Switch} from "react-router-dom"
+import BookInfo from "./BookInfo";
 
 
+// @ts-ignore
 export default function BookList() {
     const [books, setBooks] = useState([] as IBook[])
 
@@ -14,14 +17,19 @@ export default function BookList() {
     }, [])
 
     return (
-        <ul>
+        <>
             {
-                books.map((book) => {
+                books.map((book: IBook) => {
                     return (
-                        <li key={book.id}>{book.title.value}</li>
+                        <>
+                            <ul>
+                                <li key={book.id}>{book.title.value}</li>
+                                <Link to={`book/${book.id}`}>詳細</Link>
+                            </ul>
+                        </>
                     );
                 })
             }
-        </ul>
+        </>
     );
 }
