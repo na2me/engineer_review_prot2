@@ -1,6 +1,6 @@
 import React from "react";
-import {IProps} from "../types/IProps";
-import {IBook} from "../types/IBook";
+import {IProps} from "../../types/IProps";
+import {IBook} from "../../types/IBook";
 
 export default function BookInfo(props: IProps) {
     const book = props.location.state as IBook

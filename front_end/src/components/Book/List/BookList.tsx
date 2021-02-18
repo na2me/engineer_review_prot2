@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {IBook} from "../types/IBook";
-import {Link} from "react-router-dom"
+import {IBook} from "../../../types/IBook";
+import "./BookList.css";
+import Book from "./Book";
 
 
 export default function BookList() {
@@ -14,20 +15,16 @@ export default function BookList() {
     }, [])
 
     return (
-        <>
+        <div className={"book__row"}>
             {
                 books.map((book: IBook) => {
                     return (
                         <>
-                            <ul>
-                                <li key={book.id}>{book.title.value}</li>
-                                <Link to={{pathname: `book/${book.id}`, state: book}}>
-                                    詳細</Link>
-                            </ul>
+                            <Book book={book} />
                         </>
                     );
                 })
             }
-        </>
+        </div>
     );
 }
