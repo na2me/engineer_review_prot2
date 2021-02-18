@@ -27,7 +27,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "./back_end/build.gradle.kts" }}
+            - v1-dependencies-{{ checksum "~/back_end/build.gradle.kts" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
@@ -35,7 +35,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/.gradle
+            - ~/back_end/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
       # run tests!
