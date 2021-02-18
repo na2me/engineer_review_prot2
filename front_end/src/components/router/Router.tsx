@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import BookList from "../BookList";
-import BookInfo from "../BookInfo";
+import BookList from "../Book/List/BookList";
+import BookInfo from "../Book/BookInfo";
 import React from "react";
 
 export default function Router() {
