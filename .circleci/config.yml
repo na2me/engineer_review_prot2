@@ -40,7 +40,7 @@ jobs:
           key: v1-dependencies-{{ checksum "./back_end/build.gradle.kts" }}
 
       # run tests!
-      - run: gradle test
+      - run: cd back_end && gradle test
 
       - run:
           name: Saving test results
